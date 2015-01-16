@@ -1,0 +1,42 @@
+[user]
+	email = arnie97@gmail.com
+	name = Arnie97
+[core]
+	autocrlf = false
+[credential]
+	helper = wincred
+[alias]
+	aa = add --all
+	au = add --update
+	br = branch
+	cf = config
+	ch = checkout
+	cl = clone
+	cm = commit --amend
+	co = commit
+	cp = cherry-pick
+	de = describe
+	di = diff
+	dt = difftool
+	fe = fetch
+	gr = log --oneline --graph --decorate --branches=*
+	me = merge
+	mt = mergetool
+	pf = push --force
+	pl = pull
+	pr = prune
+	pu = push
+	rb = rebase
+	re = reset
+	rf = reflog
+	ri = rebase --interactive
+	rl = rev-list
+	rm = rm --cached
+	ro = remote
+	rp = rev-parse
+	sh = show
+	ss = status --short
+	st = status
+	su = submodule
+[push]
+	default = matching
