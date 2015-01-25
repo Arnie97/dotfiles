@@ -63,7 +63,7 @@ endif
 " http://www.linuxpowertop.org/known.php
 let &guicursor = &guicursor . ",a:blinkon0"
 
-filetype plugin on
+set cul			" Highlight current line
 let g:pydiction_location = '/home/user/.vim/bundle/pydiction/complete-dict'
 let g:pydiction_menu_height = 3
 
