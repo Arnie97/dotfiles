@@ -15,6 +15,7 @@
 	cm = commit --amend
 	co = commit
 	cp = cherry-pick
+	cr = create
 	de = describe
 	di = diff
 	dt = difftool
@@ -25,7 +26,7 @@
 	mt = mergetool
 	pf = push --force
 	pl = pull
-	pr = prune
+	pr = pull --rebase
 	pu = push
 	rb = rebase
 	re = reset
@@ -35,10 +36,13 @@
 	rm = rm --cached
 	ro = remote
 	rp = rev-parse
+	rq = pull-request
 	sh = show
 	sp = stripspace
 	ss = status --short
 	st = status
 	su = submodule
+[hub]
+	protocol = https
 [push]
 	default = matching
