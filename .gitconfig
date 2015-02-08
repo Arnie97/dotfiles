@@ -9,7 +9,7 @@
 	aa = add --all
 	au = add --update
 	br = branch
-	cf = !vi ~/.gitconfig
+	cf = config --edit
 	ch = checkout
 	cl = clone
 	cm = commit --amend
