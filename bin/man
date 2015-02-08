@@ -1,0 +1,5 @@
+#!/bin/bash
+clear
+for argv in $@; do
+    $argv --help | less
+done

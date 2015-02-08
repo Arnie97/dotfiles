@@ -1,0 +1,45 @@
+#!/bin/bash
+
+USAGE="Usage: init [OPTION]...
+Process management daemon.
+Options:
+      --help                  display this help and exit
+      --version               output version information and exit
+
+This daemon is normally executed by the kernel and given process id 1 to denote its special status.  When executed by a user process, it will actually run /sbin/telinit.
+
+Report bugs to <arnie97@gmail.com>."
+
+HELP="Try 'init --help' for more information."
+
+function error_info () {
+    printf 'init: %s\n%s' "$1" "$HELP" 1>&2
+    return 0
+}
+
+if test "$#" != 1 ; then
+    error_info "missing runlevel"
+    exit 1
+fi
+
+case "$1" in
+    0) shutdown -s -t 0;;
+    1) shutdown -l;;
+    2) net use * /delete;;
+    5) exit 0;;
+    6) shutdown -r -t 0;;
+
+    -h | --help)
+        printf '%s\n' "$USAGE";;
+    *)
+        if [ echo "$1" | grep -q [^[:digit:]] ] ; then
+            error_info "illegal option: $1"
+            exit 2
+        else
+            error_info "illegal runlevel: $1"
+            exit 3
+        fi
+    ;;
+esac
+
+exit 0
