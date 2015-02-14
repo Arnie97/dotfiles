@@ -3,12 +3,14 @@
 	name = Arnie97
 [core]
 	autocrlf = false
+	quotepath = false
 [credential]
 	helper = store
 [alias]
 	aa = add --all
 	au = add --update
 	br = branch
+	bw = browse
 	cf = config --edit
 	ch = checkout
 	cl = clone
