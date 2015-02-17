@@ -11,7 +11,7 @@
 	au = add --update
 	br = branch
 	bw = browse
-	cf = config --edit
+	cf = config --edit --global
 	ch = checkout
 	cl = clone
 	cm = commit --amend
@@ -21,11 +21,13 @@
 	de = describe
 	di = diff
 	dt = difftool
+	fb = filter-branch
 	fe = fetch
 	gl = log --graph --all --date-order --date=short --abbrev=4 --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cd) %C(bold blue)<%an>%Creset'
 	gr = grep
 	me = merge
 	mt = mergetool
+	pa = format-patch
 	pf = push --force
 	pl = pull
 	pr = pull --rebase
@@ -40,10 +42,10 @@
 	rp = rev-parse
 	rq = pull-request
 	sh = show
-	sp = stripspace
 	ss = status --short
 	st = status
 	su = submodule
+	tm = filter-branch --force --env-filter 'export GIT_COMMITTER_DATE="$GIT_AUTHOR_DATE"'
 [hub]
 	protocol = https
 [push]
