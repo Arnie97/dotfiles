@@ -32,7 +32,7 @@ case "$1" in
     -h | --help)
         printf '%s\n' "$USAGE";;
     *)
-        if [ echo "$1" | grep -q [^[:digit:]] ] ; then
+        if echo "$1" | grep -q [^[:digit:]]; then
             error_info "illegal option: $1"
             exit 2
         else
