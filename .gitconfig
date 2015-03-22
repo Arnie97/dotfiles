@@ -50,3 +50,5 @@
 	protocol = https
 [push]
 	default = matching
+[color]
+	ui = auto
