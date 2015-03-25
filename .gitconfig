@@ -9,6 +9,7 @@
 [alias]
 	aa = add --all
 	au = add --update
+	bl = blame
 	br = branch
 	bw = browse
 	cf = config --edit --global
@@ -18,8 +19,9 @@
 	co = commit
 	cp = cherry-pick
 	cr = create
-	de = describe
+	de = describe --tags
 	di = diff
+	ds = diff --stat
 	dt = difftool
 	fb = filter-branch
 	fe = fetch
@@ -45,6 +47,7 @@
 	ss = status --short
 	st = status
 	su = submodule
+	tf = tag --force
 	tm = filter-branch --force --env-filter 'export GIT_COMMITTER_DATE="$GIT_AUTHOR_DATE"'
 [hub]
 	protocol = https
