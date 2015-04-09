@@ -1,0 +1,9 @@
+#!/bin/bash
+
+while true; do
+    if [[ `tasklist | grep 'QQ' | wc -l | xargs echo` == '0' ]]; then
+        break
+    fi
+    sleep 5
+done
+
