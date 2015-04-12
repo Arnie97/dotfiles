@@ -27,6 +27,8 @@
 	fe = fetch
 	gl = log --graph --all --date-order --date=short --abbrev=4 --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cd) %C(bold blue)<%an>%Creset'
 	gr = grep
+	ig = !git-ignore
+	in = init
 	me = merge
 	mt = mergetool
 	pa = format-patch

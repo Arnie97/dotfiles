@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [[ ! -f "$1" ]]; then
+    echo "fatal: pathspec '$1' did not match any files"
+    exit 0
+fi
+
+if [[ `git ls-files -v "$1" | grep '^[a-z]' | wc -l | xargs echo` == '1' ]]; then
+    echo "track the changes of '$1'"
+    git update-index --no-assume-unchanged "$1"
+else
+    echo "now assume '$1' is unchanged"
+    git update-index --assume-unchanged "$1"
+fi
