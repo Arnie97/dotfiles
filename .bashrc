@@ -1,3 +1,5 @@
+HISTCONTROL=ignoreboth
+PROMPT_COMMAND='history -a'
 alias cls='clear'
 alias e.='explorer .'
 alias git='hub'
