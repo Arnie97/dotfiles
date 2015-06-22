@@ -12,6 +12,7 @@
 	bl = blame
 	br = branch
 	bw = browse
+	ce = clean
 	cf = config --edit --global
 	ch = checkout
 	cl = clone
@@ -23,6 +24,7 @@
 	di = diff
 	ds = diff --stat
 	dt = difftool
+	dw = diff --word-diff
 	fb = filter-branch
 	fe = fetch
 	gl = log --graph --all --date-order --date=short --abbrev=4 --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cd) %C(bold blue)<%an>%Creset'
