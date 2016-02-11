@@ -9,6 +9,8 @@
 [alias]
 	aa = add --all
 	au = add --update
+	bi = bisect
+	bs = bisect
 	bl = blame
 	br = branch
 	bw = browse
@@ -20,17 +22,18 @@
 	co = commit
 	cp = cherry-pick
 	cr = create
-	de = describe --tags
+	de = tell
 	di = diff
 	ds = diff --stat
 	dt = difftool
 	dw = diff --word-diff
 	fb = filter-branch
 	fe = fetch
-	gl = log --graph --all --date-order --date=short --abbrev=4 --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cd) %C(bold blue)<%an>%Creset'
+	gl = log --graph --all --date-order --abbrev=4 --date='format:%y-%m-%d' --pretty=format:'%C(red bold)%h%C(reset) %C(cyan)%cd%C(yellow bold)%d%C(reset) %s %C(green)<%an> %C(blue bold)(%ar)%C(reset)'
 	gr = grep
-	ig = !git-ignore
+	ig = ignore
 	in = init
+	ls = ls-files
 	me = merge
 	mt = mergetool
 	pa = format-patch
@@ -40,6 +43,8 @@
 	pu = push
 	rb = rebase
 	re = reset
+	rh = reset --hard
+	rs = reset --soft
 	rf = reflog
 	ri = rebase --interactive
 	rl = rev-list
