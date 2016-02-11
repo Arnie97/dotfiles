@@ -1,0 +1,13 @@
+#!/bin/bash
+
+function tell {
+    git describe --tags $1 2> /dev/null || git describe --all --always $1
+}
+
+if [[ $# -eq 0 ]]; then
+    tell --dirty='*'
+else
+    for rev in "$@"; do
+        tell "$rev"
+    done
+fi
