@@ -1,0 +1,2 @@
+#!/bin/sh
+mplayer -vo null -ao null -frames 0 -identify "$@" | grep length
