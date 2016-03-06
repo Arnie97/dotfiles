@@ -1,2 +1,4 @@
 #!/bin/sh
-mplayer -vo null -ao null -frames 0 -identify "$@" | grep length
+find -name '*.mp4' -exec \
+./mediainfo --output='General;%Duration%' '{}' \; | \
+awk '{ c += 1; s += $1 } END { printf "%.0f seconds across %d files", s / 1000, c }'
