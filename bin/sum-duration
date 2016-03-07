@@ -1,5 +1,5 @@
 #!/bin/sh
-find "$@" -name '*.mp4' -print0 | xargs --null \
+find "$@" \( -name "*.mp4" -o -name "*.avi" \) -print0 | xargs --null \
 ./mediainfo --output='General;%Duration%/%FileName%\n' | \
 sed 's/\.\///g' | \
 awk '
