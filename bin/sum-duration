@@ -1,4 +1,17 @@
 #!/bin/sh
 find "$@" -name '*.mp4' -print0 | xargs --null \
-./mediainfo --output='General;%Duration%\n' | \
-awk '{ c += 1; s += $1 } END { printf "%.0f seconds across %d files", s / 1000, c }'
+./mediainfo --output='General;%Duration% %FileName%\n' | \
+awk '
+BEGIN {
+    c = -1
+    print "Processing media files, hold on...."
+}
+{
+    c += 1
+    s += $1
+    print
+}
+END {
+    printf "%.0f seconds across %d files", s / 1000, c
+}
+'
