@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [[ $# -eq 1 ]]; then
+    milky "$1.cpp.k" && \
+    g++ -std=c++14 "$1.cpp" && \
+    if [ -f "$1.in" ]; then
+        ./a < "$1.in"
+    else
+        echo "Test input not found, using stdin:"
+        ./a
+    fi && \
+    cat "$1.cpp" > /dev/clipboard
+else
+    echo "Invalid arguments: '$@'"
+fi
