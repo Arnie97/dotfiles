@@ -1,0 +1,17 @@
+#!/bin/bash
+
+if [[ $# -eq 0 ]]; then
+    echo "Please specify a file, path or command to locate."
+else
+    for pathspec in "$@"; do
+        if [ -a "$pathspec" ]; then
+            echo "$pathspec"
+        elif which "$pathspec" 0> /dev/null 2> /dev/null; then
+            pathspec=$(which "$pathspec")
+        else
+            echo "'$pathspec' not found."
+            continue
+        fi
+        explorer \/select,$(ls --directory --append-exe $(cygpath -aw "$pathspec"))
+    done
+fi
