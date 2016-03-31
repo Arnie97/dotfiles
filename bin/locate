@@ -12,6 +12,6 @@ else
             echo "'$pathspec' not found."
             continue
         fi
-        explorer \/select,$(ls --directory --append-exe $(cygpath -aw "$pathspec"))
+        explorer \/select,$(cygpath -aw $(ls --directory --append-exe $pathspec))
     done
 fi
