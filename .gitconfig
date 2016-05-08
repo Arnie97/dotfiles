@@ -58,6 +58,8 @@
 	su = submodule
 	tf = tag --force
 	tm = filter-branch --force --env-filter 'export GIT_COMMITTER_DATE="$GIT_AUTHOR_DATE"'
+	ui = update-server-info
+	us = update-server-info
 [hub]
 	protocol = https
 [push]
