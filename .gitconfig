@@ -4,6 +4,10 @@
 [core]
 	autocrlf = false
 	quotepath = false
+[diff]
+	tool = bc
+[merge]
+	tool = bc
 [credential]
 	helper = store
 [alias]
