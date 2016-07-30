@@ -1,4 +1,4 @@
 #!/bin/bash
 
-date --set=@`stat --printf=%Y $1`
+date -s @`date +%s -r "$1"`
 
