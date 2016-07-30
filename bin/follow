@@ -1,0 +1,4 @@
+#!/bin/bash
+
+date --set=@`stat --printf=%Y $1`
+
