@@ -38,7 +38,7 @@
 	ig = ignore
 	in = init
 	ls = ls-files
-	me = merge
+	me = merge --allow-unrelated-histories
 	mt = mergetool
 	pa = format-patch
 	pf = push --force
