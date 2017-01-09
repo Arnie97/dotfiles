@@ -7,8 +7,10 @@ fi
 
 p=$1
 binary=/tmp/$p
-milky "$p.cpp.k" && \
-g++ -std=c++14 -Wall -O3 "$p.cpp" -o $binary || exit 2
+intermediate=/tmp/$p.cpp
+
+milky -o $intermediate "$p.cpp.k" && \
+g++ -std=c++14 -Wall -O3 -o $binary $intermediate || exit 2
 
 shift
 if [ $# -ge 1 ]; then
@@ -28,4 +30,4 @@ elif [ $# -eq 0 ]; then
     echo "Test input not found, using stdin:"
     time $binary
 fi && \
-cat "$p.cpp" > /dev/clipboard
+cat $intermediate > /dev/clipboard
