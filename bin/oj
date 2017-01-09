@@ -1,17 +1,31 @@
 #!/bin/bash
 
-if [ $# -ge 1 ]; then
-    milky "$1.cpp.k" && \
-    g++ -std=c++14 "$1.cpp" && \
-    if [ $# -eq 2 -a -f "$1$2.in" ]; then
-        ./a < "$1$2.in"
-    elif [ -f "$1.in" ]; then
-        ./a < "$1.in"
-    else
-        echo "Test input not found, using stdin:"
-        ./a
-    fi && \
-    cat "$1.cpp" > /dev/clipboard
-else
-    echo "Invalid arguments: '$@'"
+if [ $# -eq 0 ]; then
+    echo "Usage: oj <problem_id> [test_id...]"
+    exit 1
 fi
+
+p=$1
+binary=/tmp/$p
+milky "$p.cpp.k" && \
+g++ -std=c++14 -Wall -O3 "$p.cpp" -o $binary || exit 2
+
+shift
+if [ $# -ge 1 ]; then
+    for i in "$@"; do
+        test_case="${p}_${i}.in"
+        if [ -f $test_case ]; then
+            time $binary < $test_case
+        else
+            echo "oj: '$test_case' not found"
+        fi
+    done
+fi
+
+if [ -f "$p.in" ]; then
+    time $binary < "$p.in"
+elif [ $# -eq 0 ]; then
+    echo "Test input not found, using stdin:"
+    time $binary
+fi && \
+cat "$p.cpp" > /dev/clipboard
