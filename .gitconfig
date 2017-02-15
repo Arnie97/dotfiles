@@ -21,7 +21,7 @@
 	ce = clean
 	cf = config --edit --global
 	ch = checkout
-	cl = clone
+	cl = clone --recursive
 	cm = commit --amend
 	co = commit
 	cp = cherry-pick
