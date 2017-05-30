@@ -70,3 +70,5 @@
 	default = matching
 [color]
 	ui = auto
+[gui]
+	encoding=utf-8
