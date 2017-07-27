@@ -1,0 +1,10 @@
+#!/bin/sh
+
+HOSTS='https://coding.net/u/scaffrey/p/hosts/git/raw/master/hosts'
+ROUTES='https://github.com/sabersalv/freedom-routes/raw/dist/linux.tar.gz'
+curl -fLo /etc/hosts $HOSTS
+curl -fL $ROUTES | tar -xOzv routes-down.sh | grep 'del' | sed -re 's/^[ a-z]+//g; 1i 198.35.26.96/32' > /etc/chnroutes
+
+for i in chinadns dnsmasq shadowvpn; do
+    /etc/init.d/$i restart
+done
