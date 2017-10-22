@@ -1,11 +1,11 @@
 # Path to your oh-my-zsh configuration.
-ZSH=$HOME/.oh-my-zsh
+ZSH=$HOME/.config/zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-export ZSH_THEME="helloworld"
+ZSH_THEME="af-minimal"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -24,9 +24,14 @@ export ZSH_THEME="helloworld"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git)
+plugins=(git python encode64 urltools)
 
+ZSH_COMPDUMP=$ZSH/cache/ZCOMPDUMP
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-alias telnet='nocorrect telnet'
+alias git='hub'
+alias la='ls -A'
+alias ll='ls -Alh'
+alias lt='ls -Alht'
+alias pd='pushd'
