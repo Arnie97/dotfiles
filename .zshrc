@@ -31,6 +31,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 alias git='hub'
+alias axel='axel -a'
 alias la='ls -A'
 alias ll='ls -Alh'
 alias lt='ls -Alht'
