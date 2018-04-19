@@ -1,0 +1,4 @@
+#!/bin/sh
+export PIP_CONFIG_FILE=`cygpath -w ~/.config/pip/pip.conf`
+export PYTHONIOENCODING=GB18030
+env -u TZ winpty python.exe "$@"
