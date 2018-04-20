@@ -12,6 +12,7 @@
 	helper = store
 [alias]
 	aa = add --all
+	ap = add --patch
 	au = add --update
 	bi = bisect
 	bs = bisect
@@ -29,19 +30,20 @@
 	de = tell
 	di = diff
 	ds = diff --stat
+	dn = diff --name-status
 	dt = difftool
 	dw = diff --word-diff
 	fb = filter-branch
 	fe = fetch
+	fp = format-patch
 	gl = log --graph --all --date-order --abbrev=4 --date='format:%y-%m-%d' --pretty=format:'%C(red bold)%h%C(reset) %C(cyan)%cd%C(yellow bold)%d%C(reset) %s %C(green)<%an> %C(blue bold)(%ar)%C(reset)'
 	gr = grep
 	ig = ignore
-	in = init
 	ls = ls-files
+	lt = ls-tree --long --abbrev
 	me = merge --allow-unrelated-histories
 	mt = mergetool
-	pa = format-patch
-	pf = push --force
+	pf = push --force-with-lease
 	pl = pull
 	pr = pull --rebase
 	pu = push
@@ -51,7 +53,6 @@
 	rs = reset --soft
 	rf = reflog
 	ri = rebase --interactive
-	rl = rev-list
 	rm = rm --cached
 	ro = remote
 	rp = rev-parse
@@ -62,7 +63,6 @@
 	su = submodule
 	tf = tag --force
 	tm = filter-branch --force --env-filter 'export GIT_COMMITTER_DATE="$GIT_AUTHOR_DATE"'
-	ui = update-server-info
 	us = update-server-info
 [hub]
 	protocol = https
@@ -71,4 +71,4 @@
 [color]
 	ui = auto
 [gui]
-	encoding=utf-8
+	encoding = utf-8
