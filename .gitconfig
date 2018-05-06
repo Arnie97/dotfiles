@@ -24,6 +24,8 @@
 	ch = checkout
 	cl = clone --recursive
 	cm = commit --amend
+	ca = commit --amend --reset-author
+	cc = !GIT_COMMITTER_DATE=`git log --pretty=%aD HEAD^..` git commit --amend
 	co = commit
 	cp = cherry-pick
 	cr = create
