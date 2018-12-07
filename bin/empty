@@ -1,0 +1,25 @@
+#!/bin/sh
+
+package=${1:-empty}
+version=${2:-9.0}
+arch=${3:-i386}
+filename=${package}_${version}_${arch}.deb
+
+tmp=$(mktemp -d)
+(
+cd $tmp
+echo 2.0 > debian-binary
+cat > control << EOF
+Package: $package
+Version: $version
+Architecture: $arch
+Maintainer: Dpkg Developers <debian-dpkg@lists.debian.org>
+Description: An empty package to circumvent dependency checking
+EOF
+
+tar -czf data.tar.gz --exclude='*' .
+tar -czf control.tar.gz control
+ar -r $filename debian-binary control.tar.gz data.tar.gz
+)
+mv $tmp/$filename ./
+rm -r $tmp
