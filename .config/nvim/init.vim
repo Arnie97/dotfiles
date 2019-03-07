@@ -1,5 +1,5 @@
 " nice defaults
-" https://github.com/amix/vimrc
+" git clone https://github.com/amix/vimrc ~/.config/nvim
 source ~/.config/nvim/vimrcs/basic.vim
 source ~/.config/nvim/vimrcs/filetypes.vim
 source ~/.config/nvim/vimrcs/plugins_config.vim
@@ -27,13 +27,10 @@ let g:lightline = {
 	\ 'component_function': {
 	\   'readonly': 'LightlineReadonly',
 	\   'fugitive': 'LightlineFugitive'
-	\ },
-	\ 'separator': { 'left': '', 'right': '' },
-	\ 'subseparator': { 'left': '', 'right': '' }
-	\ }
+	\ }}
 
 function! LightlineReadonly()
-	return &readonly ? '' : ''
+	return &readonly ? 'READ ONLY' : ''
 endfunction
 
 function! LightlineFugitive()
