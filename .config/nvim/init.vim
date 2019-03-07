@@ -8,6 +8,10 @@ source ~/.config/nvim/vimrcs/extended.vim
 " line numbers
 set number
 set cmdheight=1
+set updatetime=100
+
+let g:gitgutter_enabled = 1
+let g:go_version_warning = 0
 
 " remove trailing whitespaces
 " http://vim.wikia.com/wiki/Remove_unwanted_spaces
