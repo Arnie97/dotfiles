@@ -1,0 +1,37 @@
+#!/bin/bash
+# e: open the location of specified files or folders in your file manager
+
+command_exists() { command -v "$1" > /dev/null; }  # including built-ins
+
+if command_exists "show_dir"; then  # custom behavior
+    true  # define show_dir and optionally show_file in your $PATH or .profile
+elif command_exists "xdg-open"; then  # x11
+    show_dir() { xdg-open "$1"; }
+elif command_exists "open"; then  # darwin
+    show_dir() { open "$1"; }
+elif command_exists "explorer"; then  # windows
+    show_dir() { explorer $(cygpath -w "$1"); }
+    show_file() { explorer \/select,$(cygpath -w $(ls --append-exe "$1")); }
+fi
+
+if [ $# -eq 0 ]; then
+    set "$PWD"
+fi
+for pathspec in "$@"; do
+    if [ -a "$pathspec" ]; then
+        ls --color -Fd "$pathspec"
+    elif [ -x "$(command -v "$pathspec")" ]; then  # excluding built-ins
+        pathspec=$(command -v "$pathspec")
+        ls --color -Fd "$pathspec"
+    else
+        echo "$pathspec"?
+    fi
+
+    if ! [ -f "$pathspec" ]; then
+        show_dir "$pathspec"
+    elif command_exists show_file; then
+        show_file "$pathspec"
+    else
+        show_dir $(dirname "$pathspec")
+    fi
+done
