@@ -1,15 +1,21 @@
+#!/bin/sh
+""git clone https://github.com/amix/vimrc ~/.config/nvim
+""git clone https://github.com/ap/vim-css-color ~/.config/nvim/my_plugins/vim-css-color
+""exit # the magic polyglot is valid in both shell and vim
+
 " nice defaults
-" git clone https://github.com/amix/vimrc ~/.config/nvim
 source ~/.config/nvim/vimrcs/basic.vim
 source ~/.config/nvim/vimrcs/filetypes.vim
 source ~/.config/nvim/vimrcs/plugins_config.vim
 source ~/.config/nvim/vimrcs/extended.vim
 
-" line numbers
+" line numbers, gutter and cursor
 set number
 set cmdheight=1
+set cursorline
 set updatetime=100
-
+highlight CursorLine cterm=none ctermbg=237
+highlight CursorLineNr cterm=none ctermbg=237 ctermfg=white
 let g:gitgutter_enabled = 1
 let g:go_version_warning = 0
 
