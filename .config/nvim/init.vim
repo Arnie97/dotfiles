@@ -10,9 +10,8 @@ source ~/.config/nvim/vimrcs/plugins_config.vim
 source ~/.config/nvim/vimrcs/extended.vim
 
 " line numbers, gutter and cursor
-set number
-set cmdheight=1
-set cursorline
+set number cursorline
+set noshowmode showcmd cmdheight=1
 set updatetime=100
 highlight CursorLine cterm=none ctermbg=237
 highlight CursorLineNr cterm=none ctermbg=237 ctermfg=white
@@ -44,23 +43,23 @@ try
 catch
 endtry
 
-" schemes: wombat, darcula, Dracula, powerline, jellybeans,
-" solarized, landscape, Tomorrow_Night, PaperColor, Molokai
+" schemes: wombat, powerline, jellybeans, PaperColor, seoul256
 let g:lightline = {
     \ 'colorscheme': 'wombat',
-	\ 'component_function': {
-	\   'readonly': 'LightlineReadonly',
-	\   'fugitive': 'LightlineFugitive'
-	\ }}
-
-function! LightlineReadonly()
-	return &readonly ? 'READ ONLY' : ''
-endfunction
-
-function! LightlineFugitive()
-	if exists('*fugitive#head')
-		let branch = fugitive#head()
-		return branch !=# '' ? ''.branch : ''
-	endif
-	return ''
-endfunction
+    \ 'component': {
+        \ 'branch': '%{fugitive#head()}',
+        \ 'modified': '%{&modifiable?(&readonly?"🔒":"").(&modified?"+":""):"-"}'
+    \ },
+    \ 'component_visible_condition': {
+        \ 'branch': '(exists("*fugitive#head") && ""!=fugitive#head())',
+    \ },
+    \ 'active': {'left': [
+        \ ['mode', 'paste'],
+        \ ['branch', 'filename', 'modified']
+    \ ]},
+    \ 'inactive': {'left': [
+        \ ['filename', 'modified']
+    \ ]},
+    \ 'separator':    {'left': '', 'right': ''},
+    \ 'subseparator': {'left': '', 'right': ''},
+\ }
