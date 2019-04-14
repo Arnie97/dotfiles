@@ -61,6 +61,9 @@ let g:lightline = {
     \ 'inactive': {'left': [
         \ ['filename', 'modified']
     \ ]},
-    \ 'separator':    {'left': '', 'right': ''},
-    \ 'subseparator': {'left': '', 'right': ''},
 \ }
+
+if system('tput colors') == 256
+    let g:lightline.separator    = {'left': '', 'right': ''}
+    let g:lightline.subseparator = {'left': '', 'right': ''}
+endif
