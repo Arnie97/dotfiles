@@ -19,6 +19,20 @@ highlight CursorLineNr cterm=none ctermbg=237 ctermfg=white
 let g:gitgutter_enabled = 1
 let g:go_version_warning = 0
 
+" key bindings
+let mapleader = ','
+map <leader>p :CtrlP<cr>
+map <leader>n :NERDTreeToggle<cr>
+map <leader><leader> :MRU<cr>
+map <space> :
+map <bslash> "
+map <bslash><bslash> :registers<cr>
+map mm :marks<cr>
+noremap ' `
+noremap ` '
+tnoremap <c-w> <c-\><c-n>
+cabbrev git Git
+
 " remove trailing whitespaces
 " http://vim.wikia.com/wiki/Remove_unwanted_spaces
 autocmd BufWritePre * %s/\s\+$//e
