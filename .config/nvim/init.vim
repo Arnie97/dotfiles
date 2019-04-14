@@ -9,6 +9,11 @@ source ~/.config/nvim/vimrcs/filetypes.vim
 source ~/.config/nvim/vimrcs/plugins_config.vim
 source ~/.config/nvim/vimrcs/extended.vim
 
+" visualize whitespaces, and remove trailing spaces on save
+" http://vim.wikia.com/wiki/Remove_unwanted_spaces
+autocmd BufWritePre * %s/\s\+$//e
+set list listchars+=trail:·,extends:>,precedes:<,conceal:…,nbsp:⎵
+
 " line numbers, gutter and cursor
 set number cursorline
 set noshowmode showcmd cmdheight=1
@@ -31,10 +36,6 @@ noremap ' `
 noremap ` '
 tnoremap <c-w> <c-\><c-n>
 cabbrev git Git
-
-" remove trailing whitespaces
-" http://vim.wikia.com/wiki/Remove_unwanted_spaces
-autocmd BufWritePre * %s/\s\+$//e
 
 " keep home directory clean
 let MRU_File = $HOME . '/.config/nvim/temp_dirs/mru'
