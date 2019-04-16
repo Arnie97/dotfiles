@@ -1,4 +1,7 @@
 HISTCONTROL=ignoreboth
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-forward'
+
 alias git='hub'
 alias axel='axel -a'
 alias ls='ls -F --color --show-control-chars'
