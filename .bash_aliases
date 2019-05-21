@@ -17,3 +17,4 @@ else
     alias pdd='pushd "$(xdg-user-dir DESKTOP)"'
     alias sudo='sudo -E'
 fi
+export DISPLAY=:0
