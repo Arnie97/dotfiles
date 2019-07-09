@@ -1,6 +1,5 @@
-HISTCONTROL=ignoreboth
-bind '"\e[A": history-search-backward'
-bind '"\e[B": history-search-forward'
+export DISPLAY=:0
+export HISTCONTROL=ignoreboth
 
 alias git='hub'
 alias axel='axel -a'
@@ -17,4 +16,7 @@ else
     alias pdd='pushd "$(xdg-user-dir DESKTOP)"'
     alias sudo='sudo -E'
 fi
-export DISPLAY=:0
+if [ -x "$(command -v bind)" ]; then
+    bind '"\e[A": history-search-backward'
+    bind '"\e[B": history-search-forward'
+fi
