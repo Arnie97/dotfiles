@@ -13,6 +13,8 @@ $FG[105]%(!.#.»)%{$reset_color%} '
 PROMPT2='%{$fg[red]%}\ %{$reset_color%}'
 RPS1='${return_code}'
 
+# ls color
+export LS_COLORS="$LS_COLORS:di=01;38;5;39:ln=01;38;5;37:"
 
 # color vars
 eval my_gray='$FG[237]'
@@ -21,9 +23,9 @@ eval my_orange='$FG[214]'
 # right prompt
 if type "virtualenv_prompt_info" > /dev/null
 then
-	RPROMPT='$(virtualenv_prompt_info)$my_gray%n@%y%{$reset_color%}%'
+	RPROMPT='$my_gray%n@%m ${$(virtualenv_prompt_info):-%y}%{$reset_color%}%'
 else
-	RPROMPT='$my_gray%n@%m%{$reset_color%}%'
+	RPROMPT='$my_gray%n@%m %y%{$reset_color%}%'
 fi
 
 # git settings
