@@ -9,8 +9,8 @@
 	wsErrorHighlight = all
 [merge]
 	tool = bc
-[credential]
-	helper = store
+[rebase]
+	autoStash = true
 [alias]
 	aa = add --all
 	ap = add --patch
@@ -28,7 +28,7 @@
 	ca = commit --amend --reset-author
 	cc = !GIT_COMMITTER_DATE=`git log --pretty=%aD HEAD^..` git commit --amend
 	co = commit
-	cp = cherry-pick
+	cp = cherry-pick --ff
 	cr = create
 	de = tell
 	di = diff
@@ -48,10 +48,11 @@
 	me = merge --allow-unrelated-histories
 	mt = mergetool
 	pf = push --force-with-lease
-	pl = pull
+	pl = pull --ff-only
 	pr = pull --rebase
 	pu = push
 	rb = rebase
+	rd = range-diff
 	re = reset
 	rh = reset --hard
 	rs = reset --soft
@@ -61,9 +62,11 @@
 	ro = remote
 	rp = rev-parse
 	rq = pull-request
+	rv = !git push origin HEAD:refs/for/${1:-$(git rev-parse --abbrev-ref HEAD)}%${2}
 	sh = show
+	sl = status --long
 	ss = status --short
-	st = status
+	st = stash
 	su = submodule
 	tf = tag --force
 	tm = filter-branch --force --env-filter 'export GIT_COMMITTER_DATE="$GIT_AUTHOR_DATE"'
