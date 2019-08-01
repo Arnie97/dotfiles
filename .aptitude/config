@@ -1,0 +1,7 @@
+aptitude "";
+aptitude::UI "";
+aptitude::UI::Menubar-Autohide "true";
+aptitude::UI::Minibuf-Prompts "true";
+aptitude::UI::InfoAreaTabs "true";
+APT "";
+APT::Install-Recommends "false";
