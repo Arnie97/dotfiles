@@ -12,7 +12,7 @@ source ~/.config/nvim/vimrcs/extended.vim
 " visualize whitespaces, and remove trailing spaces on save
 " http://vim.wikia.com/wiki/Remove_unwanted_spaces
 autocmd BufWritePre * %s/\s\+$//e
-set list listchars+=trail:·,extends:>,precedes:<,conceal:…,nbsp:⎵
+set list listchars=tab:\|\ ,trail:·,extends:>,precedes:<,conceal:…,nbsp:+
 
 " line numbers, gutter and cursor
 set number cursorline
@@ -20,6 +20,7 @@ set noshowmode showcmd cmdheight=1
 set updatetime=100
 highlight CursorLine cterm=none ctermbg=237
 highlight CursorLineNr cterm=none ctermbg=237 ctermfg=white
+highlight NonText cterm=none ctermbg=none ctermfg=239
 let g:gitgutter_enabled = 1
 let g:go_version_warning = 0
 
