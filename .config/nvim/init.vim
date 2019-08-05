@@ -1,6 +1,11 @@
 #!/bin/sh
-""git clone https://github.com/amix/vimrc ~/.config/nvim
-""git clone https://github.com/ap/vim-css-color ~/.config/nvim/my_plugins/vim-css-color
+""cd $(dirname $0)
+""git init
+""git remote add origin https://github.com/amix/vimrc
+""git pull origin master
+""cd my_plugins
+""git clone https://github.com/ap/vim-css-color
+""git clone https://github.com/Arnie97/mru.vim
 ""exit # the magic polyglot is valid in both shell and vim
 
 " nice defaults
