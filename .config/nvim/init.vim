@@ -20,7 +20,7 @@ autocmd BufWritePre * %s/\s\+$//e
 set list listchars=tab:\|\ ,trail:·,extends:>,precedes:<,conceal:…,nbsp:+
 
 " line numbers, gutter and cursor
-set number cursorline
+set nowrap number cursorline
 set noshowmode showcmd cmdheight=1
 set updatetime=100
 highlight CursorLine cterm=none ctermbg=237
@@ -32,15 +32,14 @@ let g:go_version_warning = 0
 " key bindings
 let mapleader = ','
 map <leader>p :CtrlP<cr>
-map <leader>n :NERDTreeToggle<cr>
 map <leader><leader> :MRU<cr>
 map <space> :
 map <bslash> "
 map <bslash><bslash> :registers<cr>
 map mm :marks<cr>
-noremap ' `
-noremap ` '
-tnoremap <c-w> <c-\><c-n>
+if exists(':terminal')
+    tnoremap <c-w> <c-\><c-n>
+endif
 cabbrev git Git
 
 " keep home directory clean
