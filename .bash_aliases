@@ -16,7 +16,9 @@ else
     alias pdd='pushd "$(xdg-user-dir DESKTOP)"'
     alias sudo='sudo -E'
 fi
-if [ -x "$(command -v bind)" ]; then
+if [ -n "$BASH_VERSION" ]; then
     bind '"\e[A": history-search-backward'
     bind '"\e[B": history-search-forward'
+elif [ -n "$ZSH_VERSION" ]; then
+    bindkey "^u" backward-kill-line
 fi
