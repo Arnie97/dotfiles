@@ -1,6 +1,10 @@
 [user]
 	email = arnie97@gmail.com
 	name = Arnie97
+[log]
+	mailmap = true
+[mailmap]
+	file = ~/.mailmap
 [core]
 	autoCRLF = false
 	quotePath = false
@@ -28,7 +32,7 @@
 	ca = commit --amend --reset-author
 	cc = !GIT_COMMITTER_DATE=`git log --pretty=%aD HEAD^..` git commit --amend
 	co = commit
-	cp = cherry-pick --ff
+	cp = cherry-pick
 	cr = create
 	de = tell
 	di = diff
@@ -39,7 +43,7 @@
 	fb = filter-branch
 	fe = fetch
 	fp = format-patch
-	gl = log --graph --all --date-order --abbrev=4 --date='format:%y-%m-%d' --pretty=format:'%C(red bold)%h%C(reset) %C(cyan)%cd%C(yellow bold)%d%C(reset) %s %C(green)<%an> %C(blue bold)(%ar)%C(reset)'
+	gl = log --graph --all --abbrev=4 --date='format:%y-%m-%d' --pretty=format:'%C(red bold)%h%C(reset) %C(cyan)%cd%C(yellow bold)%d%C(reset) %s %C(cyan)(%C(green)%aN, %C(cyan)%ar)%C(reset)'
 	gr = grep
 	ig = ignore
 	lg = log --stat --summary --pretty=fuller
