@@ -55,6 +55,7 @@
 	pl = pull --ff-only
 	pr = pull --rebase
 	pu = push
+	pv = !TZ=UTC git show --quiet --pretty='v0.0.0-%cd-%h' --date='format:%Y%m%d%H%M%S' --abbrev=12
 	rb = rebase
 	rd = range-diff
 	re = reset
