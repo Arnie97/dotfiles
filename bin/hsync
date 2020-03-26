@@ -17,11 +17,9 @@ def md5sum(filename, chunk_size=8192):
 def main(checksum_file, *directories):
     # try to create a backup, but refuse to overwrite an existing backup
     checksum_file = os.path.abspath(checksum_file)
-    checksum_bak = checksum_file + os.path.extsep + 'bak'
-    checksum_new = checksum_file + os.path.extsep + 'new'
+    checksum_bak = checksum_file + '.bak'
     if os.path.exists(checksum_bak):
         raise FileExistsError(checksum_bak)
-    os.rename(checksum_file, checksum_bak)
 
     # list all files in the specified directories and their subdirectories
     checksum_root = os.path.dirname(checksum_file)
@@ -35,17 +33,12 @@ def main(checksum_file, *directories):
         for root in directories
         for path, dirs, files in os.walk(root)
         for file in files
-    }
-
-    # ignore myself
-    new_files -= {
-        os.path.relpath(file)
-        for file in [checksum_file, checksum_bak, checksum_new]
+        if not file.endswith('.md5')
     }
 
     # ignore file entries that exist on disk
     checksums = {}
-    with open(checksum_bak, encoding='utf-8') as src:
+    with open(checksum_file, encoding='utf-8') as src:
         for line_no, raw_line in enumerate(src):
             line = raw_line.strip()
             if len(line) == 0 or line[1] in '#;':
@@ -65,20 +58,13 @@ def main(checksum_file, *directories):
         for checksum, (line_no, old_file) in checksums.items()
     }
 
-    # write new entries to another file
-    if new_files:
-        new_files = sorted(new_files.items(), key=itemgetter(1))
-        with open(checksum_new, 'a', encoding='utf-8') as dest:
-            for line_no, (checksum, new_file) in enumerate(new_files):
-                dest.write('{}  {}\n'.format(checksum, new_file))
-                sys.stderr.write('+ {} {}\n'.format(line_no + 1, new_file))
-
-    # update the paths of moved files
-    with open(checksum_bak, encoding='utf-8') as src:
-        with open(checksum_file, 'x', encoding='utf-8') as dest:
+    os.rename(checksum_file, checksum_bak)
+    with open(checksum_file, 'x', encoding='utf-8') as dest:
+        # update the paths of moved files
+        with open(checksum_bak, encoding='utf-8') as src:
             # write existing entries in the original order
-            line_no = -1
-            for line_no, raw_line in enumerate(src):
+            line_no = 0
+            for line_no, raw_line in enumerate(src, 1):
                 if line_no not in modified_lines:
                     dest.write(raw_line)
                     continue
@@ -86,21 +72,27 @@ def main(checksum_file, *directories):
                 checksum, old_file, new_file = modified_lines[line_no]
                 if new_file:
                     dest.write('{}  {}\n'.format(checksum, new_file))
-                    sys.stderr.write('~ {} {} -> {}\n'.format(
-                        line_no + 1, old_file, new_file))
+                    sys.stdout.write('~ {} {} -> {}\n'.format(
+                        line_no, old_file, new_file))
                 else:
                     dest.write(raw_line)
-                    sys.stderr.write('? {} {}\n'.format(line_no + 1, old_file))
+                    sys.stdout.write('? {} {}\n'.format(line_no, old_file))
+
+        # then append new entries at the end
+        new_files = sorted(new_files.items(), key=itemgetter(1))
+        for line_no, (checksum, new_file) in enumerate(new_files, line_no + 1):
+            dest.write('{}  {}\n'.format(checksum, new_file))
+            sys.stdout.write('+ {} {}\n'.format(line_no, new_file))
 
     summary = '  '.join('{}: {}'.format(k, v) for k, v in [
-        ('Total', line_no + 1 + len(new_files)),
-        ('Success', line_no + 1 - len(modified_lines)),
+        ('Total', line_no),
+        ('Success', line_no - len(modified_lines) - len(new_files)),
         ('Moved', unique_files - len(new_files)),
         ('Miss', len(modified_lines) - (unique_files - len(new_files))),
         ('Duplicate', calculated_files - unique_files),
         ('New', len(new_files)),
     ])
-    sys.stderr.write('-' * 80 + '\n' + summary + '\n')
+    sys.stdout.write('-' * 80 + '\n' + summary + '\n')
 
 
 if __name__ == '__main__':
