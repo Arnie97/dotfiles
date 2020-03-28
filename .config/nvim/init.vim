@@ -40,7 +40,7 @@ map mm :marks<cr>
 if exists(':terminal')
     tnoremap <c-w> <c-\><c-n>
 endif
-cabbrev git Git
+cnoremap git Git
 
 " keep home directory clean
 let MRU_File = $HOME . '/.config/nvim/temp_dirs/mru'

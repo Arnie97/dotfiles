@@ -74,7 +74,7 @@
 	st = stash
 	su = submodule
 	tf = tag --force
-	tm = filter-branch --force --env-filter 'export GIT_COMMITTER_DATE="$GIT_AUTHOR_DATE"'
+	tm = filter-branch --force --env-filter 'export GIT_COMMITTER_DATE=\""$GIT_AUTHOR_DATE"\"'
 	us = update-server-info
 [hub]
 	protocol = https
