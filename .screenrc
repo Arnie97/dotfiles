@@ -1,6 +1,7 @@
 startup_message off
-escape ^Ww
-bind a windows
+escape ^Ww  # reserve ^A for moving to the beginning of line
+bind a windows  # swap w with a since w is already occupied above
 term screen-256color-bce-s
 vbell off  # leave it to the terminal emulators
 defbce on  # use current bg color for erased chars
+defscrollback 32768  # the default value is 100 (or in Debian, 1024)
