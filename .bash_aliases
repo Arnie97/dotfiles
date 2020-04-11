@@ -1,5 +1,4 @@
 export DISPLAY=:0
-export HISTCONTROL=ignoreboth
 
 alias git='hub'
 alias axel='axel -a'
@@ -17,8 +16,10 @@ else
     alias sudo='sudo -E'
 fi
 if [ -n "$BASH_VERSION" ]; then
+    export HISTCONTROL=ignoreboth
     bind '"\e[A": history-search-backward'
     bind '"\e[B": history-search-forward'
 elif [ -n "$ZSH_VERSION" ]; then
+    setopt HIST_EXPIRE_DUPS_FIRST HIST_FIND_NO_DUPS HIST_IGNORE_DUPS HIST_IGNORE_SPACE
     bindkey "^u" backward-kill-line
 fi
