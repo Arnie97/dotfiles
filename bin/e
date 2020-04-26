@@ -32,6 +32,6 @@ for pathspec in "$@"; do
     elif command_exists show_file; then
         show_file "$pathspec"
     else
-        show_dir $(dirname "$pathspec")
+        show_dir "$(dirname "$pathspec")"
     fi
 done
