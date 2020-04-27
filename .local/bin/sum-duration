@@ -1,6 +1,6 @@
 #!/bin/sh
 find "$@" \( -name "*.mp4" -o -name "*.avi" \) -print0 | xargs --null \
-./mediainfo --output='General;%Duration%/%FileName%\n' | \
+mediainfo --output='General;%Duration%/%FileName%\n' | \
 sed 's/\.\///g' | \
 awk '
 function print_time(h)

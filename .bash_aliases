@@ -1,4 +1,5 @@
 export DISPLAY=:0
+export PATH="$HOME/.local/bin:$PATH"
 
 alias git='hub'
 alias axel='axel -a'
