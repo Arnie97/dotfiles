@@ -1,8 +1,10 @@
 export DISPLAY=:0
 export PATH="$HOME/.local/bin:$PATH"
+export LESS="-FRSX"
 
 alias git='hub'
 alias axel='axel -a'
+alias ag='ag --pager=less'
 alias ls='ls -F --color --show-control-chars'
 alias la='ls -A'
 alias ll='ls -Alh'
