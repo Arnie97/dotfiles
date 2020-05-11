@@ -1,0 +1,9 @@
+#!/bin/sh
+
+if [ -e "$1" ]; then
+    export GIT_COMMITTER_DATE=`date +%s -r "$1"`
+else
+    export GIT_COMMITTER_DATE="$1"
+fi
+
+git commit --amend --reset-author --date="$GIT_COMMITTER_DATE"

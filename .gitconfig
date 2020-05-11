@@ -31,6 +31,7 @@
 	cm = commit --amend
 	ca = commit --amend --reset-author
 	cc = !GIT_COMMITTER_DATE=`git log --pretty=%aD HEAD^..` git commit --amend
+	cw = follow
 	co = commit
 	cp = cherry-pick
 	cr = create
@@ -43,7 +44,8 @@
 	fb = filter-branch
 	fe = fetch
 	fp = format-patch
-	gl = log --graph --all --abbrev=4 --date='format:%y-%m-%d' --pretty=format:'%C(red bold)%h%C(reset) %C(cyan)%cd%C(yellow bold)%d%C(reset) %s %C(cyan)(%C(green)%aN, %C(cyan)%ar)%C(reset)'
+	gg = log --graph --abbrev=4 --date='format:%y-%m-%d' --pretty=format:'%C(red bold)%h%C(reset) %C(cyan)%cd%C(yellow bold)%d%C(reset) %s %C(cyan)(%C(green)%aN, %C(cyan)%ar)%C(reset)'
+	gl = log --graph --abbrev=4 --date='format:%y-%m-%d' --pretty=format:'%C(red bold)%h%C(reset) %C(cyan)%cd%C(yellow bold)%d%C(reset) %s %C(cyan)(%C(green)%aN, %C(cyan)%ar)%C(reset)' --all
 	gr = grep
 	ig = ignore
 	lg = log --stat --summary --pretty=fuller
@@ -67,6 +69,7 @@
 	ro = remote
 	rp = rev-parse
 	rq = pull-request
+	rt = rebase --committer-date-is-author-date
 	rv = !git push origin HEAD:refs/for/${1:-$(git rev-parse --abbrev-ref HEAD)}%${2}
 	sh = show
 	sl = status --long
@@ -74,7 +77,6 @@
 	st = stash
 	su = submodule
 	tf = tag --force
-	tm = filter-branch --force --env-filter 'export GIT_COMMITTER_DATE=\""$GIT_AUTHOR_DATE"\"'
 	us = update-server-info
 [hub]
 	protocol = https
