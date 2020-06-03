@@ -1,20 +1,3 @@
-[user]
-	email = arnie97@gmail.com
-	name = Arnie97
-[log]
-	mailmap = true
-[mailmap]
-	file = ~/.mailmap
-[core]
-	autoCRLF = false
-	quotePath = false
-[diff]
-	tool = bc
-	wsErrorHighlight = all
-[merge]
-	tool = bc
-[rebase]
-	autoStash = true
 [alias]
 	aa = add --all
 	ap = add --patch
@@ -44,13 +27,14 @@
 	fb = filter-branch
 	fe = fetch
 	fp = format-patch
-	gg = log --graph --abbrev=4 --date='format:%y-%m-%d' --pretty=format:'%C(red bold)%h%C(reset) %C(cyan)%cd%C(yellow bold)%d%C(reset) %s %C(cyan)(%C(green)%aN, %C(cyan)%ar)%C(reset)'
-	gl = log --graph --abbrev=4 --date='format:%y-%m-%d' --pretty=format:'%C(red bold)%h%C(reset) %C(cyan)%cd%C(yellow bold)%d%C(reset) %s %C(cyan)(%C(green)%aN, %C(cyan)%ar)%C(reset)' --all
+	gg = log --graph --date='format:%y-%m-%d' --pretty=custom
+	gl = log --graph --date='format:%y-%m-%d' --pretty=custom --all
 	gr = grep
 	ig = ignore
 	lg = log --stat --summary --pretty=fuller
 	ls = ls-files
 	lt = ls-tree --long --abbrev
+	mb = merge-base
 	me = merge --allow-unrelated-histories
 	mt = mergetool
 	pf = push --force-with-lease
@@ -69,20 +53,64 @@
 	ro = remote
 	rp = rev-parse
 	rq = pull-request
+	rr = rerere
 	rt = rebase --committer-date-is-author-date
 	rv = !git push origin HEAD:refs/for/${1:-$(git rev-parse --abbrev-ref HEAD)}%${2}
 	sh = show
-	sl = status --long
+	sl = status --long --show-stash
 	ss = status --short
 	st = stash
 	su = submodule
+	sw = switch
 	tf = tag --force
 	us = update-server-info
-[hub]
-	protocol = https
-[push]
-	default = matching
-[color]
-	ui = auto
+[blame]
+	coloring = highlightRecent
+[color "blame"]
+	highlightRecent = reset, 6 month ago, cyan, 3 month ago, blue, 1 month ago, green, 1 week ago, yellow, 1 day ago, red
+[core]
+	abbrev = 7
+	autoCRLF = false
+	quotePath = false
+	sparseCheckout = true
+[diff]
+	mnemonicPrefix = true
+	renames = copies
+	wsErrorHighlight = all
+[feature]
+	experimental = true
+[fetch]
+	parallel = 0
+[grep]
+	lineNumber = true
 [gui]
 	encoding = utf-8
+[http]
+	lowSpeedLimit = 20480
+	lowSpeedTime = 20
+[hub]
+	protocol = https
+[log]
+	follow = true
+	mailmap = true
+[mailmap]
+	file = ~/.mailmap
+[merge]
+	directoryRenames = true
+	guiTool = bc
+	tool = vimdiff
+[pretty]
+	custom = %C(red bold)%h%C(reset) %C(cyan)%cd%C(yellow bold)%d%C(reset) %s %C(cyan)(%C(green)%aN, %C(cyan)%cr)%C(reset)
+[push]
+	default = matching
+[rebase]
+	autoStash = true
+	instructionFormat = [%aN] %s (%cr)% d
+[rerere]
+	autoUpdate = true
+	enabled = true
+[tag]
+	sort = version:refname
+[user]
+	email = arnie97@gmail.com
+	name = Arnie97
