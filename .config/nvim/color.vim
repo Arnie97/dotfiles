@@ -11,19 +11,13 @@ endif
 
 if has('autocmd')
     autocmd FileType python syntax keyword pythonDecorator True None False self
+else
+    silent! colorscheme slate
+    finish
 endif
 
-try
-    colorscheme peaksea
-catch
-    try
-        colorscheme desert
-    catch
-    endtry
-endtry
+silent! colorscheme peaksea
 
-
-" set background=dark
 " set termguicolors
 " let g:quantum_black=1
 " let g:quantum_italics=1

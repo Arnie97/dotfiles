@@ -20,7 +20,6 @@ Plug 'shougo/neosnippet-snippets'
 Plug 'terryma/vim-expand-region'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'itchyny/lightline.vim'
-Plug 'arnie97/mru.vim', { 'on': 'MRU' }
 Plug 'arnie97/ctrlp.vim'
 Plug 'ivalkeen/vim-ctrlp-tjump'
 Plug 'tacahiroy/ctrlp-funky'
@@ -33,7 +32,6 @@ Plug 'andrewRadev/switch.vim'
 Plug 'amix/open_file_under_cursor.vim'
 Plug 'rhysd/conflict-marker.vim'
 Plug 'ryvnf/readline.vim'
-Plug 'tmsvg/pear-tree'
 Plug 'alvan/vim-closetag'
 Plug 'chrisbra/unicode.vim', { 'do': ':nmap ga <plug>(UnicodeGA)' }
 Plug 'inkarkat/vim-visualrepeat'
@@ -61,6 +59,12 @@ if executable('ctags')
     Plug 'ludovicchabant/vim-gutentags', { 'on': [] }
 endif
 
+if has('nvim') || has('patch-7.4.849')
+    Plug 'tmsvg/pear-tree'
+else
+    Plug 'raimondi/delimitMate'
+endif
+
 if has('nvim') || has('patch-8.0.902')
     Plug 'mhinz/vim-signify'
 else
@@ -76,7 +80,12 @@ if executable('flake8')
 endif
 
 if executable('go')
-    Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
+    if has('nvim') || has('patch-8.0.1453')
+        Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
+    else
+        Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries', 'tag': 'v1.15' }
+    endif
+
     let g:go_gopls_enabled = 0
     autocmd FileType go if line('$') < 5000 | let g:go_gopls_enabled = 1 | endif
 endif
@@ -89,7 +98,6 @@ Plug 'plasticboy/vim-markdown'
 Plug 'neovimhaskell/haskell-vim'
 
 Plug 'calincru/peaksea.vim'
-Plug 'vim-scripts/peaksea'
 Plug 'mhinz/vim-janah'
 Plug 'flazz/vim-colorschemes'
 Plug 'overcache/neoSolarized'
@@ -195,6 +203,10 @@ imap <expr> <cr>
 autocmd VimEnter * call s:CmdLineMappings()
 
 function s:CmdLineMappings()
+    if !exists(':Alias')
+        return
+    endif
+
     Alias ag Ack
     Alias b ls<cr>:b
     Alias git Git
