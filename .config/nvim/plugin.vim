@@ -139,17 +139,20 @@ let g:lightline = {
 \ }
 
 
-let g:ctrlp_extensions = ['tag', 'mixed', 'bookmarkdir', 'funky']
-let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_types = ['buf', 'mru', 'fil']
+let g:ctrlp_extensions = ['funky', 'tag', 'mixed', 'bookmarkdir']
+let g:ctrlp_arg_map = 1
 let g:ctrlp_cache_dir = $HOME . '/.local/share/nvim/ctrlp'
+let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_funky_cache_dir = g:ctrlp_cache_dir
 let g:ctrlp_funky_syntax_highlight = 1
-let g:ctrlp_show_hidden = 1
+let g:ctrlp_match_current_file = 1
 let g:ctrlp_max_depth = 10
-let g:ctrlp_mruf_max = 5000
-let g:ctrlp_mruf_exclude = '\v.*(/\.git/.*|_(BASE|LOCAL|REMOTE)_\d+[^/]*|\.orig$)'
 let g:ctrlp_mruf_default_order = 1
-" let g:ctrlp_tilde_homedir = 1
+let g:ctrlp_mruf_exclude = '\v.*(/\.git/.*|_(BASE|LOCAL|REMOTE)_\d+[^/]*|\.orig$)'
+let g:ctrlp_mruf_max = 5000
+let g:ctrlp_show_hidden = 1
 let g:ctrlp_prompt_mappings = {
     \ 'AcceptSelection("e")': ['<cr>'],
     \ 'AcceptSelection("h")': ['<c-s>'],
@@ -207,9 +210,11 @@ function s:CmdLineMappings()
         return
     endif
 
+    Alias ack Ack
     Alias ag Ack
     Alias b ls<cr>:b
     Alias git Git
+    Alias tabg tab Git
     Alias nt NERDTreeToggle
     Alias nf NERDTreeFind
     Alias ng NERDTreeToggleVCS

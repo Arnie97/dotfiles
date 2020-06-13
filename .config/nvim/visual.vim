@@ -1,8 +1,8 @@
 " opens a new tab with the current buffer's path
-cnoreabbrev tabe tabedit <c-r>=expand('%:p:h')<cr>/
+cnoreabbrev tabed tabedit <c-r>=expand('%:p:h')<cr>/
 
 " :W sudo saves the file
-command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
+command! W execute 'w !sudo tee % > /dev/null'
 
 
 " pressing @ executes an macro linewise over the selected range

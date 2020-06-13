@@ -94,10 +94,9 @@ endif
 
 " ctrlp family
 if exists('g:plugs') && has_key(g:plugs, 'ctrlp.vim')
-    noremap <c-p> :<c-u>CtrlP<cr>
-    noremap <c-f> :<c-u>CtrlPMixed<cr>
+    noremap <c-f> :<c-u>CtrlPRoot<cr>
     noremap <c-b> :<c-u>CtrlPBuffer<cr>
-    noremap <c-t> :<c-u>CtrlPTag<cr>
+    noremap <c-t> :<c-u>CtrlPFunky<cr>
     noremap <c-m> :<c-u>CtrlPMRUFiles<cr>
     noremap <c-/> :<c-u>CtrlPtjump<cr>
 
