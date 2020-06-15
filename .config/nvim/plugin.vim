@@ -124,10 +124,17 @@ set noshowmode
 let g:lightline = {
     \ 'component': {
         \ 'branch': '%{fugitive#head()}',
+        \ 'fileformat': '%{winwidth(0) < 70? "": &ff}',
+        \ 'filetype': '%{winwidth(0) < 65? "": &ft !=# ""? &ft: "no ft"}',
+        \ 'fileencoding': '%{winwidth(0) < 55? "": &fenc !=# "" ? &fenc: &enc}',
+        \ 'percent': '%3p%%%<',
         \ 'modified': '%{&modifiable?(&readonly?"🔒":"").(&modified?"+":""):"-"}'
     \ },
     \ 'component_visible_condition': {
-        \ 'branch': '(exists("*fugitive#head") && ""!=fugitive#head())',
+        \ 'branch': 'exists("*fugitive#head") && "" != fugitive#head()',
+        \ 'fileformat': 'winwidth(0) >= 70',
+        \ 'filetype': 'winwidth(0) >= 65',
+        \ 'fileencoding': 'winwidth(0) >= 55',
     \ },
     \ 'active': {'left': [
         \ ['mode', 'paste'],
