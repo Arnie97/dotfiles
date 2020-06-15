@@ -3,10 +3,6 @@ if has('gui_running')
     set guioptions-=e
     set t_Co=256
     set guitablabel=%M\ %t
-elseif has('nvim')
-    set termguicolors
-else
-    set term=screen-256color
 endif
 
 if has('autocmd')
