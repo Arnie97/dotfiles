@@ -97,12 +97,12 @@ Plug 'solarnz/thrift.vim'
 Plug 'plasticboy/vim-markdown'
 Plug 'neovimhaskell/haskell-vim'
 
-Plug 'calincru/peaksea.vim'
-Plug 'mhinz/vim-janah'
-Plug 'flazz/vim-colorschemes'
+Plug 'arnie97/peaksea.vim', { 'rtp': 'vim' }
 Plug 'overcache/neoSolarized'
 Plug 'chriskempson/vim-tomorrow-theme'
+Plug 'rafi/awesome-vim-colorschemes'
 Plug 'tyrannicaltoucan/vim-quantum'
+Plug 'mhinz/vim-janah'
 
 call plug#end()
 

@@ -18,16 +18,6 @@ endif
 " let g:quantum_italics=1
 " colorscheme quantum
 
-if &background == 'dark'
-    highlight CursorLine cterm=none ctermbg=237
-    highlight CursorLineNr cterm=none ctermbg=237 ctermfg=white
-    highlight NonText cterm=none ctermbg=none ctermfg=239
-else
-    highlight CursorLine cterm=none ctermbg=231
-    " highlight CursorLineNr cterm=none ctermbg=231 ctermfg=black
-    highlight NonText cterm=none ctermbg=none ctermfg=247
-endif
-
 if !exists('g:lightline')
     finish
 endif
