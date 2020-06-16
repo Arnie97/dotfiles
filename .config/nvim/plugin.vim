@@ -145,6 +145,23 @@ let g:lightline = {
     \ ]},
 \ }
 
+autocmd ColorScheme * call s:LightLineUpdate()
+autocmd VimEnter    * call s:LightLineUpdate()
+
+function! s:LightLineUpdate()
+    if !exists('g:loaded_lightline')
+        return
+    endif
+    if &background == 'dark'
+        let g:lightline.colorscheme = 'wombat'
+    else
+        let g:lightline.colorscheme = 'PaperColor'
+    endif
+    call lightline#init()
+    call lightline#colorscheme()
+    call lightline#update()
+endfunction
+
 
 let g:ctrlp_types = ['buf', 'mru', 'fil']
 let g:ctrlp_extensions = ['funky', 'tag', 'mixed', 'bookmarkdir']
