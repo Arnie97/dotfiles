@@ -64,6 +64,10 @@ noremap ]l :lnext<cr>
 noremap -l :lopen<cr>
 
 
+" run macros in visual mode
+xnoremap @ :normal @
+
+
 " move a line of text using alt-j / alt-k
 nnoremap <m-j>     mz:m+<cr>`z
 nnoremap <m-up>    mz:m+<cr>`z
@@ -108,3 +112,11 @@ endif
 " readline mappings for the command line
 cnoremap <c-a> <home>
 cnoremap <c-e> <end>
+
+" opens a new tab with the current buffer's path
+cnoreabbrev tabed tabedit <c-r>=expand('%:p:h')<cr>/
+
+" :W sudo saves the file
+if exists(':command')
+    command! W execute 'w !sudo tee % > /dev/null'
+endif

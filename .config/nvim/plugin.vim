@@ -37,11 +37,11 @@ Plug 'chrisbra/unicode.vim', { 'do': ':nmap ga <plug>(UnicodeGA)' }
 Plug 'inkarkat/vim-visualrepeat'
 Plug 'easymotion/vim-easymotion'
 Plug 'aykamko/vim-easymotion-segments'
+Plug 'thalesmello/vim-slasher'
 Plug 'vim-scripts/cmdalias.vim'
 
 Plug 'junegunn/vim-easy-align', { 'on': ['<plug>(EasyAlign)', 'EasyAlign'] }
 Plug 'junegunn/vim-peekaboo'
-Plug 'junegunn/vim-slash'
 Plug 'junegunn/gv.vim', { 'on': 'GV' }
 Plug 'junegunn/rainbow_parentheses.vim'
 
