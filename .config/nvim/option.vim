@@ -92,6 +92,7 @@ endif
 " set UTF-8 as the default encoding and en_US as the default language
 " to avoid garbled characters in Chinese language Windows
 set encoding=utf-8
+set fileencodings=ucs-bom,utf-8,default,gb18030,big5,shift-jis,latin1
 set langmenu=en
 set spelllang=en,cjk
 
