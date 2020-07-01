@@ -33,12 +33,13 @@ Plug 'amix/open_file_under_cursor.vim'
 Plug 'rhysd/conflict-marker.vim'
 Plug 'ryvnf/readline.vim'
 Plug 'alvan/vim-closetag'
-Plug 'chrisbra/unicode.vim', { 'do': ':nmap ga <plug>(UnicodeGA)' }
+Plug 'chrisbra/unicode.vim'
 Plug 'inkarkat/vim-visualrepeat'
 Plug 'easymotion/vim-easymotion'
 Plug 'aykamko/vim-easymotion-segments'
 Plug 'thalesmello/vim-slasher'
 Plug 'vim-scripts/cmdalias.vim'
+Plug 'vim-scripts/LargeFile'
 
 Plug 'junegunn/vim-easy-align', { 'on': ['<plug>(EasyAlign)', 'EasyAlign'] }
 Plug 'junegunn/vim-peekaboo'
@@ -71,12 +72,15 @@ else
     Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
 endif
 
-if has('python') || has('python3')
-    Plug 'davidhalter/jedi-vim'
-endif
+if has('lambda') && has('timers') && exists('*json_encode')
+    let g:go_code_completion_enabled = 0
+    let g:go_def_mapping_enabled = 0
+    let g:go_gopls_enabled = 0
 
-if executable('flake8')
-    Plug 'nvie/vim-flake8'
+    Plug 'mattn/vim-lsp-settings'
+    Plug 'prabirshrestha/vim-lsp'
+    Plug 'prabirshrestha/asyncomplete.vim'
+    Plug 'prabirshrestha/asyncomplete-lsp.vim'
 endif
 
 if executable('go')
@@ -85,9 +89,6 @@ if executable('go')
     else
         Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries', 'tag': 'v1.15' }
     endif
-
-    let g:go_gopls_enabled = 0
-    autocmd FileType go if line('$') < 5000 | let g:go_gopls_enabled = 1 | endif
 endif
 
 Plug 'ap/vim-css-color'
@@ -148,7 +149,7 @@ let g:lightline = {
 autocmd ColorScheme * call s:LightLineUpdate()
 autocmd VimEnter    * call s:LightLineUpdate()
 
-function! s:LightLineUpdate()
+function s:LightLineUpdate()
     if !exists('g:loaded_lightline')
         return
     endif
@@ -204,8 +205,8 @@ let g:NERDTreeWinPos = 'right'
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeRespectWildIgnore = 1
 
+let g:LargeFile = 1
 let g:gutentags_cache_dir = $HOME . '/.local/share/nvim/tag'
-let g:python_highlight_all = 1
 let g:signify_sign_change = '&'
 let g:neosnippet#enable_snipmate_compatibility = 1
 

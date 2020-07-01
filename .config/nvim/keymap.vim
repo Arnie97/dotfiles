@@ -2,7 +2,7 @@
 noremap 0 ^
 noremap ^ 0
 noremap <space> :
-map <bslash><bslash> "
+map <bslash> "
 nnoremap mm :marks<cr>
 
 
@@ -31,11 +31,16 @@ nnoremap -/ :nohlsearch<cr>
 " jump to camelCase segments
 if exists('g:plugs') && has_key(g:plugs, 'vim-easymotion-segments')
     let g:EasyMotionSegments_do_mapping = 0
-    map <leader>   <plug>(easymotion-prefix)
-    map <leader>w  <plug>(easymotion-segments-LF)
-    map <leader>b  <plug>(easymotion-segments-LB)
-    map <leader>e  <plug>(easymotion-segments-RF)
-    map <leader>ge <plug>(easymotion-segments-RB)
+    map [   <plug>(easymotion-prefix)
+    map ]   <plug>(easymotion-prefix)
+    map [w  <plug>(easymotion-segments-LF)
+    map ]w  <plug>(easymotion-segments-LF)
+    map [b  <plug>(easymotion-segments-LB)
+    map ]b  <plug>(easymotion-segments-LB)
+    map [e  <plug>(easymotion-segments-RF)
+    map ]e  <plug>(easymotion-segments-RF)
+    map [ge <plug>(easymotion-segments-RB)
+    map ]ge <plug>(easymotion-segments-RB)
 endif
 
 
@@ -54,14 +59,43 @@ endif
 
 
 " cycle between buffers, quickfix list and location list
-noremap [b :bprev<cr>
-noremap ]b :bnext<cr>
+noremap [n :bprev<cr>
+noremap ]n :bnext<cr>
 noremap [o :cprev<cr>
 noremap ]o :cnext<cr>
 noremap -o :copen<cr>
 noremap [l :lprev<cr>
 noremap ]l :lnext<cr>
 noremap -l :lopen<cr>
+
+
+if exists('g:plugs') && has_key(g:plugs, 'ctrlp.vim')
+    function s:enableLspMapping() abort
+        nmap <buffer> gd <plug>(lsp-definition)
+        nmap <buffer> [u <plug>(lsp-references)
+        nmap <buffer> ]u <plug>(lsp-references)
+        nmap <buffer> [a <plug>(lsp-implementation)
+        nmap <buffer> ]a <plug>(lsp-implementation)
+        nmap <buffer> [t <plug>(lsp-type-definition)
+        nmap <buffer> ]t <plug>(lsp-type-definition)
+        nmap <buffer> gr <plug>(lsp-rename)
+        nmap <buffer> [h <plug>(lsp-previous-diagnostic)
+        nmap <buffer> ]h <plug>(lsp-next-diagnostic)
+        nmap <buffer> K  <plug>(lsp-hover)
+
+        if exists('+tagfunc')
+            setlocal tagfunc=lsp#tagfunc
+        endif
+        setlocal omnifunc=lsp#complete
+    endfunction
+
+    autocmd User lsp_buffer_enabled call s:enableLspMapping()
+endif
+
+if exists('g:plugs') && has_key(g:plugs, 'unicode.vim')
+    let g:Unicode_no_default_mappings = 1
+    nmap ga <plug>(UnicodeGA)
+endif
 
 
 " run macros in visual mode

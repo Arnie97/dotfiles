@@ -114,9 +114,9 @@ if has('autocmd')
     autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
 
     " remove trailing spaces on save
-    autocmd BufWritePre * :call CleanExtraSpaces()
+    autocmd BufWritePre * :call s:CleanExtraSpaces()
 
-    function! CleanExtraSpaces()
+    function s:CleanExtraSpaces()
         let save_cursor = getpos('.')
         let old_query = getreg('/')
         silent! %s/\s\+$//e
