@@ -57,6 +57,8 @@
 	rt = rebase --committer-date-is-author-date
 	rv = !git push origin HEAD:refs/for/${1:-$(git rev-parse --abbrev-ref HEAD)}%${2}
 	sh = show
+	sc = sparse-checkout
+	sp = sparse-checkout
 	sl = status --long --show-stash
 	ss = status --short
 	st = stash

@@ -10,7 +10,9 @@ alias la='ls -A'
 alias ll='ls -Alh'
 alias lt='ls -Alht'
 alias md='mkdir -p'
+alias rd='rmdir'
 alias pd='pushd'
+
 if [ -x "$(command -v cygpath)" ]; then
     alias pdd='pushd "$(cygpath --desktop)"'
     alias sudo='elevate -wait4idle'
@@ -18,6 +20,11 @@ else
     alias pdd='pushd "$(xdg-user-dir DESKTOP)"'
     alias sudo='sudo -E'
 fi
+
+ccd() {
+    mkdir -p "$1" && chdir "$1" && shift && [ $# -ne 0 ] && mkdir -p "$@"
+}
+
 if [ -n "$BASH_VERSION" ]; then
     export HISTCONTROL=ignoreboth
     bind '"\e[A": history-search-backward'
