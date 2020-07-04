@@ -149,6 +149,9 @@ cnoremap <c-e> <end>
 
 " opens a new tab with the current buffer's path
 cnoreabbrev tabed tabedit <c-r>=expand('%:p:h')<cr>/
+cnoreabbrev   chd   chdir <c-r>=expand('%:p:h')<cr>/
+cnoreabbrev  lchd  lchdir <c-r>=expand('%:p:h')<cr>/
+cnoreabbrev  tchd  tchdir <c-r>=expand('%:p:h')<cr>/
 
 " :W sudo saves the file
 if exists(':command')
