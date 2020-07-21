@@ -1,0 +1,19 @@
+#!/bin/bash
+
+IFS=: read -r src dest <<<"$1"
+
+# git mr staging -> git mr feature/currentBranch:staging
+if [ -z $dest ]; then
+	dest=${src:-master}
+	src=$(git rev-parse --abbrev-ref HEAD)
+fi
+
+repo=$(git remote -v | awk -F'[:@ ]' 'NR==1{print $3 $4}')
+
+printf "\e[0;36mPush Feature Branch:\e[0m "
+echo "$src"
+git push origin --force HEAD:$src || exit $?
+printf "\e[0;36mNew Merge Request:\e[0m "
+echo "$src -> $dest"
+url="https://$repo/merge_requests/new?merge_request%5Bsource_branch%5D=$src&merge_request%5Btarget_branch%5D=$dest"
+open $url
