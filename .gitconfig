@@ -103,6 +103,8 @@
 	tool = vimdiff
 [pretty]
 	custom = %C(red bold)%h%C(reset) %C(cyan)%cd%C(yellow bold)%d%C(reset) %s %C(cyan)(%C(green)%aN, %C(cyan)%cr)%C(reset)
+[protocol]
+	version = 2
 [push]
 	default = matching
 [rebase]
