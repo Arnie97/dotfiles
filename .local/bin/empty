@@ -2,7 +2,7 @@
 
 package=${1:-empty}
 version=${2:-9.0}
-arch=${3:-i386}
+arch=${3:-$(dpkg --print-architecture)}
 filename=${package}_${version}_${arch}.deb
 
 tmp=$(mktemp -d)
