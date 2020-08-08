@@ -29,6 +29,7 @@ endif
 
 " indent, tab, and backspace
 set tabstop=4
+set shiftwidth=0
 set autoindent
 set smartindent
 set smarttab
