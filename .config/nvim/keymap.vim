@@ -5,7 +5,6 @@ noremap <space> :
 map <bslash> "
 nnoremap mm :marks<cr>
 
-
 " option toggles
 nnoremap -b :let &background = &background != 'light'? 'light': 'dark'
             \                     <bar> set background? <cr>
@@ -27,6 +26,7 @@ nnoremap -m mmHmt:%s/<c-v><cr>//ge<cr>'tzt'm
 nnoremap -g :SignifyToggle<cr>
 nnoremap -/ :nohlsearch<cr>
 
+nnoremap B :Git blame<cr><cr><c-w>12<<cr>
 
 " jump to camelCase segments
 if exists('g:plugs') && has_key(g:plugs, 'vim-easymotion-segments')
