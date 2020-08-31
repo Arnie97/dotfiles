@@ -239,7 +239,12 @@ function s:CmdLineMappings()
     Alias ag Ack
     Alias b ls<cr>:b
     Alias git Git
-    Alias tabg tab Git
+    Alias hdiff SignifyHunkDiff
+    Alias hundo SignifyHunkUndo
+    Alias hd SignifyHunkDiff
+    Alias hu SignifyHunkUndo
+    Alias tabg tab<space>Git
+    Alias tg tab<space>Git
     Alias nt NERDTreeToggle
     Alias nf NERDTreeFind
     Alias ng NERDTreeToggleVCS

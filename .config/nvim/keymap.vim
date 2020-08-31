@@ -132,14 +132,11 @@ endif
 
 " ctrlp family
 if exists('g:plugs') && has_key(g:plugs, 'ctrlp.vim')
-    noremap <c-f> :<c-u>CtrlPRoot<cr>
-    noremap <c-b> :<c-u>CtrlPBuffer<cr>
-    noremap <c-t> :<c-u>CtrlPFunky<cr>
-    noremap <c-m> :<c-u>CtrlPMRUFiles<cr>
-    noremap <c-/> :<c-u>CtrlPtjump<cr>
-
-    " make sure that enter is never overriden in the quickfix window
-    autocmd BufReadPost quickfix nnoremap <buffer> <cr> <cr>
+    noremap <expr><c-f> !empty(&buftype)? "\<c-m>": ':<c-u>CtrlPRoot<cr>'
+    noremap <expr><c-m> !empty(&buftype)? "\<c-m>": ':<c-u>CtrlPMRUFiles<cr>'
+    noremap <expr><c-b> !empty(&buftype)? "\<c-b>": ':<c-u>CtrlPBuffer<cr>'
+    noremap <expr><c-t> !empty(&buftype)? "\<c-t>": ':<c-u>CtrlPFunky<cr>'
+    noremap <expr><c-/> !empty(&buftype)? "\<c-/>": ':<c-u>CtrlPtjump<cr>'
 endif
 
 
