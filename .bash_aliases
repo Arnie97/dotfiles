@@ -1,6 +1,8 @@
 export DISPLAY=:0
 export PATH="$HOME/.local/bin:$PATH"
 export LESS="-FRSX"
+export NNN_OPTS="AcCdn"
+export NNN_OPENER="nnn-xargs"
 
 alias git='hub'
 alias axel='axel -a'
@@ -23,6 +25,23 @@ fi
 
 ccd() {
     mkdir -p "$1" && chdir "$1" && shift && [ $# -ne 0 ] && mkdir -p "$@"
+}
+
+n () {
+    # Block nesting of nnn in subshells
+    if [ -n $NNNLVL ] && [ "${NNNLVL:-0}" -ge 1 ]; then
+        echo "nnn is already running"
+        return
+    fi
+
+    # Configure cd on quit
+    NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
+    nnn "$@"
+
+    if [ -f "$NNN_TMPFILE" ]; then
+        . "$NNN_TMPFILE"
+        rm -f "$NNN_TMPFILE" > /dev/null
+    fi
 }
 
 if [ -n "$BASH_VERSION" ]; then

@@ -1,0 +1,25 @@
+#!/bin/sh
+
+# if the selection is empty, just use the current file under cursor
+# otherwise, first ask the user whether to use the selection
+
+sel="${NNN_SEL:-${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.selection}"
+
+if [ -s "$sel" ]; then
+    read -p '$ sel | xargs -0 ' cmd
+    read cmd
+fi
+
+if [ -n "$cmd" ]; then
+    eval 'cat $sel | xargs -0 ' $cmd
+else
+    read -p '$ cur | xargs -0 ' cmd
+
+    if [ -z "$cmd" ]; then
+        exit
+    else
+        eval $cmd '"$1"'
+    fi
+fi
+
+read -p '...' cmd
