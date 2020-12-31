@@ -7,6 +7,7 @@ export NNN_OPENER="nnn-xargs"
 alias git='hub'
 alias axel='axel -a'
 alias ag='ag --pager=less'
+alias lb='lsblk -So+SERIAL && echo && lsblk -o NAME,FSTYPE,SIZE,FSAVAIL,LABEL,MOUNTPOINT'
 alias ls='ls -F --color --show-control-chars'
 alias la='ls -A'
 alias ll='ls -Alh'
