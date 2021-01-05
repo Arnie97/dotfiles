@@ -28,6 +28,7 @@ endif
 
 
 " indent, tab, and backspace
+set modeline
 set tabstop=4
 set shiftwidth=0
 set autoindent
