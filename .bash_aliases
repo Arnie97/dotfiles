@@ -1,5 +1,5 @@
 export DISPLAY=:0
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$HOME/go/bin:$PATH"
 export LESS="-FRSX"
 export NNN_OPTS="AcCdn"
 export NNN_OPENER="nnn-xargs"
