@@ -95,6 +95,7 @@ Plug 'ap/vim-css-color'
 Plug 'chr4/nginx.vim'
 Plug 'mattn/emmet-vim'
 Plug 'solarnz/thrift.vim'
+Plug 'rust-lang/rust.vim'
 Plug 'plasticboy/vim-markdown'
 Plug 'neovimhaskell/haskell-vim'
 
@@ -207,8 +208,10 @@ let g:NERDTreeRespectWildIgnore = 1
 
 let g:LargeFile = 1
 let g:gutentags_cache_dir = $HOME . '/.local/share/nvim/tag'
-let g:signify_sign_change = '&'
+let g:lsp_diagnostics_float_cursor = 1
 let g:neosnippet#enable_snipmate_compatibility = 1
+let g:rustfmt_autosave = 1
+let g:signify_sign_change = '&'
 
 
 " snippet tab completion
