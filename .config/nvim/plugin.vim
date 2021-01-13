@@ -44,7 +44,7 @@ Plug 'vim-scripts/LargeFile'
 Plug 'junegunn/vim-easy-align', { 'on': ['<plug>(EasyAlign)', 'EasyAlign'] }
 Plug 'junegunn/vim-peekaboo'
 Plug 'junegunn/gv.vim', { 'on': 'GV' }
-Plug 'junegunn/rainbow_parentheses.vim'
+Plug 'junegunn/rainbow_parentheses.vim', { 'on': 'RainbowParentheses' }
 
 if executable('fzf')
     Plug 'junegunn/fzf', { 'on': 'FZF' }
@@ -54,6 +54,11 @@ if executable('ag')
     Plug 'mileszs/ack.vim'
     let g:ackprg = 'ag --vimgrep --smart-case'
     let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+endif
+
+if exists('*matchfuzzy')
+    Plug 'mattn/ctrlp-matchfuzzy'
+    let g:ctrlp_match_func = {'match': 'ctrlp_matchfuzzy#matcher'}
 endif
 
 if executable('ctags')
@@ -197,6 +202,9 @@ let g:user_emmet_leader_key = ','
 let g:pear_tree_smart_openers = 1
 let g:pear_tree_smart_closers = 1
 let g:pear_tree_smart_backspace = 1
+
+let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
+autocmd FileType lisp,clojure,scheme RainbowParentheses
 
 let g:closetag_filetypes = 'html,php,asp,jsp,smarty,vue,javascript.jsx'
 let g:closetag_xhtml_filetypes = 'xhtml,javascript.jsx'
