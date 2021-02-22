@@ -23,6 +23,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'arnie97/ctrlp.vim'
 Plug 'ivalkeen/vim-ctrlp-tjump'
 Plug 'tacahiroy/ctrlp-funky'
+Plug 'jasoncodes/ctrlp-modified.vim'
 Plug 'preservim/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind', 'NERDTreeToggleVCS'] }
 
 Plug 'andrewRadev/sideways.vim'
@@ -105,11 +106,9 @@ Plug 'plasticboy/vim-markdown'
 Plug 'neovimhaskell/haskell-vim'
 
 Plug 'arnie97/peaksea.vim', { 'rtp': 'vim' }
-Plug 'overcache/neoSolarized'
 Plug 'chriskempson/vim-tomorrow-theme'
 Plug 'rafi/awesome-vim-colorschemes'
 Plug 'tyrannicaltoucan/vim-quantum'
-Plug 'mhinz/vim-janah'
 
 call plug#end()
 
@@ -171,7 +170,7 @@ endfunction
 
 
 let g:ctrlp_types = ['buf', 'mru', 'fil']
-let g:ctrlp_extensions = ['funky', 'tag', 'mixed', 'bookmarkdir']
+let g:ctrlp_extensions = ['modified', 'funky', 'tag']
 let g:ctrlp_arg_map = 1
 let g:ctrlp_cache_dir = $HOME . '/.local/share/nvim/ctrlp'
 let g:ctrlp_clear_cache_on_exit = 0

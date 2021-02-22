@@ -83,13 +83,15 @@
 	experimental = true
 [fetch]
 	parallel = 0
+[gc]
+	auto = 128
 [grep]
 	lineNumber = true
 [gui]
 	encoding = utf-8
 [http]
 	lowSpeedLimit = 20480
-	lowSpeedTime = 20
+	lowSpeedTime = 120
 [hub]
 	protocol = https
 [log]
