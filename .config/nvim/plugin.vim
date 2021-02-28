@@ -9,6 +9,7 @@ endif
 
 call plug#begin('~/.local/share/nvim/site/pack/main/opt')
 
+Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
@@ -17,26 +18,21 @@ Plug 'tpope/vim-surround'
 
 Plug 'shougo/neosnippet'
 Plug 'shougo/neosnippet-snippets'
-Plug 'terryma/vim-expand-region'
-Plug 'terryma/vim-multiple-cursors'
 Plug 'itchyny/lightline.vim'
 Plug 'arnie97/ctrlp.vim'
 Plug 'ivalkeen/vim-ctrlp-tjump'
 Plug 'tacahiroy/ctrlp-funky'
 Plug 'jasoncodes/ctrlp-modified.vim'
 Plug 'preservim/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind', 'NERDTreeToggleVCS'] }
-
-Plug 'andrewRadev/sideways.vim'
-Plug 'andrewRadev/splitjoin.vim'
-Plug 'andrewRadev/switch.vim'
+Plug 'airblade/vim-rooter'
 
 Plug 'rhysd/conflict-marker.vim'
 Plug 'ryvnf/readline.vim'
-Plug 'alvan/vim-closetag'
 Plug 'chrisbra/unicode.vim'
 Plug 'inkarkat/vim-visualrepeat'
 Plug 'easymotion/vim-easymotion'
 Plug 'aykamko/vim-easymotion-segments'
+Plug 'andrewRadev/sideways.vim'
 Plug 'thalesmello/vim-slasher'
 Plug 'vim-scripts/cmdalias.vim'
 Plug 'vim-scripts/LargeFile'
@@ -112,19 +108,6 @@ Plug 'tyrannicaltoucan/vim-quantum'
 call plug#end()
 
 
-" switch between different case forms
-" https://blog.othree.net/log/2017/11/16/naming-cases/
-let g:switch_custom_definitions = [
-    \ {
-        \ '\<\(\l\)\(\l\+\(\u\l\+\)\+\)\>': '\=toupper(submatch(1)) . submatch(2)',
-        \ '\<\(\u\l\+\)\(\u\l\+\)\+\>': "\\=tolower(substitute(submatch(0), '\\(\\l\\)\\(\\u\\)', '\\1_\\2', 'g'))",
-        \ '\<\(\l\+\)\(_\l\+\)\+\>': '\U\0',
-        \ '\<\(\u\+\)\(_\u\+\)\+\>': "\\=tolower(substitute(submatch(0), '_', '-', 'g'))",
-        \ '\<\(\l\+\)\(-\l\+\)\+\>': "\\=substitute(submatch(0), '-\\(\\l\\)', '\\u\\1', 'g')",
-    \ }
-\ ]
-
-
 set noshowmode
 let g:lightline = {
     \ 'component': {
@@ -196,6 +179,7 @@ let g:ctrlp_prompt_mappings = {
 let g:user_emmet_mode = 'i'
 let g:user_emmet_install_global = 0
 let g:user_emmet_leader_key = ','
+autocmd FileType html,xhtml,xml,css,sass,scss,javascript,javascript.jsx,vue,eex,php,asp,jsp,smarty EmmetInstall
 
 let g:pear_tree_smart_openers = 1
 let g:pear_tree_smart_closers = 1
@@ -204,9 +188,6 @@ let g:pear_tree_smart_backspace = 1
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 autocmd FileType lisp,clojure,scheme RainbowParentheses
 
-let g:closetag_filetypes = 'html,php,asp,jsp,smarty,vue,javascript.jsx'
-let g:closetag_xhtml_filetypes = 'xhtml,javascript.jsx'
-autocmd FileType html,xhtml,xml,css,sass,scss,javascript,javascript.jsx,vue,eex,php,asp,jsp,smarty EmmetInstall
 
 let g:NERDTreeWinPos = 'right'
 let g:NERDTreeShowHidden = 1
