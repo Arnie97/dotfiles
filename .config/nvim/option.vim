@@ -19,10 +19,10 @@ if has('folding')
     set updatetime=100
 
     function! FoldText()
-        let indent_level = indent(v:foldstart) - &foldcolumn
-        let lines = '{ ' . (v:foldend - v:foldstart - 1) . ' lines... }'
-        let summary_text = substitute(getline(v:foldstart), '{.*', lines, '')
-        return repeat(' ', indent_level) . summary_text
+        let first_line = substitute(getline(v:foldstart), '^\s*', '', '')
+        let lines = ' { ' . (v:foldend - v:foldstart) . ' lines... }'
+        let summary_text = substitute(first_line, '\s*{.*', '', '') . lines
+        return repeat(' ', indent(v:foldstart)) . summary_text
     endfunction
 endif
 

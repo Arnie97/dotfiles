@@ -7,9 +7,9 @@ nnoremap mm :marks<cr>
 
 " option toggles
 nnoremap -b :let &background = &background != 'light'? 'light': 'dark'
-            \                     <bar> set background? <cr>
-nnoremap -f :let &foldmethod = &foldmethod != 'marker'? 'marker': 'syntax'
-            \                     <bar> set foldmethod? <cr>
+                                \ <bar> set background? <cr>
+nnoremap -f :let &l:foldmethod = &foldmethod != 'syntax'? 'syntax': 'indent'
+                                \ <bar> set foldmethod? <cr>
 nnoremap -c :setlocal cursorline! <bar> set cursorline? <cr>
 nnoremap -e :setlocal expandtab!  <bar> set expandtab?  <cr>
 nnoremap -h :setlocal hlsearch!   <bar> set hlsearch?   <cr>
