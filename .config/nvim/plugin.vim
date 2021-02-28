@@ -30,7 +30,6 @@ Plug 'andrewRadev/sideways.vim'
 Plug 'andrewRadev/splitjoin.vim'
 Plug 'andrewRadev/switch.vim'
 
-Plug 'amix/open_file_under_cursor.vim'
 Plug 'rhysd/conflict-marker.vim'
 Plug 'ryvnf/readline.vim'
 Plug 'alvan/vim-closetag'

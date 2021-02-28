@@ -26,8 +26,6 @@ nnoremap -m mmHmt:%s/<c-v><cr>//ge<cr>'tzt'm
 nnoremap -g :SignifyToggle<cr>
 nnoremap -/ :nohlsearch<cr>
 
-nnoremap B :Git blame<cr><cr><c-w>12<<cr>
-
 " jump to camelCase segments
 if exists('g:plugs') && has_key(g:plugs, 'vim-easymotion-segments')
     let g:EasyMotionSegments_do_mapping = 0
@@ -59,17 +57,24 @@ endif
 
 
 " cycle between buffers, quickfix list and location list
-noremap [n :bprev<cr>
-noremap ]n :bnext<cr>
-noremap [o :cprev<cr>
-noremap ]o :cnext<cr>
-noremap -o :copen<cr>
-noremap [l :lprev<cr>
-noremap ]l :lnext<cr>
-noremap -l :lopen<cr>
+nnoremap [n :bprev<cr>
+nnoremap ]n :bnext<cr>
+nnoremap [o :cprev<cr>
+onoremap [o :cprev<cr>
+nnoremap ]o :cnext<cr>
+onoremap ]o :cnext<cr>
+nnoremap -o :copen<cr>
+nnoremap [l :lprev<cr>
+onoremap [l :lprev<cr>
+nnoremap ]l :lnext<cr>
+onoremap ]l :lnext<cr>
+nnoremap -l :lopen<cr>
+nnoremap g! :tabedit <cfile><cr>
+vnoremap g! y:tabedit <c-r>"<cr>
+nnoremap gb :Git blame<cr><c-w>12<<cr>
 
 
-if exists('g:plugs') && has_key(g:plugs, 'ctrlp.vim')
+if exists('g:plugs') && has_key(g:plugs, 'vim-lsp')
     function s:enableLspMapping() abort
         nmap <buffer> gd <plug>(lsp-definition)
         nmap <buffer> [u <plug>(lsp-references)
