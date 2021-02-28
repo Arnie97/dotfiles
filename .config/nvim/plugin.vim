@@ -206,7 +206,7 @@ autocmd FileType lisp,clojure,scheme RainbowParentheses
 
 let g:closetag_filetypes = 'html,php,asp,jsp,smarty,vue,javascript.jsx'
 let g:closetag_xhtml_filetypes = 'xhtml,javascript.jsx'
-autocmd FileType html,xhtml,xml,css,sass,scss,javascript,javascript.jsx,vue,eex,php,asp,jsp EmmetInstall
+autocmd FileType html,xhtml,xml,css,sass,scss,javascript,javascript.jsx,vue,eex,php,asp,jsp,smarty EmmetInstall
 
 let g:NERDTreeWinPos = 'right'
 let g:NERDTreeShowHidden = 1
