@@ -11,6 +11,7 @@
 	cf = config --edit --global
 	ch = checkout
 	cl = clone --recursive
+	cn = clone --no-checkout --filter=blob:none
 	cm = commit --amend
 	ca = commit --amend --reset-author
 	cc = !GIT_COMMITTER_DATE=`git log --pretty=%aD HEAD^..` git commit --amend

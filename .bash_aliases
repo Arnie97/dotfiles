@@ -4,6 +4,7 @@ export LESS="-FRSX"
 export NNN_OPTS="AcCdn"
 export NNN_OPENER="nnn-xargs"
 
+alias g='git'
 alias git='hub'
 alias axel='axel -a'
 alias ag='ag --pager=less'
