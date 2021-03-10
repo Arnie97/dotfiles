@@ -109,20 +109,21 @@ call plug#end()
 
 
 set noshowmode
+let s:branch = ''
 let g:lightline = {
     \ 'component': {
-        \ 'branch': '%{fugitive#head()}',
-        \ 'fileformat': '%{winwidth(0) < 70? "": &ff}',
-        \ 'filetype': '%{winwidth(0) < 65? "": &ft !=# ""? &ft: "no ft"}',
-        \ 'fileencoding': '%{winwidth(0) < 55? "": &fenc !=# "" ? &fenc: &enc}',
-        \ 'percent': '%3p%%%<',
-        \ 'modified': '%{&modifiable?(&readonly?"🔒":"").(&modified?"+":""):"-"}'
+        \ 'modified':     '%{&modifiable? (&readonly? "🔒": "").(&modified? "+": ""): "-"}',
+        \ 'branch':       '%{LightLineBranch(0)}',
+        \ 'fileformat':   '%{LightLineSpareSpace() < 10? "": &ff}',
+        \ 'fileencoding': '%{LightLineSpareSpace() < 15? "": &fenc !=# "" ? &fenc: &enc}',
+        \ 'filetype':     '%{LightLineSpareSpace() < 25? "": &ft !=# ""? &ft: "no ft"}',
+        \ 'percent':      '%<%3p%%',
     \ },
     \ 'component_visible_condition': {
-        \ 'branch': 'exists("*fugitive#head") && "" != fugitive#head()',
-        \ 'fileformat': 'winwidth(0) >= 70',
-        \ 'filetype': 'winwidth(0) >= 65',
-        \ 'fileencoding': 'winwidth(0) >= 55',
+        \ 'branch':       'len(LightLineBranch(1))',
+        \ 'fileformat':   'LightLineSpareSpace() >= 10',
+        \ 'fileencoding': 'LightLineSpareSpace() >= 15',
+        \ 'filetype':     'LightLineSpareSpace() >= 25',
     \ },
     \ 'active': {'left': [
         \ ['mode', 'paste'],
@@ -148,6 +149,32 @@ function s:LightLineUpdate()
     call lightline#init()
     call lightline#colorscheme()
     call lightline#update()
+endfunction
+
+function LightLineSpareSpace()
+    return winwidth(0) - len(s:branch) - strlen(expand('%:t')) - 40
+endfunction
+
+function LightLineBranch(cached)
+    if a:cached || !exists('*FugitiveHead')
+        return s:branch
+    endif
+
+    let s:branch = fugitive#head()
+    if LightLineSpareSpace() > 0 || len(s:branch) <= 6
+        return s:branch
+    endif
+
+    let base_name = strridx(s:branch, '/') + 1
+    if base_name
+        let s:branch = strpart(s:branch, base_name) . '&'
+        if LightLineSpareSpace() > 0
+            return s:branch
+        endif
+    endif
+
+    let s:branch = strpart(s:branch, 0, 3) . '&'
+    return s:branch
 endfunction
 
 
