@@ -70,7 +70,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(cabal cargo command-not-found docker encode64 extract fancy-ctrl-z golang last-working-dir pip rsync screen urltools virtualenv z)
+plugins=(cabal cargo command-not-found docker encode64 extract fancy-ctrl-z golang kubectl last-working-dir pip rsync screen urltools virtualenv z)
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/.bash_aliases

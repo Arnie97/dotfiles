@@ -6,7 +6,7 @@ if has('gui_running')
 endif
 
 if has('autocmd')
-    silent! colorscheme peaksea
+    silent! colorscheme iceberg
     autocmd FileType python syntax keyword pythonDecorator True False None self
     autocmd FileType python,ruby,lua,basic,vb,vim,lisp,clojure,scheme,haskell,yaml,html,xhtml,xml,vue,eex,php,asp,jsp,smarty setlocal foldmethod=indent
     autocmd FileType git set foldmethod=syntax

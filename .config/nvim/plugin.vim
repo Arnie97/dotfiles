@@ -7,7 +7,7 @@ if !filereadable(expand('~/.local/share/nvim/site/autoload/plug.vim'))
     finish
 endif
 
-call plug#begin('~/.local/share/nvim/site/pack/main/opt')
+silent! call plug#begin('~/.local/share/nvim/site/pack/main/opt')
 
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
@@ -213,7 +213,7 @@ let g:pear_tree_smart_closers = 1
 let g:pear_tree_smart_backspace = 1
 
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
-autocmd FileType lisp,clojure,scheme RainbowParentheses
+autocmd FileType lisp,clojure,scheme,json RainbowParentheses
 
 
 let g:NERDTreeWinPos = 'right'

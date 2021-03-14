@@ -8,6 +8,7 @@ set nowrap
 set cursorline
 set scrolloff=2
 set sidescrolloff=5
+set mouse=nv
 
 
 " folding and gutter

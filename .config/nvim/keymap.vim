@@ -144,6 +144,8 @@ if exists('g:plugs') && has_key(g:plugs, 'ctrlp.vim')
     noremap <expr><c-/> !empty(&buftype)? "\<c-/>": ':<c-u>CtrlPtjump<cr>'
 endif
 
+vnoremap <enter> "*y
+
 
 " readline mappings for the command line
 cnoremap <c-a> <home>
