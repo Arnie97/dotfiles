@@ -189,8 +189,8 @@ let g:ctrlp_funky_syntax_highlight = 1
 let g:ctrlp_match_current_file = 1
 let g:ctrlp_max_depth = 10
 let g:ctrlp_mruf_default_order = 1
-let g:ctrlp_mruf_exclude = '\v.*(/\.git/.*|_(BASE|LOCAL|REMOTE)_\d+[^/]*|/\.[^/]+$|\.orig$)'
-let g:ctrlp_mruf_max = 5000
+let g:ctrlp_mruf_exclude = '\v(<|_)(temp|tmp)(_|>)|/(dev/shm|var/folders|node_modules|pkg/mod|rustlib|\.cargo/registry|\.git|\.svn|\.hg|\.bzr)/|_(BASE|LOCAL|REMOTE)_\d+|\.(orig|bak|swp)$'
+let g:ctrlp_mruf_max = 2000
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_prompt_mappings = {
     \ 'AcceptSelection("e")': ['<cr>'],
@@ -224,6 +224,7 @@ let g:LargeFile = 1
 let g:gutentags_cache_dir = $HOME . '/.local/share/nvim/tag'
 let g:lsp_diagnostics_float_cursor = 1
 let g:neosnippet#enable_snipmate_compatibility = 1
+let g:rooter_patterns = ['!/pkg/mod/', '.git', '.svn', '.hg', '.bzr']
 let g:rustfmt_autosave = 1
 let g:signify_sign_change = '&'
 
