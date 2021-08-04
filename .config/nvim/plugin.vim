@@ -77,6 +77,7 @@ if has('lambda') && has('timers') && exists('*json_encode')
     let g:go_code_completion_enabled = 0
     let g:go_def_mapping_enabled = 0
     let g:go_gopls_enabled = 0
+    let g:go_imports_autosave = 0
 
     Plug 'mattn/vim-lsp-settings'
     Plug 'prabirshrestha/vim-lsp'
@@ -212,8 +213,8 @@ let g:pear_tree_smart_openers = 1
 let g:pear_tree_smart_closers = 1
 let g:pear_tree_smart_backspace = 1
 
-let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
-autocmd FileType lisp,clojure,scheme,json RainbowParentheses
+let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}'], ['<', '>']]
+autocmd FileType c,clojure,cpp,cs,dart,go,java,javascript,json,kotlin,lisp,objc,objcpp,perl,php,r,rust,scala,scheme,swift,thrift,typescript RainbowParentheses
 
 
 let g:NERDTreeWinPos = 'right'

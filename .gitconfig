@@ -61,7 +61,7 @@
 	sc = sparse-checkout
 	sp = sparse-checkout
 	sl = status --long --show-stash
-	ss = status --short
+	ss = status --short --branch
 	st = stash
 	su = submodule
 	sw = switch
@@ -94,8 +94,6 @@
 [http]
 	lowSpeedLimit = 20480
 	lowSpeedTime = 120
-[hub]
-	protocol = https
 [log]
 	follow = true
 	mailmap = true
