@@ -1,0 +1,12 @@
+# vim: ft=python
+import os
+import re
+import time
+from datetime import datetime, date, timedelta
+from itertools import *
+from unicodedata import lookup, name, category, normalize
+
+try:
+    %load_ext ipython_autoimport
+except ImportError as e:
+    print(e)

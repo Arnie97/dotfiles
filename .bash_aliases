@@ -4,6 +4,8 @@ export LESS="-FRSX"
 export NNN_OPTS="AcCdn"
 export NNN_OPENER="nnn-xargs"
 
+alias c='cargo'
+alias d='docker'
 alias g='git'
 alias git='hub'
 alias axel='axel -a'
@@ -17,6 +19,8 @@ alias lt='ls -Alht'
 alias md='mkdir -p'
 alias rd='rmdir'
 alias pd='pushd'
+alias b64decode='decode64'
+alias b64encode='encode64'
 
 if [ -x "$(command -v cygpath)" ]; then
     alias pdd='pushd "$(cygpath --desktop)"'
