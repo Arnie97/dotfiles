@@ -57,9 +57,8 @@
 	rr = rerere
 	rt = rebase --committer-date-is-author-date
 	rv = !git push origin HEAD:refs/for/${1:-$(git rev-parse --abbrev-ref HEAD)}%${2}
-	sh = show
 	sc = sparse-checkout
-	sp = sparse-checkout
+	sh = show
 	sl = status --long --show-stash
 	ss = status --short --branch
 	st = stash
@@ -67,6 +66,7 @@
 	sw = switch
 	tf = tag --force
 	us = update-server-info
+	wt = worktree
 [blame]
 	coloring = highlightRecent
 [color "blame"]
@@ -80,6 +80,10 @@
 	mnemonicPrefix = true
 	renames = copies
 	wsErrorHighlight = all
+[diff "hex"]
+	textconv = hexdump -v -C
+[diff "zip"]
+	textconv = unzip -v
 [feature]
 	experimental = true
 [fetch]
@@ -91,6 +95,8 @@
 	lineNumber = true
 [gui]
 	encoding = utf-8
+[help]
+	autoCorrect = 30
 [http]
 	lowSpeedLimit = 20480
 	lowSpeedTime = 120

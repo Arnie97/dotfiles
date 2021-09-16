@@ -1,0 +1,2 @@
+*.bin	binary diff=hex
+*.zip	binary diff=zip
