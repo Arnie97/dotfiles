@@ -1,6 +1,7 @@
 #!/bin/sh
 
 get_remote_repo() {
+    mkdir -p $1
     cd $1
     git init
     git remote add origin https://github.com/$2
