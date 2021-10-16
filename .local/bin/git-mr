@@ -1,19 +1,33 @@
-#!/bin/bash
+#!/bin/sh
 
-IFS=: read -r src dest <<<"$1"
+show() {
+    printf "\e[0;36m$1:\e[0m "
+    echo $2
+}
+
+case $# in
+    0) ;;
+    1) ;;
+    2) repo="$1"; shift;;
+    *) show 'usage' 'git mr [[[repo] branch:]target]'; exit 1
+esac
+
+dest="${1#*:}"
 
 # git mr staging -> git mr feature/currentBranch:staging
-if [ -z $dest ]; then
-	dest=${src:-master}
-	src=$(git rev-parse --abbrev-ref HEAD)
+if [ "$dest" != "$1" ]; then
+    src="${1%%:*}"
 fi
 
-repo=$(git remote -v | awk -F'[:@ ]' 'NR==1{print $3 $4}')
+case "${src:=$(git rev-parse --abbrev-ref HEAD)}" in
+    "") exit 1;;
+    HEAD) show 'error' 'must specify the branch name in detached head mode'; exit 1
+esac
 
-printf "\e[0;36mPush Feature Branch:\e[0m "
-echo "$src"
-git push origin --force HEAD:$src || exit $?
-printf "\e[0;36mNew Merge Request:\e[0m "
-echo "$src -> $dest"
+show 'Push Feature Branch' "$src"
+git push --force-with-lease "${repo:=origin}" "HEAD:refs/heads/$src" || exit $?
+
+show 'New Merge Request' "$src -> ${dest:=master}"
+repo="$(git remote get-url --push $repo | awk -F'[:@ ]' 'NR==1{print $3 $4}')"
 url="https://$repo/merge_requests/new?merge_request%5Bsource_branch%5D=$src&merge_request%5Btarget_branch%5D=$dest"
-open $url
+e "$url"

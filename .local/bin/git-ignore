@@ -1,14 +1,14 @@
-#!/bin/bash
+#!/bin/sh
 
-function ignore {
-    if [[ -n `git ls-files -v "$1" | grep ^S` ]]; then
+ignore() {
+    if [ -n $(git ls-files -v "$1" | grep ^S) ]; then
         git update-index --no-skip-worktree "$1" && echo "track the changes of '$1'"
     else
         git update-index --skip-worktree    "$1" && echo "ignore the changes of '$1'"
     fi
 }
 
-if [[ "$#" -eq 0 ]]; then
+if [ "$#" -eq 0 ]; then
     git ls-files -v
 else
     for pathspec in "$@"; do

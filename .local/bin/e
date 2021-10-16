@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # e: open the location of specified files or folders in your file manager
 
 command_exists() { command -v "$1" > /dev/null; }  # including built-ins
@@ -7,24 +7,42 @@ if command_exists "show_dir"; then  # custom behavior
     true  # define show_dir and optionally show_file in your $PATH or .profile
 elif command_exists "xdg-open"; then  # x11
     show_dir() { xdg-open "$1"; }
+    open_url() { xdg-open "$1"; }
 elif command_exists "open"; then  # darwin
     show_dir() { open "$1"; }
-elif command_exists "explorer"; then  # windows
+    open_url() { open "$1"; }
+elif command_exists "cygpath"; then  # cygwin
     show_dir() { explorer $(cygpath -w "$1"); }
     show_file() { explorer \/select,$(cygpath -w $(ls --append-exe "$1")); }
+    open_url() { cygstart "$1"; }
+elif command_exists "wslpath"; then  # wsl interop
+    show_dir() { explorer.exe $(wslpath -w "$1"); }
+    show_file() { explorer.exe /select,$(wslpath -w $(ls --append-exe "$1")); }
+    open_url() { rundll32.exe url,OpenURL "$1"; }
+else
+    show_dir() { :; }
+    open_url() { echo "$1"; }
+fi
+
+if ls --version > /dev/null 2>&1; then
+    alias ls='ls --color --show-control-chars'
 fi
 
 if [ $# -eq 0 ]; then
     set "$PWD"
 fi
 for pathspec in "$@"; do
-    if [ -a "$pathspec" ]; then
-        ls --color -Fd "$pathspec"
+    if [ -e "$pathspec" ]; then
+        ls -Fd "$pathspec"
     elif [ -x "$(command -v "$pathspec")" ]; then  # excluding built-ins
         pathspec=$(command -v "$pathspec")
-        ls --color -Fd "$pathspec"
+        ls -Fd "$pathspec"
+    elif [ "${pathspec#*://}" != "$pathspec" ]; then
+        open_url "$pathspec"
+        continue
     else
-        echo "$pathspec"?
+        echo "$pathspec?"
+        continue
     fi
 
     if ! [ -f "$pathspec" ]; then
