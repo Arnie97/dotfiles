@@ -1,0 +1,15 @@
+#!/bin/sh
+
+if [ $# -eq 0 ]; then
+    echo "usage: hscrub <paths...>"
+fi
+
+(for pathspec in "$@"; do
+    if [ -f "$pathspec" ]; then
+        rhash -cM "$pathspec" | pv -petrals $(wc -l "$pathspec" | awk '{print $1}') | grep -v OK
+    elif [ -d "$pathspec" ]; then
+        cd "$pathspec"
+    else
+        echo "$pathspec: path not found"
+    fi
+done)
