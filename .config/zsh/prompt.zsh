@@ -2,19 +2,25 @@
 
 
 # the color palette
+typeset -AHg FG
+for color in {000..255}; do
+    FG[$color]="%F{${color}}"
+done
+
 local -H \
     _red_="$FG[009]" \
   _steel_="$FG[075]" \
     _sky_="$FG[110]" \
  _orange_="$FG[214]" \
    _gray_="$FG[247]" \
-  _reset_="%{$reset_color%}"
+  _reset_='%f'
 
 export LS_COLORS="$LS_COLORS:di=01;38;5;39:ln=01;38;5;37:"
 
 
 # the primary prompt
 PROMPT='$_steel_%(6~|%-3~/…/%2~|%~)'
+PROMPT+='${(e)git_info[prompt]}'
 if typeset -f 'git_prompt_info' > /dev/null; then
     PROMPT+='$(git_prompt_info)'
 fi
@@ -32,41 +38,20 @@ PROMPT2='$_red_\ $_reset_'
 
 
 # the right prompt
-if type "virtualenv_prompt_info" > /dev/null; then
-	RPROMPT='${$(virtualenv_prompt_info):-%y}'
-else
-	RPROMPT='%y'
-fi
+typeset -g VIRTUAL_ENV_DISABLE_PROMPT=1
+RPROMPT="${VIRTUAL_ENV:+$_sky_}${VIRTUAL_ENV##*/}${$VIRTUAL_ENV:-%y}"
 RPROMPT="$_gray_%n@%m %(?..$_red_)$RPROMPT$_reset_"
 
 
-# version control settings
-declare \
-{\
-ZSH_THEME_GIT_PROMPT_PREFIX,\
-ZSH_THEME_SVN_PROMPT_PREFIX,\
-ZSH_THEME_HG_PROMPT_PREFIX\
-}="$_sky_(" \
-\
-{\
-ZSH_THEME_GIT_PROMPT_CLEAN,\
-ZSH_THEME_SVN_PROMPT_CLEAN,\
-ZSH_THEME_HG_PROMPT_CLEAN\
-}="" \
-\
-{\
-ZSH_THEME_GIT_PROMPT_DIRTY,\
-ZSH_THEME_SVN_PROMPT_DIRTY,\
-ZSH_THEME_HG_PROMPT_DIRTY\
-}="$_orange_*$_reset_" \
-\
-{\
-ZSH_THEME_GIT_PROMPT_SUFFIX,\
-ZSH_THEME_SVN_PROMPT_SUFFIX,\
-ZSH_THEME_HG_PROMPT_SUFFIX\
-}="$_sky_)$_reset_"
-
-
-# virtualenv settings
-ZSH_THEME_VIRTUALENV_PREFIX="%(?.$_sky_.$_red_)["
-ZSH_THEME_VIRTUALENV_SUFFIX="]$_reset_"
+# depends on the git-info module to show git information
+typeset -gA git_info
+if (( ${+functions[git-info]} )); then
+    zstyle ':zim:git-info:branch'    format '%b'
+    zstyle ':zim:git-info:commit'    format '%c'
+    zstyle ':zim:git-info:action'    format ': %s'
+    zstyle ':zim:git-info:unindexed' format '*'
+    zstyle ':zim:git-info:indexed'   format '+'
+    zstyle ':zim:git-info:keys'      format 'prompt' \
+        "$_sky_(%b%c%s$_orange_%I%i$_sky_)$_reset_"
+    add-zsh-hook precmd git-info
+fi

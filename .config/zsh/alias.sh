@@ -1,5 +1,5 @@
-export DISPLAY=:0
-export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.cabal/bin:${GOPATH:-$HOME/go}/bin:$PATH"
+export CLICOLOR=1
+export DISPLAY="${DISPLAY:-:0}"
 export LESS="-FRSX"
 export NNN_OPTS="AcCdn"
 export NNN_OPENER="nnn-xargs"
@@ -7,26 +7,35 @@ export NNN_OPENER="nnn-xargs"
 alias c='cargo'
 alias d='docker'
 alias g='git'
-alias git='hub'
 alias axel='axel -a'
 alias ag='ag --pager=less'
 alias ip='ip --color=auto'
 alias lb='lsblk -So+SERIAL && echo && lsblk -o NAME,FSTYPE,SIZE,FSAVAIL,LABEL,MOUNTPOINT'
-alias ls='ls -F --color --show-control-chars'
+alias ls='ls -F'
 alias la='ls -A'
 alias ll='ls -Alh'
 alias lt='ls -Alht'
 alias md='mkdir -p'
 alias rd='rmdir'
 alias pd='pushd'
-alias b64decode='decode64'
-alias b64encode='encode64'
+
+# coreutils
+if ls --version > /dev/null 2>&1; then
+    alias ls='ls -F --color --show-control-chars'
+fi
+
+if [ -x "$(command -v hub)" ]; then
+    alias git='hub'
+fi
 
 if [ -x "$(command -v cygpath)" ]; then
     alias pdd='pushd "$(cygpath --desktop)"'
     alias sudo='elevate -wait4idle'
-else
+elif [ -x "$(command -v xdg-user-dir)" ]; then
     alias pdd='pushd "$(xdg-user-dir DESKTOP)"'
+    alias sudo='sudo -E'
+else
+    alias pdd='pushd "$HOME/Desktop"'
     alias sudo='sudo -E'
 fi
 
@@ -50,13 +59,3 @@ n () {
         rm -f "$NNN_TMPFILE" > /dev/null
     fi
 }
-
-if [ -n "$BASH_VERSION" ]; then
-    export HISTCONTROL=ignoreboth
-    bind '"\e[A": history-search-backward'
-    bind '"\e[B": history-search-forward'
-elif [ -n "$ZSH_VERSION" ]; then
-    setopt HIST_EXPIRE_DUPS_FIRST HIST_FIND_NO_DUPS HIST_IGNORE_DUPS HIST_IGNORE_SPACE
-    bindkey "^u" backward-kill-line
-    disable r
-fi
