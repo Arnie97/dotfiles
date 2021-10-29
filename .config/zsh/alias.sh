@@ -1,9 +1,12 @@
 export CLICOLOR=1
 export DISPLAY="${DISPLAY:-:0}"
-export LESS="-FRSX"
+export GPG_TTY="${GPG_TTY:-$(tty)}"
+export HOMEBREW_NO_AUTO_UPDATE=1
+export LESS="-iFRSX"
 export NNN_OPTS="AcCdn"
 export NNN_OPENER="nnn-xargs"
 
+alias -- -='cd -'
 alias c='cargo'
 alias d='docker'
 alias g='git'

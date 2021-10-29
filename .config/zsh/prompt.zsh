@@ -1,46 +1,33 @@
+# vim: ft=zsh et ts=4 sw=0
 # inspired by: https://github.com/ohmyzsh/ohmyzsh/blob/master/themes/af-magic.zsh-theme
 
 
 # the color palette
-typeset -AHg FG
-for color in {000..255}; do
-    FG[$color]="%F{${color}}"
-done
-
-local -H \
-    _red_="$FG[009]" \
-  _steel_="$FG[075]" \
-    _sky_="$FG[110]" \
- _orange_="$FG[214]" \
-   _gray_="$FG[247]" \
-  _reset_='%f'
+typeset -gA _fg
+   _fg[red]='%F{009}'
+ _fg[steel]='%F{075}'
+   _fg[sky]='%F{110}'
+_fg[orange]='%F{214}'
+  _fg[gray]='%F{247}'
 
 export LS_COLORS="$LS_COLORS:di=01;38;5;39:ln=01;38;5;37:"
 
 
 # the primary prompt
-PROMPT='$_steel_%(6~|%-3~/…/%2~|%~)'
+setopt PROMPT_{SUBST,PERCENT}
+PROMPT="$_fg[steel]%(6~|%-3~/…/%2~|%~)"
 PROMPT+='${(e)git_info[prompt]}'
-if typeset -f 'git_prompt_info' > /dev/null; then
-    PROMPT+='$(git_prompt_info)'
-fi
-if typeset -f 'svn_prompt_info' > /dev/null; then
-    PROMPT+='$(svn_prompt_info)'
-fi
-if typeset -f 'hg_prompt_info' > /dev/null; then
-    PROMPT+='$(hg_prompt_info)'
-fi
-PROMPT+=' %(!.$_red_#.$_sky_»)$_reset_ '
+PROMPT+=" %(!.$_fg[red]#.$_fg[sky]»)$f "
 
 
 # the secondary prompt
-PROMPT2='$_red_\ $_reset_'
+PROMPT2="$_fg[red]\ %f"
 
 
 # the right prompt
 typeset -g VIRTUAL_ENV_DISABLE_PROMPT=1
-RPROMPT="${VIRTUAL_ENV:+$_sky_}${VIRTUAL_ENV##*/}${$VIRTUAL_ENV:-%y}"
-RPROMPT="$_gray_%n@%m %(?..$_red_)$RPROMPT$_reset_"
+RPROMPT="$_fg[gray]%n@%m "
+RPROMPT+='%(?.${VIRTUAL_ENV:+$_fg[sky]}.$_fg[red])${${VIRTUAL_ENV##*/}:-%y}%f'
 
 
 # depends on the git-info module to show git information
@@ -52,6 +39,6 @@ if (( ${+functions[git-info]} )); then
     zstyle ':zim:git-info:unindexed' format '*'
     zstyle ':zim:git-info:indexed'   format '+'
     zstyle ':zim:git-info:keys'      format 'prompt' \
-        "$_sky_(%b%c%s$_orange_%I%i$_sky_)$_reset_"
+        "$_fg[sky](%b%c%s$_fg[orange]%I%i$_fg[sky])%f"
     add-zsh-hook precmd git-info
 fi

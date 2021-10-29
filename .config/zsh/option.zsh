@@ -18,27 +18,8 @@ WORDCHARS=${WORDCHARS//[\/]}
 # GNU Readline behavior
 bindkey '^u' backward-kill-line
 
-
-# zsh-history-substring-search
-
 # Molly-guard, use ^p^m instead
 disable r
-
-# Bind ^[[A/^[[B manually so up/down works both before and after zle-line-init
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
-
-# Bind up and down keys
-zmodload -F zsh/terminfo +p:terminfo
-if [[ -n ${terminfo[kcuu1]} && -n ${terminfo[kcud1]} ]]; then
-  bindkey ${terminfo[kcuu1]} history-substring-search-up
-  bindkey ${terminfo[kcud1]} history-substring-search-down
-fi
-
-bindkey '^P' history-substring-search-up
-bindkey '^N' history-substring-search-down
-bindkey -M vicmd 'k' history-substring-search-up
-bindkey -M vicmd 'j' history-substring-search-down
 
 
 # zsh-autosuggestions
@@ -46,7 +27,9 @@ bindkey -M vicmd 'j' history-substring-search-down
 # Customize the style that the suggestions are shown with.
 # See https://github.com/zsh-users/zsh-autosuggestions/blob/master/README.md#suggestion-highlight-style
 #ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=242'
+ZSHZ_CASE="smart"
 ZSHZ_DATA="$ZDOTDIR/.z"
+ZSHZ_TILDE=1
 
 
 # zsh-syntax-highlighting
@@ -105,16 +88,11 @@ setopt HIST_VERIFY
 # Cause all terminals to share the same history 'session'.
 setopt SHARE_HISTORY
 
-#
-# Input/output
-#
-
 # Allow comments starting with `#` in the interactive shell.
 setopt INTERACTIVE_COMMENTS
 
-#
+
 # Job control
-#
 
 # List jobs in verbose format by default.
 setopt LONG_LIST_JOBS
