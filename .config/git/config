@@ -82,6 +82,9 @@
 	wsErrorHighlight = all
 [diff "hex"]
 	textconv = hexdump -v -C
+[diff "xlsx"]
+	# go install github.com/tokuhirom/git-xlsx-textconv@latest
+	textconv = git xlsx-textconv
 [diff "zip"]
 	textconv = unzip -v
 [feature]

@@ -39,10 +39,10 @@ Plug 'thalesmello/vim-slasher'
 Plug 'vim-scripts/cmdalias.vim'
 Plug 'vim-scripts/LargeFile'
 
+Plug 'arnie97/rainbow_parentheses.vim', { 'on': 'RainbowParentheses' }
 Plug 'junegunn/vim-easy-align', { 'on': ['<plug>(EasyAlign)', 'EasyAlign'] }
 Plug 'junegunn/vim-peekaboo'
 Plug 'junegunn/gv.vim', { 'on': 'GV' }
-Plug 'junegunn/rainbow_parentheses.vim', { 'on': 'RainbowParentheses' }
 
 if executable('fzf')
     Plug 'junegunn/fzf', { 'on': 'FZF' }
@@ -192,7 +192,7 @@ let g:ctrlp_funky_syntax_highlight = 1
 let g:ctrlp_match_current_file = 1
 let g:ctrlp_max_depth = 10
 let g:ctrlp_mruf_default_order = 1
-let g:ctrlp_mruf_exclude = '\v(<|_)(temp|tmp)(_|>)|/(dev/shm|var/folders|node_modules|pkg/mod|rustlib|\.cargo/registry|\.git|\.svn|\.hg|\.bzr)/|_(BASE|LOCAL|REMOTE)_\d+|\.(orig|bak|swp)$'
+let g:ctrlp_mruf_exclude = '\v(<|_)(temp|tmp)(_|>)|/(dev/shm|var/folders|node_modules|pkg/mod|rustlib|\.cargo/registry|\.git|\.svn|\.hg|\.bzr)/|_(BASE|LOCAL|REMOTE)_\d+|\.(orig|bak|swp)$|\.#override.conf'
 let g:ctrlp_mruf_max = 2000
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_prompt_mappings = {
@@ -215,7 +215,7 @@ let g:pear_tree_smart_openers = 1
 let g:pear_tree_smart_closers = 1
 let g:pear_tree_smart_backspace = 1
 
-let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}'], ['<', '>']]
+let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}', 'fold']]
 autocmd FileType c,clojure,cpp,cs,dart,go,java,javascript,json,kotlin,lisp,objc,objcpp,perl,php,r,rust,scala,scheme,swift,thrift,typescript RainbowParentheses
 
 
@@ -226,6 +226,7 @@ let g:NERDTreeRespectWildIgnore = 1
 let g:LargeFile = 1
 let g:gutentags_cache_dir = $HOME . '/.local/share/nvim/tag'
 let g:lsp_diagnostics_float_cursor = 1
+let g:lsp_diagnostics_virtual_text_enabled = 0
 let g:neosnippet#enable_snipmate_compatibility = 1
 let g:rooter_patterns = ['!/pkg/mod/', '.git', '.svn', '.hg', '.bzr']
 let g:rustfmt_autosave = 1
