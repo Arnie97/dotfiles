@@ -2,18 +2,29 @@
 
 get_remote_repo() {
     mkdir -p $1
-    cd $1
-    git init
-    git remote add origin https://github.com/$2
-    git fetch
-    git checkout $3
-    cd -
+    git -C $1 init
+    git -C $1 remote add origin https://github.com/$2
+    git -C $1 fetch -v
+    git -C $1 checkout $3
+}
+
+get_remote_file() {
+    mkdir -p $1
+    url=https://raw.githubusercontent.com/$2/$3/$4
+    if command -v curl; then
+        cd $1
+        curl -fLORC- $url
+        cd -
+    elif wget --version > /dev/null 2>&1; then
+        wget -nc -P $1 $url
+    elif command -v wget > /dev/null 2>&1; then
+        wget -P $1 $url
+    elif command -v busybox > /dev/null 2>&1; then
+        busybox wget -P $1 $url
+    fi
 }
 
 get_remote_repo ~ arnie97/dotfiles conf
-get_remote_repo ~/.config/zsh ohmyzsh/ohmyzsh master
-mkdir -p ~/.local/share/nvim/site/autoload
-wget -nc -O ~/.local/share/nvim/site/autoload/plug.vim \
-    "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-wget -nc -O ~/.ssh/authorized_keys \
-    "https://raw.githubusercontent.com/arnie97/dotfiles/init/authorized_keys"
+get_remote_file ~/.config/zsh zimfw/zimfw master zimfw.zsh
+get_remote_file ~/.local/share/nvim/site/autoload junegunn/vim-plug master plug.vim
+get_remote_file ~/.ssh/authorized_keys arnie97/dotfiles init authorized_keys
