@@ -43,7 +43,7 @@ else
 fi
 
 ccd() {
-    mkdir -p "$1" && chdir "$1" && shift && [ $# -ne 0 ] && mkdir -p "$@"
+    mkdir -p "$1" && cd "$1" && shift && [ $# -ne 0 ] && mkdir -p "$@"
 }
 
 n () {

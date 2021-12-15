@@ -1,6 +1,5 @@
 [ -z "$ZSH_VERSION" ] && exit
 
-
 # Use degit instead of git as the default tool to install and update modules.
 #zstyle ':zim:zmodule' use 'degit'
 
@@ -9,42 +8,15 @@
 # If none is provided, the default '%n@%m: %~' is used.
 #zstyle ':zim:termtitle' format '%1~'
 
-# Remove path separator from WORDCHARS.
-WORDCHARS=${WORDCHARS//[\/]}
+# List jobs in verbose format by default.
+setopt LONG_LIST_JOBS
 
-# Append `../` to your input for each `.` you type after an initial `..`
-#zstyle ':zim:input' double-dot-expand yes
-
-# GNU Readline behavior
-bindkey '^u' backward-kill-line
-
-# Molly-guard, use ^p^m instead
-disable r
-
-
-# zsh-autosuggestions
-
-# Customize the style that the suggestions are shown with.
-# See https://github.com/zsh-users/zsh-autosuggestions/blob/master/README.md#suggestion-highlight-style
-#ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=242'
-ZSHZ_CASE="smart"
-ZSHZ_DATA="$ZDOTDIR/.z"
-ZSHZ_TILDE=1
-
-
-# zsh-syntax-highlighting
-
-# Set what highlighters will be used.
-# See https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters.md
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
-
-# Customize the main highlighter styles.
-# See https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters/main.md#how-to-tweak-it
-#typeset -A ZSH_HIGHLIGHT_STYLES
-#ZSH_HIGHLIGHT_STYLES[comment]='fg=242'
 
 
 # Changing directories
+ZSHZ_CASE="smart"
+ZSHZ_DATA="$ZDOTDIR/.z"
+ZSHZ_TILDE=1
 
 # Perform cd to a directory if the typed command is invalid, but is a directory.
 setopt AUTO_CD
@@ -62,7 +34,11 @@ setopt PUSHD_SILENT
 setopt PUSHD_TO_HOME
 
 
+
 # History
+
+# Save each command's beginning timestamp.
+setopt EXTENDED_HISTORY
 
 # The maximum number of events stored internally and saved in the history file.
 # The former is greater than the latter in case user wants HIST_EXPIRE_DUPS_FIRST.
@@ -82,32 +58,47 @@ setopt HIST_IGNORE_DUPS
 # Remove commands from the history that begin with a space.
 setopt HIST_IGNORE_SPACE
 
+# Remove superfluous blank characters from the history command.
+setopt HIST_REDUCE_BLANKS
+
+# Remove the "history" built-in itself.
+setopt HIST_NO_STORE
+
 # Don't execute the command directly upon history expansion.
 setopt HIST_VERIFY
+
+# Provide better locking performance.
+setopt HIST_FCNTL_LOCK
 
 # Cause all terminals to share the same history 'session'.
 setopt SHARE_HISTORY
 
+
+
+# Interactive line editor
+
 # Allow comments starting with `#` in the interactive shell.
 setopt INTERACTIVE_COMMENTS
 
-
-# Job control
-
-# List jobs in verbose format by default.
-setopt LONG_LIST_JOBS
-
-# Prevent background jobs being given a lower priority.
-setopt NO_BG_NICE
-
-# Prevent status report of jobs on shell exit.
-setopt NO_CHECK_JOBS
-
-# Prevent SIGHUP to jobs on shell exit.
-setopt NO_HUP
-
 # Prompt for spelling correction of commands.
 setopt CORRECT
+
+# GNU Readline behavior
+bindkey '^u' backward-kill-line
+
+# Molly-guard, use ^p^m instead
+disable r
+
+# Customize the main highlighter styles.
+# See https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters/main.md
+typeset -A ZSH_HIGHLIGHT_STYLES
+ZSH_HIGHLIGHT_STYLES[builtin]='fg=magenta'
+ZSH_HIGHLIGHT_STYLES[command]='fg=cyan'
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
+ZSH_HIGHLIGHT_MAXLENGTH=4096
+
+# Remove path separator from WORDCHARS.
+WORDCHARS=${WORDCHARS//[\/]}
 
 # The following lines were added by compinstall
 zstyle ':completion:*' completer _complete _ignored _approximate
