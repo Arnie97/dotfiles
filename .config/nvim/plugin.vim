@@ -30,6 +30,7 @@ Plug 'rhysd/conflict-marker.vim'
 Plug 'ryvnf/readline.vim'
 Plug 'fidian/hexmode'
 Plug 'wsdjeg/vim-fetch'
+Plug 'arnie97/vim-hugefile'
 Plug 'inkarkat/vim-visualrepeat'
 Plug 'easymotion/vim-easymotion'
 Plug 'aykamko/vim-easymotion-segments'
@@ -37,7 +38,6 @@ Plug 'chrisbra/unicode.vim'
 Plug 'andrewRadev/sideways.vim'
 Plug 'thalesmello/vim-slasher'
 Plug 'vim-scripts/cmdalias.vim'
-Plug 'vim-scripts/LargeFile'
 
 Plug 'arnie97/rainbow_parentheses.vim', { 'on': 'RainbowParentheses' }
 Plug 'junegunn/vim-easy-align', { 'on': ['<plug>(EasyAlign)', 'EasyAlign'] }
@@ -50,6 +50,8 @@ endif
 
 if executable('ag')
     Plug 'mileszs/ack.vim'
+    set grepprg=ag\ --vimgrep\ --smart-case\ $*
+    set grepformat=%f:%l:%c:%m
     let g:ackprg = 'ag --vimgrep --smart-case'
     let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 endif
@@ -80,6 +82,7 @@ if has('lambda') && has('timers') && exists('*json_encode')
     let g:go_def_mapping_enabled = 0
     let g:go_gopls_enabled = 0
     let g:go_imports_autosave = 0
+    let g:go_version_warning = 0
 
     Plug 'mattn/vim-lsp-settings'
     Plug 'prabirshrestha/vim-lsp'
@@ -163,7 +166,7 @@ function LightLineBranch(cached)
         return s:branch
     endif
 
-    let s:branch = fugitive#head()
+    let s:branch = FugitiveHead()
     if LightLineSpareSpace() > 0 || len(s:branch) <= 6
         return s:branch
     endif
@@ -223,8 +226,8 @@ let g:NERDTreeWinPos = 'right'
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeRespectWildIgnore = 1
 
-let g:LargeFile = 1
 let g:gutentags_cache_dir = $HOME . '/.local/share/nvim/tag'
+let g:hugefile_trigger_size = 0.5
 let g:lsp_diagnostics_float_cursor = 1
 let g:lsp_diagnostics_virtual_text_enabled = 0
 let g:neosnippet#enable_snipmate_compatibility = 1
@@ -257,8 +260,12 @@ function s:CmdLineMappings()
         return
     endif
 
-    Alias ack Ack
-    Alias ag Ack
+    if !exists(':Ack')
+        Alias ag grep
+    else
+        Alias ag Ack
+    endif
+
     Alias b ls<cr>:b
     Alias git Git
     Alias hdiff SignifyHunkDiff

@@ -80,6 +80,8 @@
 	mnemonicPrefix = true
 	renames = copies
 	wsErrorHighlight = all
+[diff "atool"]
+	textconv = als
 [diff "hex"]
 	textconv = hexdump -v -C
 [diff "xlsx"]
@@ -103,6 +105,8 @@
 [http]
 	lowSpeedLimit = 20480
 	lowSpeedTime = 120
+[hub]
+	protocol = ssh
 [log]
 	follow = true
 	mailmap = true

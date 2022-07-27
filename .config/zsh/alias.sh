@@ -1,18 +1,20 @@
 export CLICOLOR=1
-export DISPLAY="${DISPLAY:-:0}"
 export GPG_TTY="${GPG_TTY:-$(tty)}"
 export HOMEBREW_NO_AUTO_UPDATE=1
 export LESS="-iFRSX"
 export NNN_OPTS="AcCdn"
 export NNN_OPENER="nnn-xargs"
+export RUSTUP_DIST_SERVER="https://rsproxy.cn"
+export RUSTUP_UPDATE_ROOT="https://rsproxy.cn/rustup"
+export RUST_BACKTRACE=1
 
 alias -- -='cd -'
 alias c='cargo'
 alias d='docker'
 alias g='git'
+alias y='rlwrap yaegi'
 alias axel='axel -a'
 alias ag='ag --pager=less'
-alias ip='ip --color=auto'
 alias lb='lsblk -So+SERIAL && echo && lsblk -o NAME,FSTYPE,SIZE,FSAVAIL,LABEL,MOUNTPOINT'
 alias ls='ls -F'
 alias la='ls -A'
@@ -25,6 +27,11 @@ alias pd='pushd'
 # coreutils
 if ls --version > /dev/null 2>&1; then
     alias ls='ls -F --color --show-control-chars'
+fi
+
+# iproute2
+if ip --color netns > /dev/null 2>&1; then
+    alias ip='ip --color=auto'
 fi
 
 if [ -x "$(command -v hub)" ]; then

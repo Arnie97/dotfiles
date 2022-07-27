@@ -1,3 +1,6 @@
 *.bin	binary diff=hex
+*.rar	binary diff=atool
+*.tar	binary diff=atool
+*.tar.*	binary diff=atool
 *.xlsx	binary diff=xlsx
 *.zip	binary diff=zip
