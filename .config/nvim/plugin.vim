@@ -29,6 +29,8 @@ Plug 'airblade/vim-rooter'
 Plug 'rhysd/conflict-marker.vim'
 Plug 'ryvnf/readline.vim'
 Plug 'fidian/hexmode'
+Plug 'ojroques/vim-oscyank'
+Plug 'roxma/vim-paste-easy'
 Plug 'wsdjeg/vim-fetch'
 Plug 'arnie97/vim-hugefile'
 Plug 'inkarkat/vim-visualrepeat'
@@ -62,7 +64,7 @@ if exists('*matchfuzzy')
 endif
 
 if executable('ctags')
-    Plug 'ludovicchabant/vim-gutentags', { 'on': [] }
+    Plug 'ludovicchabant/vim-gutentags'
 endif
 
 if has('nvim') || has('patch-7.4.849')
@@ -95,6 +97,18 @@ if executable('go')
         Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
     else
         Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries', 'tag': 'v1.15' }
+    endif
+
+    if has('nvim-0.5')
+        Plug 'mfussenegger/nvim-dap'
+        Plug 'rcarriga/nvim-dap-ui', { 'tag': 'v0.27.1' }
+        Plug 'leoluz/nvim-dap-go'
+        Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate', 'branch': '0.5-compat' }
+
+        autocmd VimEnter * lua
+            \ require 'dapui'.setup()
+            \ require 'dap-go'.setup()
+            \ require 'dap-repl'
     endif
 endif
 
@@ -188,12 +202,11 @@ function LightLineBranch(cached)
 endfunction
 
 
-let g:ctrlp_types = ['buf', 'mru', 'fil']
-let g:ctrlp_extensions = ['modified', 'funky', 'tag']
+let g:ctrlp_types = ['fil', 'buf', 'mru']
+let g:ctrlp_extensions = ['funky', 'modified', 'tag']
 let g:ctrlp_arg_map = 1
 let g:ctrlp_cache_dir = $HOME . '/.local/share/nvim/ctrlp'
 let g:ctrlp_clear_cache_on_exit = 0
-let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_funky_cache_dir = g:ctrlp_cache_dir
 let g:ctrlp_funky_syntax_highlight = 1
 let g:ctrlp_match_current_file = 1
@@ -202,6 +215,8 @@ let g:ctrlp_mruf_default_order = 1
 let g:ctrlp_mruf_exclude = '\v(<|_)(temp|tmp)(_|>)|/(dev/shm|var/folders|node_modules|pkg/mod|rustlib|\.cargo/registry|\.git|\.svn|\.hg|\.bzr)/|_(BASE|LOCAL|REMOTE)_\d+|\.(orig|bak|swp)$|\.#override.conf'
 let g:ctrlp_mruf_max = 2000
 let g:ctrlp_show_hidden = 1
+let g:ctrlp_tjump_shortener = [expand('~'), '~']
+let g:ctrlp_tjump_skip_tag_name = 1
 let g:ctrlp_prompt_mappings = {
     \ 'AcceptSelection("e")': ['<cr>'],
     \ 'AcceptSelection("h")': ['<c-s>'],
@@ -230,7 +245,10 @@ let g:NERDTreeWinPos = 'right'
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeRespectWildIgnore = 1
 
+let g:gutentags_add_default_project_roots = 0
 let g:gutentags_cache_dir = $HOME . '/.local/share/nvim/tag'
+let g:gutentags_define_advanced_commands = 1
+let g:gutentags_project_root = ['.gutentags']
 let g:hugefile_trigger_size = 0.5
 let g:lsp_diagnostics_float_cursor = 1
 let g:lsp_diagnostics_virtual_text_enabled = 0
@@ -272,8 +290,6 @@ function s:CmdLineMappings()
 
     Alias b ls<cr>:b
     Alias git Git
-    Alias hdiff SignifyHunkDiff
-    Alias hundo SignifyHunkUndo
     Alias hd SignifyHunkDiff
     Alias hu SignifyHunkUndo
     Alias tabg tab<space>Git
@@ -281,5 +297,4 @@ function s:CmdLineMappings()
     Alias nt NERDTreeToggle
     Alias nf NERDTreeFind
     Alias ng NERDTreeToggleVCS
-    Alias nv NERDTreeToggleVCS
 endfunction

@@ -10,35 +10,35 @@ nnoremap -b :let &background = &background != 'light'? 'light': 'dark'
                                 \ <bar> set background? <cr>
 nnoremap -f :let &l:foldmethod = &foldmethod != 'syntax'? 'syntax': 'indent'
                                 \ <bar> set foldmethod? <cr>
-nnoremap -c :setlocal cursorline! <bar> set cursorline? <cr>
 nnoremap -e :setlocal expandtab!  <bar> set expandtab?  <cr>
-nnoremap -h :setlocal hlsearch!   <bar> set hlsearch?   <cr>
 nnoremap -i :setlocal ignorecase! <bar> set ignorecase? <cr>
 nnoremap -n :setlocal number!     <bar> set number?     <cr>
 nnoremap -p :setlocal paste!      <bar> set paste?      <cr>
-nnoremap -r :setlocal autoread!   <bar> set autoread?   <cr>
 nnoremap -s :setlocal spell!      <bar> set spell?      <cr>
 nnoremap -t :setlocal list!       <bar> set list?       <cr>
 nnoremap -w :setlocal wrap!       <bar> set wrap?       <cr>
 
 " remove the Windows ^M - when the line endings gets messed up
 nnoremap -m mmHmt:%s/<c-v><cr>//ge<cr>'tzt'm
-nnoremap -g :SignifyToggle<cr>
-nnoremap -/ :nohlsearch<cr>
+nnoremap -y :SignifyToggle<cr>
+nnoremap -c :SignifyHunkDiff<cr>
+nnoremap -u :SignifyHunkUndo<cr>
+nnoremap -d :lua require 'dapui'.toggle()<cr>
+nnoremap -k :lua require 'dap'.toggle_breakpoint()<cr>
+nnoremap -/ :lua require 'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '), nil, vim.fn.input('Breakpoint log message: '))<cr>
+nnoremap -. :lua require 'dap'.continue()<cr>
 
 " jump to camelCase segments
 if exists('g:plugs') && has_key(g:plugs, 'vim-easymotion-segments')
     let g:EasyMotionSegments_do_mapping = 0
     map [   <plug>(easymotion-prefix)
     map ]   <plug>(easymotion-prefix)
-    map [w  <plug>(easymotion-segments-LF)
+    map [w  <plug>(easymotion-segments-LB)
     map ]w  <plug>(easymotion-segments-LF)
     map [b  <plug>(easymotion-segments-LB)
-    map ]b  <plug>(easymotion-segments-LB)
-    map [e  <plug>(easymotion-segments-RF)
+    map ]b  <plug>(easymotion-segments-LF)
+    map [e  <plug>(easymotion-segments-RB)
     map ]e  <plug>(easymotion-segments-RF)
-    map [ge <plug>(easymotion-segments-RB)
-    map ]ge <plug>(easymotion-segments-RB)
 endif
 
 
@@ -85,8 +85,9 @@ if exists('g:plugs') && has_key(g:plugs, 'vim-lsp')
         nmap <buffer> [y <plug>(lsp-peek-type-definition)
         nmap <buffer> ]y <plug>(lsp-peek-type-definition)
         nmap <buffer> gr <plug>(lsp-rename)
-        nmap <buffer> [h <plug>(lsp-previous-diagnostic)
-        nmap <buffer> ]h <plug>(lsp-next-diagnostic)
+        nmap <buffer> [g <plug>(lsp-previous-diagnostic)
+        nmap <buffer> ]g <plug>(lsp-next-diagnostic)
+        nmap <buffer> -g <plug>(lsp-document-diagnostic)
         nmap <buffer> K  <plug>(lsp-hover)
 
         if exists('+tagfunc')
@@ -138,14 +139,34 @@ endif
 
 " ctrlp family
 if exists('g:plugs') && has_key(g:plugs, 'ctrlp.vim')
-    noremap <expr><c-f> !empty(&buftype)? "\<c-m>": ':<c-u>CtrlPRoot<cr>'
-    noremap <expr><c-m> !empty(&buftype)? "\<c-m>": ':<c-u>CtrlPMRUFiles<cr>'
-    noremap <expr><c-b> !empty(&buftype)? "\<c-b>": ':<c-u>CtrlPBuffer<cr>'
-    noremap <expr><c-t> !empty(&buftype)? "\<c-t>": ':<c-u>CtrlPFunky<cr>'
-    noremap <expr><c-/> !empty(&buftype)? "\<c-/>": ':<c-u>CtrlPtjump<cr>'
+    nnoremap <expr> <cr>  !empty(&buftype)? "\<cr>":  ':CtrlPMRUFiles<cr>'
+    nnoremap <expr> <c-b> !empty(&buftype)? "\<c-b>": ':CtrlPBuffer<cr>'
+    nnoremap <expr> <c-n> !empty(&buftype)? "\<c-n>": ':CtrlPModified<cr>'
+    nnoremap <expr> <c-f> !empty(&buftype)? "\<c-f>": ':CtrlPFunky<cr>'
+    nnoremap <expr> <c-t> !empty(&buftype)? "\<c-t>": ':CtrlPTag<cr>'
+    nnoremap [t :CtrlPtjump<cr>
+    nnoremap ]t :CtrlPtjump<cr>
+    vnoremap [t :CtrlPtjumpVisual<cr>
+    vnoremap ]t :CtrlPtjumpVisual<cr>
 endif
 
-vnoremap <enter> "*y
+
+" clipboard control sequence, OSC 52
+vnoremap <cr> "*y
+
+if exists('g:plugs') && has_key(g:plugs, 'vim-oscyank')
+    if !has('clipboard')
+        vnoremap <cr> :OSCYank<cr>
+    endif
+
+    function s:yankOSC52()
+        if v:event.regname =~# '[lo]'
+            execute 'OSCYankReg ' . v:event.regname
+        endif
+    endfunction
+
+    autocmd TextYankPost * call s:yankOSC52()
+endif
 
 
 " readline mappings for the command line
