@@ -15,7 +15,7 @@ export LS_COLORS="$LS_COLORS:di=01;38;5;39:ln=01;38;5;37:"
 
 # the primary prompt
 setopt PROMPT_{SUBST,PERCENT}
-PROMPT="$_fg[steel]%(6~|%-3~/…/%2~|%~)"
+PROMPT='$_fg[steel]$(initials)'
 PROMPT+='${(e)git_info[prompt]}'
 PROMPT+=" %(!.$_fg[red]#.$_fg[sky]»)%f "
 

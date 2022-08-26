@@ -98,6 +98,10 @@ if executable('go')
     endif
 endif
 
+if !has('patch-8.2.3519')
+    Plug 'cespare/vim-toml'
+endif
+
 Plug 'ap/vim-css-color'
 Plug 'chr4/nginx.vim'
 Plug 'mattn/emmet-vim'

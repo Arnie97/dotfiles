@@ -15,4 +15,5 @@ fi
 
 source "$ZDOTDIR/alias.sh"
 source "$ZDOTDIR/option.zsh"
+source "$ZDOTDIR/initials.zsh"
 source "$ZDOTDIR/prompt.zsh"
