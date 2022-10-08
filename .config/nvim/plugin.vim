@@ -41,6 +41,10 @@ Plug 'andrewRadev/sideways.vim'
 Plug 'thalesmello/vim-slasher'
 Plug 'vim-scripts/cmdalias.vim'
 
+if has('nvim') || has('patch-8.0.1394')
+    Plug 'svermeulen/vim-yoink'
+endif
+
 Plug 'arnie97/rainbow_parentheses.vim', { 'on': 'RainbowParentheses' }
 Plug 'junegunn/vim-easy-align', { 'on': ['<plug>(EasyAlign)', 'EasyAlign'] }
 Plug 'junegunn/vim-peekaboo'
@@ -48,6 +52,10 @@ Plug 'junegunn/gv.vim', { 'on': 'GV' }
 
 if executable('fzf')
     Plug 'junegunn/fzf', { 'on': 'FZF' }
+endif
+
+if has('nvim') || has('patch-8.1.0039')
+    Plug 'yilin-yang/vim-markbar'
 endif
 
 if executable('ag')
@@ -212,7 +220,7 @@ let g:ctrlp_funky_syntax_highlight = 1
 let g:ctrlp_match_current_file = 1
 let g:ctrlp_max_depth = 10
 let g:ctrlp_mruf_default_order = 1
-let g:ctrlp_mruf_exclude = '\v(<|_)(temp|tmp)(_|>)|/(dev/shm|var/folders|node_modules|pkg/mod|rustlib|\.cargo/registry|\.git|\.svn|\.hg|\.bzr)/|_(BASE|LOCAL|REMOTE)_\d+|\.(orig|bak|swp)$|\.#override.conf'
+let g:ctrlp_mruf_exclude = '\v(<|_)(temp|tmp)(_|>)|/(dev/shm|var/folders|node_modules|vendor|pkg/mod|rustlib|\.cargo/registry|\.git|\.svn|\.hg|\.bzr)/|_(BASE|LOCAL|REMOTE)_\d+|\.(orig|bak|swp)$|\.#override.conf'
 let g:ctrlp_mruf_max = 2000
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_tjump_shortener = [expand('~'), '~']
@@ -240,7 +248,6 @@ let g:pear_tree_smart_backspace = 1
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}', 'fold']]
 autocmd FileType c,clojure,cpp,cs,dart,go,java,javascript,json,kotlin,lisp,objc,objcpp,perl,php,r,rust,scala,scheme,swift,thrift,typescript RainbowParentheses
 
-
 let g:NERDTreeWinPos = 'right'
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeRespectWildIgnore = 1
@@ -249,13 +256,22 @@ let g:gutentags_add_default_project_roots = 0
 let g:gutentags_cache_dir = $HOME . '/.local/share/nvim/tag'
 let g:gutentags_define_advanced_commands = 1
 let g:gutentags_project_root = ['.gutentags']
+
 let g:hugefile_trigger_size = 0.5
 let g:lsp_diagnostics_float_cursor = 1
 let g:lsp_diagnostics_virtual_text_enabled = 0
+let g:markbar_num_lines_context = 3
 let g:neosnippet#enable_snipmate_compatibility = 1
 let g:rooter_patterns = ['!/pkg/mod/', '.git', '.svn', '.hg', '.bzr']
 let g:rustfmt_autosave = 1
 let g:signify_sign_change = '&'
+
+let g:yoinkSyncNumberedRegisters = 1
+let g:yoinkIncludeDeleteOperations = 1
+let g:yoinkIncludeNamedRegisters = 0
+if has('nvim')
+    let g:yoinkSavePersistently = 1
+endif
 
 
 " snippet tab completion

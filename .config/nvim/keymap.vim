@@ -1,6 +1,7 @@
 " swap keys
 noremap 0 ^
 noremap ^ 0
+noremap x "-x
 noremap <space> :
 map <bslash> "
 nnoremap mm :marks<cr>
