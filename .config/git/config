@@ -116,6 +116,8 @@
 	directoryRenames = true
 	guiTool = bc
 	tool = vimdiff
+[mergetool "vimdiff"]
+	cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [pretty]
 	custom = %C(red bold)%h%C(reset) %C(cyan)%cd%C(yellow bold)%d%C(reset) %s %C(cyan)(%C(green)%aN, %C(cyan)%cr)%C(reset)
 [protocol]

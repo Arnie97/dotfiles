@@ -6,7 +6,7 @@ fi
 
 (for pathspec in "$@"; do
     if [ -f "$pathspec" ]; then
-        rhash -cM "$pathspec" | pv -petrals $(wc -l "$pathspec" | awk '{print $1}') | grep -v OK
+        rhash -cM "$pathspec" | pv -petrals $(wc -l "$pathspec" | awk '{print $1}') | grep -v '  OK'
     elif [ -d "$pathspec" ]; then
         cd "$pathspec"
     else

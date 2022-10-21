@@ -2,8 +2,10 @@
 noremap 0 ^
 noremap ^ 0
 noremap x "-x
+noremap Y y$
 noremap <space> :
 map <bslash> "
+nnoremap & :&&<cr>
 nnoremap mm :marks<cr>
 
 " option toggles
@@ -166,7 +168,9 @@ if exists('g:plugs') && has_key(g:plugs, 'vim-oscyank')
         endif
     endfunction
 
-    autocmd TextYankPost * call s:yankOSC52()
+    if exists("##TextYankPost")
+        autocmd TextYankPost * call s:yankOSC52()
+    endif
 endif
 
 
