@@ -13,7 +13,7 @@ set mouse=nv
 
 " folding and gutter
 if has('folding')
-    set foldlevel=3
+    set foldlevel=255
     set foldmethod=syntax
     set foldtext=FoldText()
     set foldcolumn=1

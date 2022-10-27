@@ -128,6 +128,12 @@ nnoremap <m-left>  :SidewaysLeft<cr>
 nnoremap <m-l>     :SidewaysRight<cr>
 nnoremap <m-right> :SidewaysRight<cr>
 
+" an argument, inner argument
+omap aa <plug>SidewaysArgumentTextobjA
+xmap aa <plug>SidewaysArgumentTextobjA
+omap ia <plug>SidewaysArgumentTextobjI
+xmap ia <plug>SidewaysArgumentTextobjI
+
 " easier way to switch between buffers
 noremap <c-j> <c-w>j
 noremap <c-k> <c-w>k

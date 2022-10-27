@@ -37,6 +37,7 @@ Plug 'inkarkat/vim-visualrepeat'
 Plug 'easymotion/vim-easymotion'
 Plug 'aykamko/vim-easymotion-segments'
 Plug 'chrisbra/unicode.vim'
+Plug 'wellle/context.vim'
 Plug 'andrewRadev/sideways.vim'
 Plug 'thalesmello/vim-slasher'
 Plug 'vim-scripts/cmdalias.vim'
@@ -252,6 +253,11 @@ let g:NERDTreeWinPos = 'right'
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeRespectWildIgnore = 1
 
+let g:context_highlight_tag = '<hide>'
+let g:context_max_height = 11
+let g:context_max_per_indent = 3
+
+let g:go_fold_enable = ['block', 'import', 'package_comment']
 let g:gutentags_add_default_project_roots = 0
 let g:gutentags_cache_dir = $HOME . '/.local/share/nvim/tag'
 let g:gutentags_define_advanced_commands = 1
