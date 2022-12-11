@@ -11,6 +11,10 @@
 # List jobs in verbose format by default.
 setopt LONG_LIST_JOBS
 
+# Report job execution time and maximum RSS.
+export REPORTMEMORY=65536
+export REPORTTIME=10
+export TIMEFMT="$(print -P %F{247})%P real %*E (user %*U, sys %*S) rss %Mk"
 
 
 # Changing directories
