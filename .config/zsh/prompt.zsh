@@ -28,6 +28,17 @@ PROMPT2="$_fg[red]\ %f"
 typeset -g VIRTUAL_ENV_DISABLE_PROMPT=1
 RPROMPT="$_fg[gray]%n@%m "
 RPROMPT+='%(?.${VIRTUAL_ENV:+$_fg[sky]}.$_fg[red])${${VIRTUAL_ENV##*/}:-%y}%f'
+RPROMPT_BAK="$RPROMPT"
+
+print-time-accept-line() {
+    RPROMPT="$_fg[gray]$(date '+%Y-%m-%d %H:%M:%S %Z')"
+    zle reset-prompt
+    RPROMPT="$RPROMPT_BAK"
+    zle accept-line
+}
+
+zle -N print-time-accept-line
+bindkey ^M print-time-accept-line
 
 
 # depends on the git-info module to show git information
