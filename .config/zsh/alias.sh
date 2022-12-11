@@ -2,7 +2,7 @@ export CLICOLOR=1
 export GPG_TTY="${GPG_TTY:-$(tty)}"
 export HOMEBREW_NO_AUTO_UPDATE=1
 export LESS="-iFRSX"
-export NNN_OPTS="AcCdn"
+export NNN_OPTS="AdeHn"
 export NNN_OPENER="nnn-xargs"
 export RUSTUP_DIST_SERVER="https://rsproxy.cn"
 export RUSTUP_UPDATE_ROOT="https://rsproxy.cn/rustup"
@@ -32,6 +32,10 @@ fi
 # iproute2
 if ip --color netns > /dev/null 2>&1; then
     alias ip='ip --color=auto'
+fi
+
+if [ -x "$(command -v podman)" -a ! -x "$(command -v docker)" ]; then
+    alias docker='podman'
 fi
 
 if [ -x "$(command -v hub)" ]; then

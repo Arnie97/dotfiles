@@ -46,7 +46,8 @@ setopt EXTENDED_HISTORY
 
 # The maximum number of events stored internally and saved in the history file.
 # The former is greater than the latter in case user wants HIST_EXPIRE_DUPS_FIRST.
-HISTSIZE=20000
+HISTFILE="$ZDOTDIR/.zsh_history"
+HISTSIZE=12000
 SAVEHIST=10000
 setopt HIST_EXPIRE_DUPS_FIRST
 
