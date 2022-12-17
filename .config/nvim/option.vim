@@ -68,7 +68,7 @@ set ttimeoutlen=100
 
 
 " delete comment character when joining commented lines
-if v:version > 703 || v:version == 703 && has('patch541')
+if has('patch-7.3.541')
     set formatoptions+=j
 endif
 
@@ -77,6 +77,8 @@ endif
 set hidden
 set switchbuf=useopen,usetab,newtab
 set showtabline=2
+set splitbelow
+set splitright
 
 
 " backup and undo

@@ -31,17 +31,17 @@ nnoremap -k :lua require 'dap'.toggle_breakpoint()<cr>
 nnoremap -/ :lua require 'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '), nil, vim.fn.input('Breakpoint log message: '))<cr>
 nnoremap -. :lua require 'dap'.continue()<cr>
 
-" jump to camelCase segments
-if exists('g:plugs') && has_key(g:plugs, 'vim-easymotion-segments')
-    let g:EasyMotionSegments_do_mapping = 0
-    map [   <plug>(easymotion-prefix)
-    map ]   <plug>(easymotion-prefix)
-    map [w  <plug>(easymotion-segments-LB)
-    map ]w  <plug>(easymotion-segments-LF)
-    map [b  <plug>(easymotion-segments-LB)
-    map ]b  <plug>(easymotion-segments-LF)
-    map [e  <plug>(easymotion-segments-RB)
-    map ]e  <plug>(easymotion-segments-RF)
+
+" fast jump with sneak
+if exists('g:plugs') && has_key(g:plugs, 'vim-sneak')
+    nmap f  <plug>Sneak_f
+    nmap F  <plug>Sneak_F
+    nmap t  <plug>Sneak_t
+    nmap T  <plug>Sneak_T
+    nmap gz <plug>Sneak_s
+    nmap gZ <plug>Sneak_S
+    xmap z  <plug>Sneak_s
+    xmap Z  <plug>Sneak_S
 endif
 
 
@@ -55,7 +55,6 @@ if exists('g:plugs') && has_key(g:plugs, 'conflict-marker.vim')
 
     map [x <plug>(conflict-marker-prev-hunk)
     map ]x <plug>(conflict-marker-next-hunk)
-    map gl <plug>(EasyAlign)
 endif
 
 
@@ -90,7 +89,7 @@ if exists('g:plugs') && has_key(g:plugs, 'vim-lsp')
         nmap <buffer> gr <plug>(lsp-rename)
         nmap <buffer> [g <plug>(lsp-previous-diagnostic)
         nmap <buffer> ]g <plug>(lsp-next-diagnostic)
-        nmap <buffer> -g <plug>(lsp-document-diagnostic)
+        nmap <buffer> -g <plug>(lsp-document-diagnostics)
         nmap <buffer> K  <plug>(lsp-hover)
 
         if exists('+tagfunc')
@@ -160,6 +159,30 @@ if exists('g:plugs') && has_key(g:plugs, 'ctrlp.vim')
 endif
 
 
+" omni completion
+inoremap <expr> <tab>   pumvisible()? "\<c-n>": "\<tab>"
+inoremap <expr> <s-tab> pumvisible()? "\<c-p>": "\<s-tab>"
+
+if exists('g:plugs') && has_key(g:plugs, 'neosnippet')
+    imap <expr> ;;
+        \ neosnippet#expandable_or_jumpable()?
+        \ "\<plug>(neosnippet_expand_or_jump)":
+        \ &omnifunc ==# 'emmet#completeTag'?
+        \ "\<plug>(emmet-expand-abbr)": ';;'
+
+    smap <expr> ;;
+        \ neosnippet#expandable_or_jumpable()?
+        \ "\<plug>(neosnippet_expand_or_jump)": ';;'
+
+    let g:user_emmet_complete_tag = 1
+    let g:user_emmet_install_global = 0
+    let g:user_emmet_leader_key = ';'
+    let g:user_emmet_mode = 'i'
+
+    autocmd FileType html,xhtml,xml,css,sass,scss,javascript,javascriptreact,typescript,typescriptreact,vue,eex,php,asp,jsp,smarty EmmetInstall
+endif
+
+
 " clipboard control sequence, OSC 52
 vnoremap <cr> "*y
 
@@ -185,7 +208,10 @@ cnoremap <c-a> <home>
 cnoremap <c-e> <end>
 
 " opens a new tab with the current buffer's path
+cnoreabbrev    ed    edit <c-r>=expand('%:p:h')<cr>/
 cnoreabbrev tabed tabedit <c-r>=expand('%:p:h')<cr>/
+cnoreabbrev   spl   split <c-r>=expand('%:p:h')<cr>/
+cnoreabbrev  vspl  vsplit <c-r>=expand('%:p:h')<cr>/
 cnoreabbrev   chd   chdir <c-r>=expand('%:p:h')<cr>/
 cnoreabbrev  lchd  lchdir <c-r>=expand('%:p:h')<cr>/
 cnoreabbrev  tchd  tchdir <c-r>=expand('%:p:h')<cr>/

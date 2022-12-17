@@ -10,6 +10,7 @@ if has('autocmd')
     autocmd FileType python syntax keyword pythonDecorator True False None self
     autocmd FileType python,ruby,lua,basic,vb,vim,lisp,clojure,scheme,haskell,yaml,html,xhtml,xml,vue,eex,php,asp,jsp,smarty setlocal foldmethod=indent
     autocmd FileType git set foldmethod=syntax
+    autocmd FileType go set makeprg=go
     autocmd BufNewFile,BufRead *.ksy setfiletype yaml
     autocmd BufNewFile,BufRead */systemd/* setfiletype dosini
 else
