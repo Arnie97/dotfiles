@@ -170,23 +170,6 @@ let g:lightline = {
     \ ]},
 \ }
 
-autocmd ColorScheme * call s:LightLineUpdate()
-autocmd VimEnter    * call s:LightLineUpdate()
-
-function s:LightLineUpdate()
-    if !exists('g:loaded_lightline')
-        return
-    endif
-    if &background == 'dark'
-        let g:lightline.colorscheme = 'wombat'
-    else
-        let g:lightline.colorscheme = 'PaperColor'
-    endif
-    call lightline#init()
-    call lightline#colorscheme()
-    call lightline#update()
-endfunction
-
 function LightLineSpareSpace()
     return winwidth(0) - len(s:branch) - strlen(expand('%:t')) - 40
 endfunction
@@ -271,6 +254,8 @@ let g:netrw_winsize = 30
 let g:pear_tree_smart_openers = 1
 let g:pear_tree_smart_closers = 1
 let g:pear_tree_smart_backspace = 1
+let g:quantum_black = 1
+let g:quantum_italics = 1
 
 autocmd FileType arduino,awk,c,clojure,cpp,cs,d,dart,dts,go,java,javascript,json,kotlin,lisp,objc,objcpp,perl,php,ps1,r,racket,rust,scala,scheme,swift,thrift,typescript RainbowParentheses
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}', 'fold']]
