@@ -75,6 +75,10 @@ nnoremap g! :tabedit <cfile><cr>
 vnoremap g! y:tabedit <c-r>"<cr>
 nnoremap gb :Git blame<cr><c-w>12<<cr>
 
+if has('autocmd')
+    autocmd FileType qf nnoremap <buffer> -o :cclose<cr>
+    autocmd FileType qf nnoremap <buffer> -l :lclose<cr>
+endif
 
 if exists('g:plugs') && has_key(g:plugs, 'vim-lsp')
     function s:enableLspMapping() abort

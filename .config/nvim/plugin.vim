@@ -72,6 +72,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'junegunn/vim-peekaboo'
 Plug 'mbbill/undotree'
 Plug 'mhinz/vim-signify', [['nvim', 'patch-8.0.902'], [{'branch': 'legacy'}]]
+Plug 'skywind3000/asyncrun.vim'
 Plug 'wellle/context.vim'
 Plug 'yilin-yang/vim-markbar', [['nvim', 'patch-8.1.0039']]
 
@@ -102,7 +103,7 @@ if has('lambda') && has('timers') && exists('*json_encode')
     Plug 'prabirshrestha/asyncomplete-neosnippet.vim'
 endif
 
-" debug adapters
+" debug adapters and tree-sitter integrations
 if has('nvim-0.5')
     autocmd VimEnter * lua
         \ require 'dapui'.setup()
@@ -119,12 +120,15 @@ if has('nvim-0.5')
         \ ['nvim-0.7', {'tag': 'v0.7.2'}],
         \ ['nvim-0.6', {'commit': '6a437db'}],
         \ ['nvim-0.5', {'branch': '0.5-compat'}]]
+    Plug 'nvim-treesitter/nvim-treesitter-context', [['nvim-0.7']]
     Plug 'p00f/nvim-ts-rainbow'
 endif
 
 " file types
 Plug 'ap/vim-css-color'
-Plug 'arnie97/rainbow_parentheses.vim', {'on': 'RainbowParentheses'}
+Plug 'arnie97/exakt.vim'
+Plug 'arnie97/go-cmd.vim'
+Plug 'arnie97/rainbow.vim'
 Plug 'cespare/vim-toml', [[!has('nvim-0.6') && !has('patch-8.2.3519')]]
 Plug 'chr4/nginx.vim'
 Plug 'ludovicchabant/vim-gutentags', [[executable('ctags')]]
@@ -228,6 +232,9 @@ let g:ctrlp_prompt_mappings = {
 
 
 " everything else
+let g:asyncrun_local = 1
+let g:asyncrun_open = 4
+let g:context_enabled = 0
 let g:context_highlight_tag = '<hide>'
 let g:context_max_height = 11
 let g:context_max_per_indent = 3
@@ -292,7 +299,7 @@ function s:CmdLineMappings()
 
     Alias b ls<cr>:b
     Alias git Git
-    Alias go make
+    Alias go Go
     Alias hd SignifyHunkDiff
     Alias hu SignifyHunkUndo
     Alias tabg tab<space>Git
