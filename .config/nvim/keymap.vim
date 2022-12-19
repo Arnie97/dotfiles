@@ -9,17 +9,15 @@ nnoremap & :&&<cr>
 nnoremap mm :marks<cr>
 
 " option toggles
-nnoremap -b :let &background = &background != 'light'? 'light': 'dark'
-                                \ <bar> set background? <cr>
-nnoremap -f :let &l:foldmethod = &foldmethod != 'syntax'? 'syntax': 'indent'
-                                \ <bar> set foldmethod? <cr>
-nnoremap -e :setlocal expandtab!  <bar> set expandtab?  <cr>
-nnoremap -i :setlocal ignorecase! <bar> set ignorecase? <cr>
-nnoremap -n :setlocal number!     <bar> set number?     <cr>
-nnoremap -p :setlocal paste!      <bar> set paste?      <cr>
-nnoremap -s :setlocal spell!      <bar> set spell?      <cr>
-nnoremap -t :setlocal list!       <bar> set list?       <cr>
-nnoremap -w :setlocal wrap!       <bar> set wrap?       <cr>
+nnoremap <expr> -b <sid>ToggleOption('background', 'light', 'dark')
+nnoremap <expr> -e <sid>ToggleOption('expandtab')
+nnoremap <expr> -f <sid>ToggleOption('foldmethod', 'syntax', 'indent')
+nnoremap <expr> -i <sid>ToggleOption('ignorecase')
+nnoremap <expr> -n <sid>ToggleOption('number')
+nnoremap <expr> -p <sid>ToggleOption('paste')
+nnoremap <expr> -s <sid>ToggleOption('spell')
+nnoremap <expr> -t <sid>ToggleOption('list')
+nnoremap <expr> -w <sid>ToggleOption('wrap')
 
 " remove the Windows ^M - when the line endings gets messed up
 nnoremap -m mmHmt:%s/<c-v><cr>//ge<cr>'tzt'm
@@ -226,3 +224,11 @@ cnoreabbrev  tchd  tchdir <c-r>=expand('%:p:h')<cr>/
 if exists(':command')
     command! W execute 'w !sudo tee % > /dev/null'
 endif
+
+function <sid>ToggleOption(key, ...) abort
+    let target = '!'
+    if a:0 > 1
+        let target = '='.(eval('&'.a:key) !=# a:1? a:1 : a:2)
+    endif
+    return ':setlocal '.a:key.target.' | set '.a:key."?\n"
+endfunction
