@@ -1,3 +1,4 @@
+local M = {}
 local dap = require 'dap'
 
 require 'dap.repl'.commands = vim.tbl_extend('force', dap.repl.commands, {
@@ -25,3 +26,12 @@ require 'dap.repl'.commands = vim.tbl_extend('force', dap.repl.commands, {
         ['.breakpoint'] = dap.toggle_breakpoint,
     },
 })
+
+function M.conditional_breakpoint()
+    return dap.set_breakpoint(
+        vim.fn.input('Breakpoint condition: '), nil,
+        vim.fn.input('Breakpoint log message: ')
+    )
+end
+
+return M

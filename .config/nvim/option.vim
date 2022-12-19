@@ -68,8 +68,12 @@ set ttimeoutlen=100
 
 
 " delete comment character when joining commented lines
+set formatoptions+=mB1
 if has('patch-7.3.541')
     set formatoptions+=j
+endif
+if has('patch-8.2.4907') || has('nvim-0.7.1')
+    set formatoptions+=/p
 endif
 
 
@@ -120,14 +124,18 @@ if has('autocmd')
     autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
 
     " remove trailing spaces on save
-    autocmd BufWritePre * :call s:CleanExtraSpaces()
+    let g:trim = 1
+    autocmd BufWritePre * call s:TrimWhitespace()
 
-    function s:CleanExtraSpaces()
+    function s:TrimWhitespace()
+        if !g:trim
+            return
+        endif
         let save_cursor = getpos('.')
-        let old_query = getreg('/')
+        let save_search = getreg('/')
         silent! %s/\s\+$//e
         call setpos('.', save_cursor)
-        call setreg('/', old_query)
+        call setreg('/', save_search)
     endfunction
 endif
 

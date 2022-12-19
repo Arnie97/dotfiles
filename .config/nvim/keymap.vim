@@ -26,10 +26,12 @@ nnoremap -m mmHmt:%s/<c-v><cr>//ge<cr>'tzt'm
 nnoremap -y :SignifyToggle<cr>
 nnoremap -c :SignifyHunkDiff<cr>
 nnoremap -u :SignifyHunkUndo<cr>
+nnoremap -a :let g:trim = !g:trim<bar> echo (g:trim? '  ': 'no').'trim'<cr>
 nnoremap -d :lua require 'dapui'.toggle()<cr>
 nnoremap -k :lua require 'dap'.toggle_breakpoint()<cr>
-nnoremap -/ :lua require 'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '), nil, vim.fn.input('Breakpoint log message: '))<cr>
 nnoremap -. :lua require 'dap'.continue()<cr>
+nnoremap -/ :lua require 'dap-repl'.conditional_breakpoint()<cr>
+nnoremap -- <plug>VinegarUp
 
 
 " fast jump with sneak
