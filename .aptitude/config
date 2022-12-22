@@ -6,5 +6,8 @@ aptitude::UI::Keybindings::CyclePrev "f7,;";
 aptitude::UI::Menubar-Autohide "true";
 aptitude::UI::Minibuf-Prompts "true";
 aptitude::UI::InfoAreaTabs "true";
+aptitude::UI::HelpBar "false";
+aptitude::UI::Advance-On-Action "true";
+aptitude::Clean-After-Install "true";
 APT "";
 APT::Install-Recommends "false";

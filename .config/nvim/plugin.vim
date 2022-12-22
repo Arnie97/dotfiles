@@ -8,18 +8,18 @@ if !filereadable(expand('~/.local/share/nvim/site/autoload/plug.vim'))
 endif
 
 function s:PlugCompat(...)
-    if a:0 < 2 || type(a:2) != v:t_list
+    if a:0 < 2 || type(a:2) != type([])
         return call('plug#', a:000)
     endif
 
     for rule in a:2
         let opts = {}
-        if type(rule[-1]) == v:t_dict
+        if type(rule[-1]) == type({})
             let [rule, opts] = [rule[:-2], rule[-1]]
         endif
 
         for cond in rule
-            if type(cond) == v:t_string
+            if type(cond) == type('')
                 let cond = has(cond)
             endif
             if cond
@@ -60,7 +60,7 @@ Plug 'roxma/vim-paste-easy'
 
 " motions
 Plug 'andrewradev/sideways.vim'
-Plug 'chaoren/vim-wordmotion'
+Plug 'chaoren/vim-wordmotion', [['patch-7.4.1577']]
 Plug 'inkarkat/vim-visualrepeat'
 Plug 'justinmk/vim-sneak'
 Plug 'rhysd/conflict-marker.vim'
@@ -74,7 +74,7 @@ Plug 'mbbill/undotree'
 Plug 'mhinz/vim-signify', [['nvim', 'patch-8.0.902'], [{'branch': 'legacy'}]]
 Plug 'skywind3000/asyncrun.vim'
 Plug 'wellle/context.vim'
-Plug 'yilin-yang/vim-markbar', [['nvim', 'patch-8.1.0039']]
+Plug 'yilin-yang/vim-markbar', [['nvim-0.1.6', 'patch-8.1.0039']]
 
 " command-line & insert mode
 Plug 'ryvnf/readline.vim'
@@ -93,9 +93,8 @@ endif
 
 " language servers
 if has('lambda') && has('timers') && exists('*json_encode')
-    autocmd VimEnter * call
-        \ asyncomplete#sources#neosnippet#get_source_options({})
-        \ ->asyncomplete#register_source()
+    autocmd VimEnter * call asyncomplete#register_source(
+        \ asyncomplete#sources#neosnippet#get_source_options({}))
     Plug 'mattn/vim-lsp-settings'
     Plug 'prabirshrestha/vim-lsp'
     Plug 'prabirshrestha/asyncomplete.vim'
@@ -127,20 +126,23 @@ endif
 " file types
 Plug 'ap/vim-css-color'
 Plug 'arnie97/exakt.vim'
-Plug 'arnie97/go-cmd.vim'
+Plug 'arnie97/go-cmd.vim', [[executable('go')]]
 Plug 'arnie97/rainbow.vim'
 Plug 'cespare/vim-toml', [[!has('nvim-0.6') && !has('patch-8.2.3519')]]
 Plug 'chr4/nginx.vim'
+Plug 'cmcaine/vim-uci', [[executable('uci')]]
 Plug 'ludovicchabant/vim-gutentags', [[executable('ctags')]]
 Plug 'mattn/emmet-vim'
 Plug 'neovimhaskell/haskell-vim', [[executable('ghc')]]
 Plug 'plasticboy/vim-markdown'
 Plug 'rust-lang/rust.vim', [[executable('rustc')]]
 Plug 'solarnz/thrift.vim', [[executable('thrift')]]
+Plug 'wfxr/protobuf.vim', [[executable('protoc')]]
 
 " color schemes
 Plug 'arnie97/peaksea.vim', {'rtp': 'vim'}
 Plug 'chriskempson/vim-tomorrow-theme'
+Plug 'mswift42/vim-themes'
 Plug 'rafi/awesome-vim-colorschemes'
 Plug 'tyrannicaltoucan/vim-quantum'
 
@@ -248,7 +250,7 @@ let g:hugefile_trigger_size = 0.5
 let g:lsp_diagnostics_float_cursor = 1
 let g:lsp_diagnostics_virtual_text_enabled = 0
 let g:markbar_num_lines_context = 3
-let g:markbar_persist_mark_names = v:false
+let g:markbar_persist_mark_names = exists('v:false')? eval('v:false'): 0
 let g:markbar_peekaboo_marks_to_display = '''"[]^.abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
 let g:neosnippet#enable_snipmate_compatibility = 1
 
@@ -261,8 +263,6 @@ let g:netrw_winsize = 30
 let g:pear_tree_smart_openers = 1
 let g:pear_tree_smart_closers = 1
 let g:pear_tree_smart_backspace = 1
-let g:quantum_black = 1
-let g:quantum_italics = 1
 
 autocmd FileType arduino,awk,c,clojure,cpp,cs,d,dart,dts,go,java,javascript,json,kotlin,lisp,objc,objcpp,perl,php,ps1,r,racket,rust,scala,scheme,swift,thrift,typescript RainbowParentheses
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}', 'fold']]

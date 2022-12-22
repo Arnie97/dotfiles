@@ -1,6 +1,3 @@
-vim.opt.foldmethod = 'expr'
-vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
-
 require 'nvim-treesitter.configs'.setup {
   ensure_installed = maintained,
   sync_install = false,
@@ -21,6 +18,19 @@ require 'nvim-treesitter.configs'.setup {
     },
   },
 }
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = {'*'},
+  callback = function()
+    local lang = require 'nvim-treesitter.parsers'.get_buf_lang()
+    local installed = require 'nvim-treesitter.info'.installed_parsers()
+    if vim.tbl_contains(installed, lang) then
+      -- https://github.com/lewis6991/satellite.nvim/pull/2
+      vim.fn.setwinvar(0, '&foldmethod', 'expr')
+      vim.fn.setwinvar(0, '&foldexpr', 'nvim_treesitter#foldexpr()')
+    end
+  end
+})
 
 local found, context = pcall(require, 'treesitter-context')
 if not found then

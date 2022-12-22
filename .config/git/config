@@ -135,7 +135,7 @@
 [tag]
 	sort = version:refname
 [url "git@github.com:"]
-	insteadOf = https://github.com
+	insteadOf = https://github.com/
 [user]
 	email = arnie97@gmail.com
 	name = Arnie97

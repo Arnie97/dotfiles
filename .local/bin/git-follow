@@ -3,7 +3,7 @@
 if [ -e "$1" ]; then
     export GIT_COMMITTER_DATE="$(date -Rr "$1")"
 elif git rev-parse -q --verify "$1^{commit}"; then
-    export GIT_COMMITTER_DATE="$(git diff-tree --no-patch --format='%aD' "$1")"
+    export GIT_COMMITTER_DATE="$(git show --format='%aD' "$1")"
 else
     export GIT_COMMITTER_DATE="$1"
 fi
