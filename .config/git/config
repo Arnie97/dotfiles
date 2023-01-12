@@ -65,6 +65,7 @@
 	su = submodule
 	sw = switch
 	tf = tag --force
+	tr = track
 	us = update-server-info
 	wt = worktree
 [blame]

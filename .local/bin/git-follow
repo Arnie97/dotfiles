@@ -2,7 +2,7 @@
 
 if [ -e "$1" ]; then
     export GIT_COMMITTER_DATE="$(date -Rr "$1")"
-elif git rev-parse -q --verify "$1^{commit}"; then
+elif git rev-parse --verify --quiet "$1^{commit}"; then
     export GIT_COMMITTER_DATE="$(git show --format='%aD' "$1")"
 else
     export GIT_COMMITTER_DATE="$1"

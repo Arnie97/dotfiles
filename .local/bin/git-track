@@ -1,0 +1,11 @@
+#!/bin/sh
+
+branch=$(git rev-parse --abbrev-ref HEAD)
+
+case "$1" in
+    */) upstream="$1$branch";;
+    *?) upstream="$1";;
+    **) upstream="origin/$branch";;
+esac
+
+git branch --set-upstream-to "$upstream"

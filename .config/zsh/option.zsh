@@ -91,6 +91,14 @@ setopt CORRECT
 # GNU Readline behavior
 bindkey '^u' backward-kill-line
 
+# Prefix search
+for direction in Up Down; do
+    widget=${(L)direction}-line-or-beginning-search
+    autoload -U $widget
+    zle -N $widget
+    bindkey "$key[$direction]" $widget
+done
+
 # Molly-guard, use ^p^m instead
 disable r
 
