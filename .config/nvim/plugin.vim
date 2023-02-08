@@ -4,6 +4,8 @@
 ""exit # the magic polyglot is valid in both shell and vim
 
 if !filereadable(expand('~/.local/share/nvim/site/autoload/plug.vim'))
+    filetype plugin indent on
+    syntax on
     finish
 endif
 
@@ -124,6 +126,7 @@ if has('nvim-0.5')
 endif
 
 " file types
+Plug 'alderz/smali-vim', [[executable('apktool')]]
 Plug 'ap/vim-css-color'
 Plug 'arnie97/exakt.vim'
 Plug 'arnie97/go-cmd.vim', [[executable('go')]]
@@ -246,6 +249,7 @@ let g:gutentags_cache_dir = $HOME . '/.local/share/nvim/tag'
 let g:gutentags_define_advanced_commands = 1
 let g:gutentags_project_root = ['.gutentags']
 
+let g:hexmode_xxd_options = '-c 16 -g 2'
 let g:hugefile_trigger_size = 0.5
 let g:lsp_diagnostics_float_cursor = 1
 let g:lsp_diagnostics_virtual_text_enabled = 0
