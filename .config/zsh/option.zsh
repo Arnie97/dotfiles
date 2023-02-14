@@ -88,6 +88,39 @@ setopt INTERACTIVE_COMMENTS
 # Prompt for spelling correction of commands.
 setopt CORRECT
 
+# Beep on errors.
+setopt BEEP
+
+# Use zkbd key codes if present, otherwise fallback on terminfo.
+zkbd="$ZDOTDIR/.zkbd/$TERM-${${DISPLAY:t}:-$VENDOR-$OSTYPE}"
+
+if [[ ${(t)key} == association ]]; then
+    # already loaded in /etc/zshrc
+elif [[ -r "$zkbd" ]]; then
+    source "$zkbd"
+else
+    typeset -A key
+    key=(
+        BackSpace kbs
+        Home      khome
+        End       kend
+        Insert    kich1
+        Delete    kdch1
+        Up        kcuu1
+        Down      kcud1
+        Left      kcub1
+        Right     kcuf1
+        PageUp    kpp
+        PageDown  knp
+    )
+    for k v in "${(@kv)key}"; do
+        key[k]="$terminfo[$v]"
+    done
+    for k in {1..20}; do
+        key[F$k]="$terminfo[kf$k]"
+    done
+fi
+
 # GNU Readline behavior
 bindkey '^u' backward-kill-line
 
