@@ -105,6 +105,9 @@ set encoding=utf-8
 set fileencodings=ucs-bom,utf-8,default,gb18030,big5,shift-jis,latin1
 set langmenu=en
 set spelllang=en,cjk
+if exists('+spelloptions')
+    set spelloptions=camel
+endif
 
 " set LF as the default line ending
 set fileformats=unix,dos,mac
@@ -149,4 +152,4 @@ set cmdheight=1
 set history=1000
 
 set laststatus=2
-set statusline=%f\ %h%w%m%r\ %=%(%l,%c%V\ %=\ %P%)
+set statusline=\ %t\ %h%w%m%r\ %<%=%{&ff}\ %{&fenc}\ %{&ft}\ \ %(%l,%c%V\ \ %P\ %)
