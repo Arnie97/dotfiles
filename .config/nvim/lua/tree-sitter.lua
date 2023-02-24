@@ -28,6 +28,7 @@ vim.api.nvim_create_autocmd('FileType', {
       -- https://github.com/lewis6991/satellite.nvim/pull/2
       vim.fn.setwinvar(0, '&foldmethod', 'expr')
       vim.fn.setwinvar(0, '&foldexpr', 'nvim_treesitter#foldexpr()')
+      vim.cmd('ContextDisableWindow')
     end
   end
 })

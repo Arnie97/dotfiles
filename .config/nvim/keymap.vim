@@ -40,8 +40,8 @@ if exists('g:plugs') && has_key(g:plugs, 'vim-sneak')
     nmap F  <plug>Sneak_F
     nmap t  <plug>Sneak_t
     nmap T  <plug>Sneak_T
-    nmap gz <plug>Sneak_s
-    nmap gZ <plug>Sneak_S
+    nmap zz <plug>Sneak_s
+    nmap zZ <plug>Sneak_S
     omap f  <plug>Sneak_f
     omap F  <plug>Sneak_F
     omap t  <plug>Sneak_t
@@ -88,6 +88,14 @@ nnoremap gb :Git blame<cr><c-w>12<<cr>
 if has('autocmd')
     autocmd FileType qf nnoremap <buffer> -o :cclose<cr>
     autocmd FileType qf nnoremap <buffer> -l :lclose<cr>
+endif
+
+if exists('g:plugs') && has_key(g:plugs, 'vim-wordmotion')
+    let g:wordmotion_prefix = ']'
+    map [w ]b
+    map [e ]ge
+    map [b ]b
+    map [ge ]ge
 endif
 
 if exists('g:plugs') && has_key(g:plugs, 'vim-lsp')

@@ -239,7 +239,7 @@ let g:ctrlp_prompt_mappings = {
 " everything else
 let g:asyncrun_local = 1
 let g:asyncrun_open = 4
-let g:context_enabled = 0
+let g:context_add_mappings = 0
 let g:context_highlight_tag = '<hide>'
 let g:context_max_height = 11
 let g:context_max_per_indent = 3
@@ -253,7 +253,7 @@ let g:hexmode_xxd_options = '-c 16 -g 2'
 let g:hugefile_trigger_size = 0.5
 let g:lsp_diagnostics_float_cursor = 1
 let g:lsp_diagnostics_virtual_text_enabled = 0
-let g:markbar_num_lines_context = 3
+let g:markbar_num_lines_context = 1
 let g:markbar_persist_mark_names = exists('v:false')? eval('v:false'): 0
 let g:markbar_peekaboo_marks_to_display = '''"[]^.abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
 let g:neosnippet#enable_snipmate_compatibility = 1
