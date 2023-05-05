@@ -1,0 +1,12 @@
+#!/bin/sh
+
+conflicts=$(git diff --cached --compact-summary --color -G'^[<=>]{7}')
+
+if [ -n "$conflicts" ]; then
+	echo "Commit aborted due to unsolved merge conflicts:"
+	for conflict in "$conflicts"; do
+		echo "$conflict"
+	done
+	echo "To suppress this check, use git commit -n (i.e. --no-verify)"
+	exit 1
+fi

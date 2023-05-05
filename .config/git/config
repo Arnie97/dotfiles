@@ -21,15 +21,16 @@
 	cr = create
 	de = tell
 	di = diff
-	ds = diff --stat
+	ds = diff --compact-summary
 	dn = diff --no-index
 	dt = difftool
 	dw = diff --word-diff
+	ex = "!exec "
 	fb = filter-branch
 	fe = fetch
 	fp = format-patch
 	gg = log --graph --date='format:%y-%m-%d' --pretty=custom
-	gl = log --graph --date='format:%y-%m-%d' --pretty=custom --all
+	gl = gg --all
 	gr = grep
 	ig = ignore
 	lg = log --stat --summary --pretty=fuller
@@ -42,13 +43,12 @@
 	pl = pull --ff-only
 	pr = pull --rebase
 	pu = push
-	pv = !TZ=UTC git show --quiet --pretty='v0.0.0-%cd-%h' --date='format:%Y%m%d%H%M%S' --abbrev=12
 	rb = rebase
 	rd = range-diff
 	re = reset
 	rh = reset --hard
 	rs = reset --soft
-	rf = reflog
+	rf = reflog --date=iso
 	ri = rebase --interactive
 	rm = rm --cached
 	ro = remote
@@ -75,6 +75,7 @@
 [core]
 	abbrev = 7
 	autoCRLF = false
+	hooksPath = ~/.config/git/hooks
 	quotePath = false
 	sparseCheckout = true
 [diff]
@@ -133,6 +134,8 @@
 [rerere]
 	autoUpdate = true
 	enabled = true
+[status]
+	showStash = true
 [tag]
 	sort = version:refname
 [url "git@github.com:"]

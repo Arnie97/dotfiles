@@ -133,7 +133,8 @@ Plug 'arnie97/go-cmd.vim', [[executable('go')]]
 Plug 'arnie97/rainbow.vim'
 Plug 'cespare/vim-toml', [[!has('nvim-0.6') && !has('patch-8.2.3519')]]
 Plug 'chr4/nginx.vim'
-Plug 'cmcaine/vim-uci', [[executable('uci')]]
+Plug 'cmcaine/vim-uci'
+Plug 'leafoftree/vim-vue-plugin'
 Plug 'ludovicchabant/vim-gutentags', [[executable('ctags')]]
 Plug 'mattn/emmet-vim'
 Plug 'neovimhaskell/haskell-vim', [[executable('ghc')]]
@@ -208,7 +209,7 @@ endfunction
 
 " ctrlp
 let g:ctrlp_types = ['fil', 'buf', 'mru']
-let g:ctrlp_extensions = ['funky', 'modified', 'tag']
+let g:ctrlp_extensions = ['tag', 'modified', 'funky']
 let g:ctrlp_arg_map = 1
 let g:ctrlp_cache_dir = $HOME . '/.local/share/nvim/ctrlp'
 let g:ctrlp_clear_cache_on_exit = 0
