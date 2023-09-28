@@ -56,7 +56,8 @@
 	rq = pull-request
 	rr = rerere
 	rt = rebase --committer-date-is-author-date
-	rv = !git push origin HEAD:refs/for/${1:-$(git rev-parse --abbrev-ref HEAD)}%${2}
+	rv = revert
+	rw = !git push origin HEAD:refs/for/${1:-$(git rev-parse --abbrev-ref HEAD)}%${2}
 	sc = sparse-checkout
 	sh = show
 	sl = status --long --show-stash
@@ -125,10 +126,10 @@
 [protocol]
 	version = 2
 [push]
-	default = matching
+	default = upstream
 [rebase]
 	autoStash = true
-	instructionFormat = [%aN] %s (%cr)% d
+	instructionFormat = %as [%aN] %s (%cr)% d
 [receive]
 	denyCurrentBranch = warn
 [rerere]

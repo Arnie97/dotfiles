@@ -95,7 +95,7 @@ endif
 
 " language servers
 if has('lambda') && has('timers') && exists('*json_encode')
-    autocmd VimEnter * call asyncomplete#register_source(
+    autocmd User asyncomplete_setup call asyncomplete#register_source(
         \ asyncomplete#sources#neosnippet#get_source_options({}))
     Plug 'mattn/vim-lsp-settings'
     Plug 'prabirshrestha/vim-lsp'
@@ -137,6 +137,7 @@ Plug 'cmcaine/vim-uci'
 Plug 'leafoftree/vim-vue-plugin'
 Plug 'ludovicchabant/vim-gutentags', [[executable('ctags')]]
 Plug 'mattn/emmet-vim'
+Plug 'm-pilia/vim-mediawiki'
 Plug 'neovimhaskell/haskell-vim', [[executable('ghc')]]
 Plug 'plasticboy/vim-markdown'
 Plug 'rust-lang/rust.vim', [[executable('rustc')]]
@@ -208,8 +209,8 @@ endfunction
 
 
 " ctrlp
-let g:ctrlp_types = ['fil', 'buf', 'mru']
-let g:ctrlp_extensions = ['tag', 'modified', 'funky']
+let g:ctrlp_types = ['buf', 'mru', 'fil']
+let g:ctrlp_extensions = ['funky', 'tag', 'modified']
 let g:ctrlp_arg_map = 1
 let g:ctrlp_cache_dir = $HOME . '/.local/share/nvim/ctrlp'
 let g:ctrlp_clear_cache_on_exit = 0
@@ -221,7 +222,7 @@ let g:ctrlp_match_func = !exists('*matchfuzzy')? {}: {
 \ }
 let g:ctrlp_max_depth = 10
 let g:ctrlp_mruf_default_order = 1
-let g:ctrlp_mruf_exclude = '\v(<|_)(temp|tmp)(_|>)|/(dev/shm|var/folders|node_modules|vendor|pkg/mod|rustlib|\.cargo/registry|\.git|\.svn|\.hg|\.bzr)/|_(BASE|LOCAL|REMOTE)_\d+|\.(orig|bak|swp)$|\.#override.conf'
+let g:ctrlp_mruf_exclude = '\v(<|_)(temp|tmp)(_|>)|/(dev/shm|var/folders|nix/store|node_modules|vendor|pkg/mod|rustlib|\.cargo/registry|\.git|\.svn|\.hg|\.bzr)/|_(BASE|LOCAL|REMOTE)_\d+|\.(orig|bak|swp)$|\.#override.conf'
 let g:ctrlp_mruf_max = 2000
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_tjump_shortener = [expand('~'), '~']

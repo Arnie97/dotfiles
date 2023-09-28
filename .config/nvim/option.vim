@@ -6,6 +6,7 @@ set nocompatible
 set number
 set nowrap
 set cursorline
+set ruler
 set scrolloff=2
 set sidescrolloff=5
 set mouse=nv

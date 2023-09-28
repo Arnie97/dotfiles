@@ -201,7 +201,7 @@ if exists('g:plugs') && has_key(g:plugs, 'neosnippet')
     let g:user_emmet_leader_key = ';'
     let g:user_emmet_mode = 'i'
 
-    autocmd FileType html,xhtml,xml,css,sass,scss,javascript,javascriptreact,typescript,typescriptreact,vue,eex,php,asp,jsp,smarty EmmetInstall
+    autocmd FileType html,xhtml,xml,css,sass,scss,javascript,javascriptreact,typescript,typescriptreact,mediawiki,vue,eex,php,asp,jsp,smarty EmmetInstall
 endif
 
 

@@ -15,7 +15,7 @@ endif
 if has('termguicolors')
     autocmd ColorScheme * set notermguicolors
     autocmd ColorScheme anderson,atom,ayu,base16-*,carbon*,*deep*,flat*,gotham*,*material*,mountaineer*,*-moon,nord*,pyte,quantum,rakr,two-* set termguicolors
-    autocmd ColorScheme Greymatters,Oldlace,*day,*-night,bergen,breezy-fall,darktooth,light-kiss,madrid,metalheart,munich,reykjavik,silkworm,soft-*,white-sand
+    autocmd ColorScheme Greymatters,Oldlace,*day,bergen,breezy-fall,darktooth,fog*,light-kiss,madrid,metalheart,munich,reykjavik,silkworm,soft-*,warm-night,white-sand
         \ set termguicolors
         \ | highlight! link CursorLineNr LineNr
         \ | highlight! link FoldColumn LineNr
