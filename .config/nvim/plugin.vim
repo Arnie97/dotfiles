@@ -62,15 +62,16 @@ Plug 'roxma/vim-paste-easy'
 
 " motions
 Plug 'andrewradev/sideways.vim'
+Plug 'arnie97/slash.vim'
 Plug 'chaoren/vim-wordmotion', [['patch-7.4.1577']]
 Plug 'inkarkat/vim-visualrepeat'
 Plug 'justinmk/vim-sneak'
 Plug 'rhysd/conflict-marker.vim'
-Plug 'thalesmello/vim-slasher'
 
 " panels
 Plug 'chrisbra/unicode.vim'
 Plug 'itchyny/lightline.vim'
+Plug 'itchyny/vim-qfedit'
 Plug 'junegunn/vim-peekaboo'
 Plug 'mbbill/undotree'
 Plug 'mhinz/vim-signify', [['nvim', 'patch-8.0.902'], [{'branch': 'legacy'}]]

@@ -12,7 +12,6 @@ alias -- -='cd -'
 alias c='cargo'
 alias d='docker'
 alias g='git'
-alias y='rlwrap yaegi'
 alias axel='axel -a'
 alias ag='ag --pager=less'
 alias lb='lsblk -So+SERIAL && echo && lsblk -o NAME,FSTYPE,SIZE,FSAVAIL,LABEL,MOUNTPOINT'
@@ -25,7 +24,9 @@ alias rd='rmdir'
 alias pd='pushd'
 
 # coreutils
-if ls --version > /dev/null 2>&1; then
+if [ -x "$(command -v gls)" ]; then
+    alias ls='gls -F --color'
+elif ls --version > /dev/null 2>&1; then
     alias ls='ls -F --color --show-control-chars'
 fi
 
@@ -42,6 +43,12 @@ if [ -x "$(command -v hub)" ]; then
     alias git='hub'
 fi
 
+if [ -x "$(command -v nvim)" ]; then
+    alias vi='nvim'
+elif [ -x "$(command -v vim)" ]; then
+    alias vi='vim'
+fi
+
 if [ -x "$(command -v cygpath)" ]; then
     alias pdd='pushd "$(cygpath --desktop)"'
     alias sudo='elevate -wait4idle'
@@ -51,6 +58,12 @@ elif [ -x "$(command -v xdg-user-dir)" ]; then
 else
     alias pdd='pushd "$HOME/Desktop"'
     alias sudo='sudo -E'
+fi
+
+if [ -x "$(command -v rlwrap)" ]; then
+    for cmd in dash luajit scheme-r5rs scheme48 yaegi; do
+        alias $cmd="rlwrap $cmd"
+    done
 fi
 
 ccd() {
