@@ -76,6 +76,7 @@
 [core]
 	abbrev = 7
 	autoCRLF = false
+	editor = nvim
 	hooksPath = ~/.config/git/hooks
 	quotePath = false
 	sparseCheckout = true
@@ -114,13 +115,13 @@
 	follow = true
 	mailmap = true
 [mailmap]
-	file = ~/.mailmap
+	file = ~/.config/git/mailmap
 [merge]
 	directoryRenames = true
 	guiTool = bc
 	tool = vimdiff
 [mergetool "vimdiff"]
-	cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+	path = nvim
 [pretty]
 	custom = %C(red bold)%h%C(reset) %C(cyan)%cd%C(yellow bold)%d%C(reset) %s %C(cyan)(%C(green)%aN, %C(cyan)%cr)%C(reset)
 [protocol]

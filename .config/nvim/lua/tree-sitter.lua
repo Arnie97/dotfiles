@@ -5,9 +5,6 @@ require 'nvim-treesitter.configs'.setup {
   highlight = {
     enable = true,
   },
-  rainbow = {
-    enable = true,
-  },
   incremental_selection = {
     enable = true,
     keymaps = {
@@ -60,4 +57,22 @@ context.setup {
       'enum',
     },
   }
+}
+
+local found, rainbow = pcall(require, 'rainbow-delimiters.setup')
+if not found then
+  return
+end
+
+rainbow.setup {
+  highlight = {
+    'Keyword',
+    'Identifier',
+    'Number',
+    'PreProc',
+    'Type',
+    'Tag',
+    'String',
+    'Special',
+  },
 }

@@ -118,12 +118,17 @@ if has('nvim-0.5')
         \ ['nvim-0.6'],
         \ ['nvim-0.5', {'tag': 'v0.27.1'}]]
     Plug 'nvim-treesitter/nvim-treesitter', [
+        \ ['nvim-0.9', {'tag': 'v0.9.1'}],
         \ ['nvim-0.8', {'tag': 'v0.8.1'}],
         \ ['nvim-0.7', {'tag': 'v0.7.2'}],
         \ ['nvim-0.6', {'commit': '6a437db'}],
         \ ['nvim-0.5', {'branch': '0.5-compat'}]]
-    Plug 'nvim-treesitter/nvim-treesitter-context', [['nvim-0.7']]
-    Plug 'p00f/nvim-ts-rainbow'
+    Plug 'nvim-treesitter/nvim-treesitter-context', [
+        \ ['nvim-0.9'],
+        \ ['nvim-0.7', {'tag': 'compat/0.7'}],
+        \ ['nvim-0.6', {'commit': '4938cda'}],
+        \ ['nvim-0.5', {'commit': '7ad8f59'}]]
+    Plug 'hiphish/rainbow-delimiters.nvim', [['nvim-0.9']]
 endif
 
 " file types
@@ -135,6 +140,7 @@ Plug 'arnie97/rainbow.vim'
 Plug 'cespare/vim-toml', [[!has('nvim-0.6') && !has('patch-8.2.3519')]]
 Plug 'chr4/nginx.vim'
 Plug 'cmcaine/vim-uci'
+Plug 'dylon/vim-antlr'
 Plug 'leafoftree/vim-vue-plugin'
 Plug 'ludovicchabant/vim-gutentags', [[executable('ctags')]]
 Plug 'mattn/emmet-vim'
@@ -151,6 +157,7 @@ Plug 'chriskempson/vim-tomorrow-theme'
 Plug 'mswift42/vim-themes'
 Plug 'rafi/awesome-vim-colorschemes'
 Plug 'tyrannicaltoucan/vim-quantum'
+Plug 'vimpostor/vim-lumen', [['patch-8.1.1809']]
 
 call plug#end()
 

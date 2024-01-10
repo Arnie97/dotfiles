@@ -40,6 +40,8 @@ if exists('g:plugs') && has_key(g:plugs, 'vim-sneak')
     nmap F  <plug>Sneak_F
     nmap t  <plug>Sneak_t
     nmap T  <plug>Sneak_T
+    nmap gz <plug>Sneak_s
+    nmap gZ <plug>Sneak_S
     nmap zz <plug>Sneak_s
     nmap zZ <plug>Sneak_S
     omap f  <plug>Sneak_f
