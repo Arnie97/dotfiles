@@ -1,6 +1,5 @@
 " fallback for unknown file types
 autocmd BufNewFile,BufRead /etc/wireguard/*.conf* setfiletype cfg
-autocmd BufNewFile,BufRead */systemd/* setfiletype cfg
 autocmd BufNewFile,BufRead *.ksy setfiletype yaml
 
 autocmd FileType python,ruby,lua,basic,vb,vim,lisp,clojure,scheme,racket,haskell,yaml,html,xhtml,xml,vue,eex,php,asp,jsp,smarty

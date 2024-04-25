@@ -1,37 +1,39 @@
 " swap keys
-noremap 0 ^
-noremap ^ 0
 noremap x "-x
+noremap X "-X
 noremap Y y$
 noremap <space> :
 map <bslash> "
 nnoremap & :&&<cr>
-nnoremap mm :marks<cr>
+noremap <silent> <expr> 0 getline('.')[:col('.') - 2] =~ '^\s\+$'? '0': '^'
+
+" remove the Windows ^M when the line endings gets messed up
+nnoremap dm mmHmt:%s/<c-v><cr>//ge<cr>'tzt'm
+nnoremap dc :SignifyHunkUndo<cr>
 
 " option toggles
-nnoremap -b :let &background = &background != 'light'? 'light': 'dark'
-                                \ <bar> set background? <cr>
-nnoremap -f :let &l:foldmethod = &foldmethod != 'syntax'? 'syntax': 'indent'
-                                \ <bar> set foldmethod? <cr>
+nnoremap -b :SetCycle background  light dark            <cr>
 nnoremap -e :setlocal expandtab!  <bar> set expandtab?  <cr>
+nnoremap -f :SetCycle fileformat  dos unix mac          <cr>
 nnoremap -i :setlocal ignorecase! <bar> set ignorecase? <cr>
 nnoremap -n :setlocal number!     <bar> set number?     <cr>
 nnoremap -p :setlocal paste!      <bar> set paste?      <cr>
+nnoremap -r :setlocal autoread!   <bar> set autoread?   <cr>
 nnoremap -s :setlocal spell!      <bar> set spell?      <cr>
 nnoremap -t :setlocal list!       <bar> set list?       <cr>
 nnoremap -w :setlocal wrap!       <bar> set wrap?       <cr>
+nnoremap -z :SetCycle foldmethod  indent expr marker syntax<cr>
 
-" remove the Windows ^M - when the line endings gets messed up
-nnoremap -m mmHmt:%s/<c-v><cr>//ge<cr>'tzt'm
 nnoremap -y :SignifyToggle<cr>
 nnoremap -c :SignifyHunkDiff<cr>
-nnoremap -u :SignifyHunkUndo<cr>
+nnoremap -m :marks<cr>
 nnoremap -a :let g:trim = !g:trim<bar> echo (g:trim? '  ': 'no').'trim'<cr>
 nnoremap -d :lua require 'dapui'.toggle()<cr>
 nnoremap -k :lua require 'dap'.toggle_breakpoint()<cr>
 nnoremap -. :lua require 'dap'.continue()<cr>
-nnoremap -/ :lua require 'dap-repl'.conditional_breakpoint()<cr>
-nnoremap -- <plug>VinegarUp
+nnoremap -, :lua require 'dap-repl'.conditional_breakpoint()<cr>
+nnoremap -/ <plug>VinegarUp
+nnoremap -- :options<cr>
 
 
 " fast jump with sneak
@@ -60,10 +62,10 @@ endif
 " jump to conflict markers
 if exists('g:plugs') && has_key(g:plugs, 'conflict-marker.vim')
     let g:conflict_marker_enable_mappings = 0
-    map gxt <plug>(conflict-marker-themselves)
-    map gxo <plug>(conflict-marker-ourselves)
-    map gxn <plug>(conflict-marker-none)
-    map gxb <plug>(conflict-marker-both)
+    nmap cxt <plug>(conflict-marker-themselves)
+    nmap cxo <plug>(conflict-marker-ourselves)
+    nmap cxn <plug>(conflict-marker-none)
+    nmap cxb <plug>(conflict-marker-both)
 
     map [x <plug>(conflict-marker-prev-hunk)
     map ]x <plug>(conflict-marker-next-hunk)
@@ -71,8 +73,6 @@ endif
 
 
 " cycle between buffers, quickfix list and location list
-nnoremap [n :bprev<cr>
-nnoremap ]n :bnext<cr>
 nnoremap [o :cprev<cr>
 onoremap [o :cprev<cr>
 nnoremap ]o :cnext<cr>
@@ -102,19 +102,20 @@ endif
 
 if exists('g:plugs') && has_key(g:plugs, 'vim-lsp')
     function s:enableLspMapping() abort
+        nmap <buffer> gO <plug>(lsp-document-symbol)
         nmap <buffer> gd <plug>(lsp-definition)
         nmap <buffer> [u <plug>(lsp-references)
         nmap <buffer> ]u <plug>(lsp-references)
-        nmap <buffer> [a <plug>(lsp-implementation)
-        nmap <buffer> ]a <plug>(lsp-implementation)
+        nmap <buffer> [n <plug>(lsp-implementation)
+        nmap <buffer> ]n <plug>(lsp-implementation)
         nmap <buffer> gy <plug>(lsp-type-definition)
         nmap <buffer> [y <plug>(lsp-peek-type-definition)
         nmap <buffer> ]y <plug>(lsp-peek-type-definition)
-        nmap <buffer> gr <plug>(lsp-rename)
         nmap <buffer> [g <plug>(lsp-previous-diagnostic)
         nmap <buffer> ]g <plug>(lsp-next-diagnostic)
         nmap <buffer> -g <plug>(lsp-document-diagnostics)
         nmap <buffer> K  <plug>(lsp-hover)
+        nmap <buffer> crr <plug>(lsp-rename)
 
         if exists('+tagfunc')
             setlocal tagfunc=lsp#tagfunc
@@ -243,4 +244,11 @@ cnoreabbrev  tchd  tchdir <c-r>=expand('%:p:h')<cr>/
 " :W sudo saves the file
 if exists(':command')
     command! W execute 'w !sudo tee % > /dev/null'
+    command! -nargs=+ SetCycle call s:SetCycle(<f-args>)
+
+    function! s:SetCycle(option, ...) abort
+        let changed = a:000[index(a:000, eval('&l:' . a:option)) - 1]
+        execute 'setlocal ' . a:option . '=' . changed
+        execute 'setlocal ' . a:option . '?'
+    endfunction
 endif

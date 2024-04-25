@@ -115,7 +115,7 @@ if has('nvim-0.5')
     Plug 'mfussenegger/nvim-dap'
     Plug 'leoluz/nvim-dap-go'
     Plug 'rcarriga/nvim-dap-ui', [
-        \ ['nvim-0.6'],
+        \ ['nvim-0.6', {'tag': 'v3.9.3'}],
         \ ['nvim-0.5', {'tag': 'v0.27.1'}]]
     Plug 'nvim-treesitter/nvim-treesitter', [
         \ ['nvim-0.9', {'tag': 'v0.9.1'}],
@@ -263,8 +263,10 @@ let g:hexmode_xxd_options = '-c 16 -g 2'
 let g:hugefile_trigger_size = 0.5
 let g:lsp_diagnostics_float_cursor = 1
 let g:lsp_diagnostics_virtual_text_enabled = 0
+let g:markbar_bool_false = exists('v:false')? eval('v:false'): 0
+let g:markbar_cache_with_hidden_buffers = g:markbar_bool_false
 let g:markbar_num_lines_context = 1
-let g:markbar_persist_mark_names = exists('v:false')? eval('v:false'): 0
+let g:markbar_persist_mark_names = g:markbar_bool_false
 let g:markbar_peekaboo_marks_to_display = '''"[]^.abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
 let g:neosnippet#enable_snipmate_compatibility = 1
 
@@ -272,6 +274,7 @@ let g:netrw_altfile = 1
 let g:netrw_banner = 0
 let g:netrw_browse_split = 4
 let g:netrw_liststyle = 3
+let g:netrw_nogx = 1
 let g:netrw_winsize = 30
 
 let g:pear_tree_smart_openers = 1
@@ -280,7 +283,7 @@ let g:pear_tree_smart_backspace = 1
 
 autocmd FileType arduino,awk,c,clojure,cpp,cs,d,dart,dts,go,java,javascript,json,kotlin,lisp,objc,objcpp,perl,php,ps1,r,racket,rust,scala,scheme,swift,thrift,typescript RainbowParentheses
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}', 'fold']]
-let g:rooter_patterns = ['!/pkg/mod/', '.git', '.svn', '.hg', '.bzr']
+let g:rooter_patterns = ['!/pkg/mod/', '.git', '.svn', '.hg', '.bzr', 'go.mod', 'package.json']
 let g:rustfmt_autosave = 1
 let g:signify_sign_change = '&'
 
@@ -306,7 +309,7 @@ function s:CmdLineMappings()
     endif
 
     if !exists(':Ack')
-        Alias ag grep
+        Alias ag grep<space>-r<space><cword>
     else
         Alias ag Ack
     endif
