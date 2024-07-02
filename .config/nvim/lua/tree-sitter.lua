@@ -16,6 +16,10 @@ require 'nvim-treesitter.configs'.setup {
   },
 }
 
+if not vim.api.nvim_create_autocmd then
+  return
+end
+
 vim.api.nvim_create_autocmd('FileType', {
   pattern = {'*'},
   callback = function()

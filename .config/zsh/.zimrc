@@ -1,3 +1,10 @@
+# Skip unavailable external modules
+xmodule() {
+    if [ -d "$1" ]; then
+        zmodule "$@" --fpath site-functions
+    fi
+}
+
 # Applies correct bindkeys for input events.
 zmodule input
 
@@ -9,6 +16,15 @@ zmodule utility
 
 # Exposes git repository status information to prompts, used by asciiship.
 zmodule git-info
+
+# Nix completions
+xmodule /nix/var/nix/profiles/default/share/zsh --name nix
+
+# Nix profile completions
+xmodule ~/.nix-profile/share/zsh --name nix-profile
+
+# CMake, Go, Maven, and Yarn completions
+zmodule zsh-users/zsh-completions
 
 # Enables and configures smart and extensive tab completion.
 # completion must be sourced after zsh-users/zsh-completions
@@ -23,3 +39,5 @@ zmodule agkozak/zsh-z
 
 # Cross-platform clipboard wrapper
 zmodule zpm-zsh/clipboard
+
+# vi: set ft=zsh et ts=4:

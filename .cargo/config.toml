@@ -2,7 +2,10 @@
 git-fetch-with-cli = true
 
 [source.crates-io]
-replace-with = "tuna"
+replace-with = "rsproxy"
+
+[source.rsproxy]
+registry = "sparse+https://rsproxy.cn/index/"
 
 [source.tuna]
 registry = "https://mirrors.bfsu.edu.cn/git/crates.io-index.git"

@@ -1,13 +1,13 @@
 [alias]
 	aa = add --all
 	au = add --update
-	bi = bisect
-	bs = bisect
 	bl = blame
 	br = branch
+	bs = bisect
 	bw = browse
 	cf = config --edit --global
 	ch = checkout
+	ci = ci-status -v
 	cl = clone --recursive
 	cn = clone --single-branch --no-checkout --filter=blob:none
 	cm = commit --amend
@@ -27,6 +27,7 @@
 	fb = filter-branch
 	fe = fetch
 	fp = format-patch
+	ga = !git reflog expire --all --expire=all && git gc --prune=all --aggressive
 	gg = log --graph --date='format:%y-%m-%d' --pretty=custom
 	gl = gg --all
 	gr = grep
@@ -35,11 +36,13 @@
 	ls = ls-files
 	lt = ls-tree --long --abbrev
 	mb = merge-base
-	me = merge --allow-unrelated-histories
+	me = merge
 	mt = mergetool
+	mu = merge --allow-unrelated-histories
+	pb = pull --rebase
+	pl = pull
+	pq = pull-request
 	pf = push --force-with-lease
-	pl = pull --ff-only
-	pr = pull --rebase
 	pu = push
 	rb = rebase
 	rd = range-diff
@@ -51,7 +54,6 @@
 	rm = rm --cached
 	ro = remote
 	rp = rev-parse
-	rq = pull-request
 	rr = rerere
 	rt = rebase --committer-date-is-author-date
 	rv = revert
@@ -63,7 +65,6 @@
 	ss = status --short --branch
 	st = stash
 	su = submodule
-	sw = switch
 	tf = tag --force
 	tr = track
 	us = update-server-info
@@ -87,6 +88,8 @@
 	textconv = als
 [diff "hex"]
 	textconv = hexdump -v -C
+[diff "jq"]
+	textconv = jq --tab -S <
 [diff "xlsx"]
 	# go install github.com/tokuhirom/git-xlsx-textconv@latest
 	textconv = git xlsx-textconv
@@ -110,6 +113,8 @@
 	lowSpeedTime = 120
 [hub]
 	protocol = ssh
+[init]
+	defaultBranch = master
 [log]
 	follow = true
 	mailmap = true
@@ -125,6 +130,8 @@
 	custom = %C(red bold)%h%C(reset) %C(cyan)%cd%C(yellow bold)%d%C(reset) %s %C(cyan)(%C(green)%aN, %C(cyan)%cr)%C(reset)
 [protocol]
 	version = 2
+[pull]
+	ff = only
 [push]
 	default = upstream
 [rebase]

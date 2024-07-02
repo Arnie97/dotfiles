@@ -112,12 +112,16 @@ if has('nvim-0.5')
         \ require 'dap-go'.setup()
         \ require 'dap-repl'
         \ require 'tree-sitter'
-    Plug 'mfussenegger/nvim-dap'
+    Plug 'mfussenegger/nvim-dap', [
+        \ ['nvim-0.7', {'tag': '0.7.0'}],
+        \ ['nvim-0.5', {'tag': '0.3.0'}]]
     Plug 'leoluz/nvim-dap-go'
     Plug 'rcarriga/nvim-dap-ui', [
-        \ ['nvim-0.6', {'tag': 'v3.9.3'}],
+        \ ['nvim-0.7', {'tag': 'v3.9.3'}],
+        \ ['nvim-0.6', {'tag': 'v3.6.4'}],
         \ ['nvim-0.5', {'tag': 'v0.27.1'}]]
     Plug 'nvim-treesitter/nvim-treesitter', [
+        \ ['nvim-0.10', {'commit': '5a8e964'}],
         \ ['nvim-0.9', {'tag': 'v0.9.1'}],
         \ ['nvim-0.8', {'tag': 'v0.8.1'}],
         \ ['nvim-0.7', {'tag': 'v0.7.2'}],
@@ -321,6 +325,6 @@ function s:CmdLineMappings()
     Alias hu SignifyHunkUndo
     Alias tabg tab<space>Git
     Alias tg tab<space>Git
-    Alias ud UndotreeToggle
-    Alias ut UnicodeTable
+    Alias ut UndotreeToggle
+    Alias uni UnicodeTable
 endfunction

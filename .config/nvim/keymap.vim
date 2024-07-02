@@ -10,6 +10,7 @@ noremap <silent> <expr> 0 getline('.')[:col('.') - 2] =~ '^\s\+$'? '0': '^'
 " remove the Windows ^M when the line endings gets messed up
 nnoremap dm mmHmt:%s/<c-v><cr>//ge<cr>'tzt'm
 nnoremap dc :SignifyHunkUndo<cr>
+nnoremap du :SignifyHunkUndo<cr>
 
 " option toggles
 nnoremap -b :SetCycle background  light dark            <cr>
@@ -240,6 +241,7 @@ cnoreabbrev  vspl  vsplit <c-r>=expand('%:p:h')<cr>/
 cnoreabbrev   chd   chdir <c-r>=expand('%:p:h')<cr>/
 cnoreabbrev  lchd  lchdir <c-r>=expand('%:p:h')<cr>/
 cnoreabbrev  tchd  tchdir <c-r>=expand('%:p:h')<cr>/
+cnoreabbrev   sav  saveas <c-r>=expand('%:p:h')<cr>/
 
 " :W sudo saves the file
 if exists(':command')
