@@ -9,5 +9,7 @@ aptitude::UI::InfoAreaTabs "true";
 aptitude::UI::HelpBar "false";
 aptitude::UI::Advance-On-Action "true";
 aptitude::Clean-After-Install "true";
+aptitude::Keep-Unused-Pattern "";
+aptitude::Delete-Unused-Pattern "";
 APT "";
 APT::Install-Recommends "false";

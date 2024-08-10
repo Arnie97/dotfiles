@@ -2,6 +2,7 @@
 ""curl --create-dirs -Lo ~/.local/share/nvim/site/autoload/plug.vim \
 "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
 ""exit # the magic polyglot is valid in both shell and vim
+" vi: set ft=vim:
 
 if !filereadable(expand('~/.local/share/nvim/site/autoload/plug.vim'))
     filetype plugin indent on
@@ -121,7 +122,7 @@ if has('nvim-0.5')
         \ ['nvim-0.6', {'tag': 'v3.6.4'}],
         \ ['nvim-0.5', {'tag': 'v0.27.1'}]]
     Plug 'nvim-treesitter/nvim-treesitter', [
-        \ ['nvim-0.10', {'commit': '5a8e964'}],
+        \ ['nvim-0.10'],
         \ ['nvim-0.9', {'tag': 'v0.9.1'}],
         \ ['nvim-0.8', {'tag': 'v0.8.1'}],
         \ ['nvim-0.7', {'tag': 'v0.7.2'}],

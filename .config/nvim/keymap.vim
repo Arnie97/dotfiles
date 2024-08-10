@@ -116,6 +116,7 @@ if exists('g:plugs') && has_key(g:plugs, 'vim-lsp')
         nmap <buffer> ]g <plug>(lsp-next-diagnostic)
         nmap <buffer> -g <plug>(lsp-document-diagnostics)
         nmap <buffer> K  <plug>(lsp-hover)
+        nmap <buffer> cra <plug>(lsp-code-action)
         nmap <buffer> crr <plug>(lsp-rename)
 
         if exists('+tagfunc')
