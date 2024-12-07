@@ -81,6 +81,7 @@ Plug 'wellle/context.vim'
 Plug 'yilin-yang/vim-markbar', [['nvim-0.1.6', 'patch-8.1.0039']]
 
 " command-line & insert mode
+Plug 'godlygeek/tabular'
 Plug 'ryvnf/readline.vim'
 Plug 'shougo/neosnippet'
 Plug 'shougo/neosnippet-snippets'
@@ -274,13 +275,8 @@ let g:markbar_num_lines_context = 1
 let g:markbar_persist_mark_names = g:markbar_bool_false
 let g:markbar_peekaboo_marks_to_display = '''"[]^.abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
 let g:neosnippet#enable_snipmate_compatibility = 1
-
-let g:netrw_altfile = 1
-let g:netrw_banner = 0
-let g:netrw_browse_split = 4
 let g:netrw_liststyle = 3
 let g:netrw_nogx = 1
-let g:netrw_winsize = 30
 
 let g:pear_tree_smart_openers = 1
 let g:pear_tree_smart_closers = 1
