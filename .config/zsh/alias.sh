@@ -1,5 +1,4 @@
 export CLICOLOR=1
-export GPG_TTY="${GPG_TTY:-$(tty)}"
 export HOMEBREW_NO_AUTO_UPDATE=1
 export LESS="-iFRSX"
 export NNN_OPTS="AdeHn"
@@ -14,7 +13,7 @@ alias d='docker'
 alias g='git'
 alias axel='axel -a'
 alias ag='ag --pager=less'
-alias lb='lsblk -So+SERIAL && echo && lsblk -o NAME,FSTYPE,SIZE,FSAVAIL,LABEL,MOUNTPOINT'
+alias lb='lsblk -S && echo && lsblk -o NAME,FSTYPE,SIZE,FSAVAIL,LABEL,MOUNTPOINT'
 alias ls='ls -F'
 alias la='ls -A'
 alias ll='ls -Alh'

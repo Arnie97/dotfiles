@@ -32,6 +32,7 @@ function s:PlugCompat(...)
     endfor
 endfunction
 
+let g:plug_url_format = 'git@github.com:%s'
 silent! call plug#begin('~/.local/share/nvim/site/pack/main/opt')
 command! -nargs=+ -bar Plug call s:PlugCompat(<args>)
 
