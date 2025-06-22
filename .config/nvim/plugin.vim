@@ -89,13 +89,18 @@ Plug 'shougo/neosnippet-snippets'
 Plug 'tmsvg/pear-tree', [['nvim', 'patch-7.4.849']]
 Plug 'vim-scripts/cmdalias.vim'
 
-if executable('ag')
+for cmd in ['rg', 'ag']
+    if !executable(cmd)
+        continue
+    endif
+
     Plug 'mileszs/ack.vim'
-    set grepprg=ag\ --vimgrep\ --smart-case\ $*
     set grepformat=%f:%l:%c:%m
-    let g:ackprg = 'ag --vimgrep --smart-case'
-    let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
-endif
+    let &grepprg = cmd .. ' --vimgrep --smart-case'
+    let g:ackprg = &grepprg
+    let g:ctrlp_user_command = cmd .. ' %s -l --hidden -g ""'
+    break
+endfor
 
 " language servers
 if has('lambda') && has('timers') && exists('*json_encode')

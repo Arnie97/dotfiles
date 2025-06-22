@@ -69,7 +69,7 @@ set ttimeoutlen=100
 
 
 " delete comment character when joining commented lines
-set formatoptions+=mB1
+set formatoptions+=m1
 if has('patch-7.3.541')
     set formatoptions+=j
 endif
