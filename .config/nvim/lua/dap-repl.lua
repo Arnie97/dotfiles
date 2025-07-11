@@ -1,5 +1,10 @@
-local M = {}
-local dap = require 'dap'
+local found, dap = pcall(require, 'dap')
+if not found then
+  return
+end
+
+require 'dapui'.setup()
+require 'dap-go'.setup()
 
 require 'dap.repl'.commands = vim.tbl_extend('force', dap.repl.commands, {
     continue = {'.c', '.continue'},
@@ -26,6 +31,8 @@ require 'dap.repl'.commands = vim.tbl_extend('force', dap.repl.commands, {
         ['.breakpoint'] = dap.toggle_breakpoint,
     },
 })
+
+local M = {}
 
 function M.conditional_breakpoint()
     return dap.set_breakpoint(

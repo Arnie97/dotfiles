@@ -116,8 +116,6 @@ endif
 " debug adapters and tree-sitter integrations
 if has('nvim-0.5')
     autocmd VimEnter * lua
-        \ require 'dapui'.setup()
-        \ require 'dap-go'.setup()
         \ require 'dap-repl'
         \ require 'tree-sitter'
     Plug 'mfussenegger/nvim-dap', [
@@ -152,13 +150,14 @@ Plug 'arnie97/rainbow.vim'
 Plug 'cespare/vim-toml', [[!has('nvim-0.6') && !has('patch-8.2.3519')]]
 Plug 'chr4/nginx.vim'
 Plug 'cmcaine/vim-uci'
-Plug 'dylon/vim-antlr'
-Plug 'leafoftree/vim-vue-plugin'
+Plug 'dylon/vim-antlr', [[executable('antlr4')]]
+Plug 'leafoftree/vim-vue-plugin', [[executable('node')]]
 Plug 'ludovicchabant/vim-gutentags', [[executable('ctags')]]
 Plug 'mattn/emmet-vim'
 Plug 'm-pilia/vim-mediawiki'
 Plug 'neovimhaskell/haskell-vim', [[executable('ghc')]]
 Plug 'plasticboy/vim-markdown'
+Plug 'robertklep/vim-berry', [[executable('berry')]]
 Plug 'rust-lang/rust.vim', [[executable('rustc')]]
 Plug 'solarnz/thrift.vim', [[executable('thrift')]]
 Plug 'wfxr/protobuf.vim', [[executable('protoc')]]
