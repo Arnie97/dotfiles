@@ -146,6 +146,8 @@ ZSH_HIGHLIGHT_MAXLENGTH=4096
 # Remove path separator from WORDCHARS.
 WORDCHARS=${WORDCHARS//[\/]}
 
+zstyle ':completion:*:mvn:*' plugins android gplus spring-boot
+
 # The following lines were added by compinstall
 zstyle ':completion:*' completer _complete _ignored _approximate
 zstyle ':completion:*' expand suffix

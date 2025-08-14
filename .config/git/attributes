@@ -1,4 +1,3 @@
-*.json	text   diff=jq
 *.bin	binary diff=hex
 *.rar	binary diff=atool
 *.tar	binary diff=atool

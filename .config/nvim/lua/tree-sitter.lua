@@ -1,3 +1,8 @@
+local found, claude = pcall(require, 'claude-code')
+if found then
+  claude.setup()
+end
+
 local found, treesitter = pcall(require, 'nvim-treesitter.configs')
 if not found then
   return

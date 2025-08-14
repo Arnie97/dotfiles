@@ -139,6 +139,7 @@ if has('nvim-0.5')
         \ ['nvim-0.6', {'commit': '4938cda'}],
         \ ['nvim-0.5', {'commit': '7ad8f59'}]]
     Plug 'hiphish/rainbow-delimiters.nvim', [['nvim-0.9']]
+    Plug 'greggh/claude-code.nvim', [[has('nvim-0.7') && executable('claude')]]
 endif
 
 " file types
@@ -154,6 +155,7 @@ Plug 'dylon/vim-antlr', [[executable('antlr4')]]
 Plug 'leafoftree/vim-vue-plugin', [[executable('node')]]
 Plug 'ludovicchabant/vim-gutentags', [[executable('ctags')]]
 Plug 'mattn/emmet-vim'
+Plug 'mikelue/vim-maven-plugin', [[executable('mvn')]]
 Plug 'm-pilia/vim-mediawiki'
 Plug 'neovimhaskell/haskell-vim', [[executable('ghc')]]
 Plug 'plasticboy/vim-markdown'
@@ -316,8 +318,10 @@ function s:CmdLineMappings()
 
     if !exists(':Ack')
         Alias ag grep<space>-r<space><cword>
+        Alias rg grep<space>-r<space><cword>
     else
         Alias ag Ack
+        Alias rg Ack
     endif
 
     Alias b ls<cr>:b
@@ -325,6 +329,7 @@ function s:CmdLineMappings()
     Alias go Go
     Alias hd SignifyHunkDiff
     Alias hu SignifyHunkUndo
+    Alias mvn Mvn
     Alias tabg tab<space>Git
     Alias tg tab<space>Git
     Alias ut UndotreeToggle
