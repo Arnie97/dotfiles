@@ -119,9 +119,11 @@ if has('nvim-0.5')
         \ require 'dap-repl'
         \ require 'tree-sitter'
     Plug 'mfussenegger/nvim-dap', [
+        \ ['nvim-0.10'],
+        \ ['nvim-0.9', {'tag': '0.10.0'}],
         \ ['nvim-0.7', {'tag': '0.7.0'}],
         \ ['nvim-0.5', {'tag': '0.3.0'}]]
-    Plug 'leoluz/nvim-dap-go'
+    Plug 'leoluz/nvim-dap-go', [[executable('go')]]
     Plug 'rcarriga/nvim-dap-ui', [
         \ ['nvim-0.7', {'tag': 'v3.9.3'}],
         \ ['nvim-0.6', {'tag': 'v3.6.4'}],
@@ -149,7 +151,7 @@ Plug 'arnie97/exakt.vim'
 Plug 'arnie97/go-cmd.vim', [[executable('go')]]
 Plug 'arnie97/rainbow.vim'
 Plug 'cespare/vim-toml', [[!has('nvim-0.6') && !has('patch-8.2.3519')]]
-Plug 'chr4/nginx.vim'
+Plug 'chr4/nginx.vim', [[executable('/usr/sbin/nginx')]]
 Plug 'cmcaine/vim-uci'
 Plug 'dylon/vim-antlr', [[executable('antlr4')]]
 Plug 'leafoftree/vim-vue-plugin', [[executable('node')]]
@@ -170,7 +172,7 @@ Plug 'chriskempson/vim-tomorrow-theme'
 Plug 'mswift42/vim-themes'
 Plug 'rafi/awesome-vim-colorschemes'
 Plug 'tyrannicaltoucan/vim-quantum'
-Plug 'vimpostor/vim-lumen', [['patch-8.1.1809']]
+Plug 'vimpostor/vim-lumen', [[has('patch-8.1.1809') && !exists('$SSH_CLIENT')]]
 
 call plug#end()
 

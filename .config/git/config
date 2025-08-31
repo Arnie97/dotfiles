@@ -1,11 +1,12 @@
 [alias]
 	aa = add --all
 	au = add --update
+	ax = annex
 	bl = blame
 	br = branch
 	bs = bisect
 	bw = browse
-	cf = config --edit --global
+	cf = config
 	ch = checkout
 	ci = ci-status -v
 	cl = clone --recursive

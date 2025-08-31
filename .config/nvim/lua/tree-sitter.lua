@@ -1,6 +1,10 @@
 local found, claude = pcall(require, 'claude-code')
 if found then
-  claude.setup()
+  claude.setup {
+    keymaps = {
+      window_navigation = false,
+    },
+  }
 end
 
 local found, treesitter = pcall(require, 'nvim-treesitter.configs')
