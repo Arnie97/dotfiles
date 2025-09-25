@@ -1,0 +1,67 @@
+#!/bin/sh
+
+# Demo git-annex external backend program.
+# Copyright 2020 Joey Hess; licenced under the GNU GPL version 3 or higher.
+
+set -e
+
+hashtype="${0##*git-annex-backend-X}"
+
+# could send PROGRESS while doing this, but it's
+# hard to implement that in shell
+case "$hashtype" in
+    BLAKE3_256)
+        hashfile() { b3sum --no-names "$1"; } ;;
+    BLAKE3_512)
+        hashfile() { b3sum --no-names -l 64 "$1"; } ;;
+    XXH32|XH32)
+        hashfile() { xxhsum -H0 "$1" | cut -d ' ' -f 1; } ;;
+    XXH64|XH64)
+        hashfile() { xxhsum -H1 "$1" | cut -d ' ' -f 1; } ;;
+    XXH128|XH128)
+        hashfile() { xxhsum -H2 "$1" | cut -d ' ' -f 1; } ;;
+    XXH3|XH3)
+        hashfile() { xxhsum -H3 --tag "$1" | awk '{ print $NF }'; } ;;
+esac
+
+while read line; do
+    set -- $line
+    case "$1" in
+        GETVERSION)
+            echo VERSION 1
+        ;;
+        CANVERIFY)
+            echo CANVERIFY-YES
+        ;;
+        ISSTABLE)
+            echo ISSTABLE-YES
+        ;;
+        ISCRYPTOGRAPHICALLYSECURE)
+            echo ISCRYPTOGRAPHICALLYSECURE-YES
+        ;;
+        GENKEY)
+            contentfile="$2"
+            hash=$(hashfile "$contentfile")
+            sz=$(wc -c "$contentfile" | cut -d ' ' -f 1)
+            if [ -n "$hash" ]; then
+                echo "GENKEY-SUCCESS" "$hashtype-s$sz--$hash"
+            else
+                echo "GENKEY-FAILURE" "calculate hash sum failed"
+            fi
+        ;;
+        VERIFYKEYCONTENT)
+            key="$2"
+            contentfile="$3"
+            hash=$(hashfile "$contentfile")
+            khash=$(echo "$key" | sed 's/.*--//')
+            if [ "$hash" = "$khash" ]; then
+                echo "VERIFYKEYCONTENT-SUCCESS"
+            else
+                echo "VERIFYKEYCONTENT-FAILURE"
+            fi
+        ;;
+        *)
+            echo ERROR protocol error
+        ;;
+    esac
+done

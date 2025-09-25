@@ -1,4 +1,5 @@
 registry=https://registry.npmmirror.com
+prefix=~/.local
 
 # https://github.com/cnpm/binary-mirror-config/blob/master/package.json
 COREPACK_NPM_REGISTRY=https://registry.npmmirror.com

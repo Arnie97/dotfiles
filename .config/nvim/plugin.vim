@@ -33,6 +33,7 @@ function s:PlugCompat(...)
 endfunction
 
 let g:plug_url_format = 'git@github.com:%s'
+" let g:plug_threads = 1
 silent! call plug#begin('~/.local/share/nvim/site/pack/main/opt')
 command! -nargs=+ -bar Plug call s:PlugCompat(<args>)
 
@@ -65,6 +66,7 @@ Plug 'roxma/vim-paste-easy'
 " motions
 Plug 'andrewradev/sideways.vim'
 Plug 'arnie97/slash.vim'
+Plug 'arthurxavierx/vim-caser'
 Plug 'chaoren/vim-wordmotion', [['patch-7.4.1577']]
 Plug 'inkarkat/vim-visualrepeat'
 Plug 'justinmk/vim-sneak'
@@ -98,7 +100,7 @@ for cmd in ['rg', 'ag']
     set grepformat=%f:%l:%c:%m
     let &grepprg = cmd .. ' --vimgrep --smart-case'
     let g:ackprg = &grepprg
-    let g:ctrlp_user_command = cmd .. ' %s -l --hidden -g ""'
+    " let g:ctrlp_user_command = cmd .. ' %s -l --hidden'
     break
 endfor
 
@@ -232,6 +234,7 @@ endfunction
 
 
 " ctrlp
+let g:ctrlp_cmd = 'CtrlPCurWD'
 let g:ctrlp_types = ['buf', 'mru', 'fil']
 let g:ctrlp_extensions = ['funky', 'tag', 'modified']
 let g:ctrlp_arg_map = 1
@@ -243,7 +246,7 @@ let g:ctrlp_match_current_file = 1
 let g:ctrlp_match_func = !exists('*matchfuzzy')? {}: {
     \ 'match': 'ctrlp_matchfuzzy#matcher'
 \ }
-let g:ctrlp_max_depth = 10
+let g:ctrlp_max_depth = 20
 let g:ctrlp_mruf_default_order = 1
 let g:ctrlp_mruf_exclude = '\v(<|_)(temp|tmp)(_|>)|/(dev/shm|var/folders|nix/store|node_modules|vendor|pkg/mod|rustlib|\.cargo/registry|\.git|\.svn|\.hg|\.bzr)/|_(BASE|LOCAL|REMOTE)_\d+|\.(orig|bak|swp)$|\.#override.conf'
 let g:ctrlp_mruf_max = 2000

@@ -13,6 +13,7 @@ alias -- -='cd -'
 alias c='cargo'
 alias d='docker'
 alias g='git'
+alias t='tmux'
 alias axel='axel -a'
 alias ag='ag --pager=less'
 alias lb='lsblk -S && echo && lsblk -o NAME,FSTYPE,SIZE,FSAVAIL,LABEL,MOUNTPOINT'
@@ -65,6 +66,45 @@ if [ -x "$(command -v rlwrap)" ]; then
     for cmd in dash luajit scheme-r5rs scheme48 yaegi; do
         alias $cmd="rlwrap $cmd"
     done
+fi
+
+if [ -x "$(command -v udevil)" ]; then
+    mount() {
+        if [ "$#" -eq 0 ]; then
+            command mount
+            return
+        fi
+        for opt in "$@"; do
+            case "$opt" in
+            -b|-o*|-t*|--verbose|--quiet)
+                break;;
+            -*)
+                command mount "$@"
+                return;;
+            esac
+        done
+
+        msg=$(udevil mount "$@")
+        echo "$msg"
+        mountpoint="${msg##Mounted * at /}"
+        if [ -n "$mountpoint" -a -d "/$mountpoint" ]; then
+            pushd "/$mountpoint"
+        fi
+    }
+
+    umount() {
+        for opt in "$@"; do
+            case "$opt" in
+            -l|-f|--verbose|--quiet)
+                break;;
+            -*)
+                command umount "$@"
+                return;;
+            esac
+        done
+
+        udevil umount "$@"
+    }
 fi
 
 ccd() {

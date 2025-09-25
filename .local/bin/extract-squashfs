@@ -1,0 +1,8 @@
+#!/bin/sh
+if [ "$#" -ne 2 ]; then
+    echo "usage: `basename ""$0""` <openwrt_sysupgrade_image> <output_image>"
+    exit 1
+fi
+
+7z l "$1" | awk -v ORS=' ' '/^Path/{print "dd if=" $3} /^Offset/{print "iseek=1 ibs=" $3}' | exec sh -v > "$2"
+file "$2"
