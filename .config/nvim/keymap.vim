@@ -9,6 +9,7 @@ noremap <silent> <expr> 0 getline('.')[:col('.') - 2] =~ '^\s\+$'? '0': '^'
 
 " remove the Windows ^M when the line endings gets messed up
 nnoremap dm mmHmt:%s/<c-v><cr>//ge<cr>'tzt'm
+nnoremap dr :call TrimWhitespace(1)<cr>
 nnoremap dc :SignifyHunkUndo<cr>
 nnoremap du :SignifyHunkUndo<cr>
 
@@ -19,7 +20,7 @@ nnoremap -f :SetCycle fileformat  dos unix mac          <cr>
 nnoremap -i :setlocal ignorecase! <bar> set ignorecase? <cr>
 nnoremap -n :setlocal number!     <bar> set number?     <cr>
 nnoremap -p :setlocal paste!      <bar> set paste?      <cr>
-nnoremap -r :setlocal autoread!   <bar> set autoread?   <cr>
+nnoremap -a :setlocal autoread!   <bar> set autoread?   <cr>
 nnoremap -s :setlocal spell!      <bar> set spell?      <cr>
 nnoremap -t :setlocal list!       <bar> set list?       <cr>
 nnoremap -w :setlocal wrap!       <bar> set wrap?       <cr>
@@ -28,7 +29,7 @@ nnoremap -z :SetCycle foldmethod  indent expr marker syntax<cr>
 nnoremap -y :SignifyToggle<cr>
 nnoremap -c :SignifyHunkDiff<cr>
 nnoremap -m :marks<cr>
-nnoremap -a :let g:trim = !g:trim<bar> echo (g:trim? '  ': 'no').'trim'<cr>
+nnoremap -r :let g:trim = !g:trim<bar> echo (g:trim? '  ': 'no').'trim'<cr>
 nnoremap -d :lua require 'dapui'.toggle()<cr>
 nnoremap -k :lua require 'dap'.toggle_breakpoint()<cr>
 nnoremap -. :lua require 'dap'.continue()<cr>

@@ -129,10 +129,10 @@ if has('autocmd')
 
     " remove trailing spaces on save
     let g:trim = 1
-    autocmd BufWritePre * call s:TrimWhitespace()
+    autocmd BufWritePre * call TrimWhitespace(0)
 
-    function s:TrimWhitespace()
-        if !g:trim
+    function TrimWhitespace(manual)
+        if !g:trim && !a:manual
             return
         endif
         let save_cursor = getpos('.')
