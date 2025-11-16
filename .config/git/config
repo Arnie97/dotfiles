@@ -77,7 +77,6 @@
 [core]
 	abbrev = 7
 	autoCRLF = false
-	editor = nvim
 	hooksPath = ~/.config/git/hooks
 	quotePath = false
 	sparseCheckout = true
@@ -126,7 +125,7 @@
 	guiTool = bc
 	tool = vimdiff
 [mergetool "vimdiff"]
-	path = nvim
+	# path = nvim
 [pretty]
 	custom = %C(red bold)%h%C(reset) %C(cyan)%cd%C(yellow bold)%d%C(reset) %s %C(cyan)(%C(green)%aN, %C(cyan)%cr)%C(reset)
 [protocol]

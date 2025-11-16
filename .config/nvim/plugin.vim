@@ -91,7 +91,7 @@ Plug 'shougo/neosnippet-snippets'
 Plug 'tmsvg/pear-tree', [['nvim', 'patch-7.4.849']]
 Plug 'vim-scripts/cmdalias.vim'
 
-for cmd in ['rg', 'ag']
+for cmd in ['ag', 'rg']
     if !executable(cmd)
         continue
     endif

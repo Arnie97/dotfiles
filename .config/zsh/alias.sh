@@ -16,6 +16,7 @@ alias g='git'
 alias t='tmux'
 alias axel='axel -a'
 alias ag='ag --pager=less'
+alias ip='ip --color=auto'
 alias lb='lsblk -S && echo && lsblk -o NAME,FSTYPE,SIZE,FSAVAIL,LABEL,MOUNTPOINT'
 alias ls='ls -F'
 alias la='ls -A'
@@ -32,11 +33,6 @@ elif ls --version > /dev/null 2>&1; then
     alias ls='ls -F --color --show-control-chars'
 fi
 
-# iproute2
-if ip --color netns > /dev/null 2>&1; then
-    alias ip='ip --color=auto'
-fi
-
 if [ -x "$(command -v podman)" -a ! -x "$(command -v docker)" ]; then
     alias docker='podman'
 fi
@@ -45,11 +41,13 @@ if [ -x "$(command -v hub)" ]; then
     alias git='hub'
 fi
 
-if [ -x "$(command -v nvim)" ]; then
-    alias vi='nvim'
-elif [ -x "$(command -v vim)" ]; then
-    alias vi='vim'
-fi
+for editor in nvim vim vi; do
+    if [ -x "$(command -v $editor)" ]; then
+        alias vi=$editor
+        export EDITOR=$editor
+        break
+    fi
+done
 
 if [ -x "$(command -v cygpath)" ]; then
     alias pdd='pushd "$(cygpath --desktop)"'

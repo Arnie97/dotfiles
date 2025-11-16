@@ -56,58 +56,54 @@ function s:LightLineColorSchemeUpdate() abort
         \ g:colors_name =~# '\vatom|base16-|material|-moon|rakr'? 'nord':
         \ g:colors_name =~# '\vmoloka|peaksea|wombat'? 'wombat': 'seoul256'
 
-    set t_Co=256
     call lightline#init()
     call lightline#update()
 endfunction
 
 
 " fallback for ANSI 16-color palettes
-let s:colors = &t_Co
-if executable('tput')
-    let s:colors = system('tput colors')
-endif
-
-if s:colors < 88
+if &t_Co < 88
     silent! colorscheme onedark
     finish
 endif
 
-" let g:lightline.separator    = {'left': '', 'right': ''}
-" let g:lightline.subseparator = {'left': '', 'right': ''}
-
 
 " theme specific tweaks
-let $TERM_ITALICS = 'true'
-let g:afterglow_italic_comments = 1
-let g:deepspace_italics = 1
 let g:enable_bold_font = 1  " hybrid_material
-let g:enable_italic_font = 1
-let g:gruvbox_italic = 1
-let g:jellybeans_use_term_italics = 1
-let g:nord_bold = 1
-let g:nord_italic = 1
-let g:nord_underline = 1
 let g:nord_cursor_line_number_background = 1
 let g:oceanic_material_allow_bold = 1
-let g:oceanic_material_allow_italic = 1
 let g:oceanic_material_allow_reverse = 1
 let g:oceanic_material_allow_undercurl = 1
 let g:oceanic_material_allow_underline = 1
 let g:oceanic_next_terminal_bold = 1
-let g:oceanic_next_terminal_italic = 1
-let g:one_allow_italics = 1
-let g:onedark_terminal_italics = 1
-let g:PaperColor_Theme_Options = {'allow_bold': 1, 'allow_italic': 1}
-let g:purify_italic = 1
 let g:quantum_black = 1
-let g:quantum_italics = 1
 let g:rehash256 = 1  " molokai
-let g:solarized_italics = 1
 let g:sonokai_better_performance = 1
 let g:sonokai_current_word = 'none'
 let g:sonokai_diagnostic_highlight = 1
 let g:sonokai_dim_inactive_windows = 1
-let g:sonokai_enable_italic = 1
+
+if has("gui_running") || $TERM_ITALICS == 'true'
+    let g:PaperColor_Theme_Options = {'theme': {'default': {'allow_bold': 1, 'allow_italic': 1}}}
+    let g:afterglow_italic_comments = 1
+    let g:challenger_deep_terminal_italics = 1
+    let g:deepspace_italics = 1
+    let g:enable_italic_font = 1  " hybrid_material
+    let g:jellybeans_use_term_italics = 1
+    let g:mountaineer_enable_italic = 1
+    let g:nord_italic_comments = 1
+    let g:oceanic_material_allow_italic = 1
+    let g:oceanic_next_terminal_italic = 1
+    let g:one_allow_italics = 1
+    let g:onedark_terminal_italics = 1
+    let g:purify_italic = 1
+    let g:quantum_italics = 1
+    let g:solarized_italics = 1
+    let g:sonokai_enable_italic = 1
+    let g:two_firewatch_italics = 1
+
+    let g:lightline.separator    = {'left': '', 'right': ''}
+    let g:lightline.subseparator = {'left': '', 'right': ''}
+endif
 
 silent! colorscheme iceberg
