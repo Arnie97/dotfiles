@@ -1,4 +1,5 @@
 export CLICOLOR=1
+export FX_THEME=6
 export HOMEBREW_NO_AUTO_UPDATE=1
 export LESS="-iFRSX"
 export NNN_OPTS="AdeHn"

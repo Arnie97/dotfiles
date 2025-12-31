@@ -52,6 +52,7 @@ set incsearch
 set wildmenu
 set wildmode=longest:full,full
 set wildignore=*~,*.class,*.[newj]ar,*.py[cod],*.o,*.obj,*.a,*.lib,*.so,*.dll,*.dylib,*.out,*.elf,*.exe,.DS_Store
+set completeopt+=longest
 
 
 " show matching brackets
@@ -109,6 +110,7 @@ set spelllang=en,cjk
 if exists('+spelloptions')
     set spelloptions=camel
 endif
+set dictionary=/usr/share/dict/words
 
 " set LF as the default line ending
 set fileformats=unix,dos,mac

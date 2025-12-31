@@ -88,10 +88,12 @@ nnoremap -l :lopen<cr>
 nnoremap g! :tabedit <cfile><cr>
 vnoremap g! y:tabedit <c-r>"<cr>
 nnoremap gb :Git blame<cr><c-w>12<<cr>
+nnoremap gr <nop>
 
 if has('autocmd')
     autocmd FileType qf nnoremap <buffer> -o :cclose<cr>
     autocmd FileType qf nnoremap <buffer> -l :lclose<cr>
+    autocmd FileType qf nnoremap <buffer> -; :lclose<cr>
 endif
 
 if exists('g:plugs') && has_key(g:plugs, 'vim-wordmotion')
@@ -102,23 +104,51 @@ if exists('g:plugs') && has_key(g:plugs, 'vim-wordmotion')
     map [ge ]ge
 endif
 
+if exists('g:plugs') && has_key(g:plugs, 'nvim-lspconfig')
+    function s:enableLspMapping() abort
+        nnoremap <buffer> [;  :lua vim.diagnostic.goto_prev()   <cr>
+        nnoremap <buffer> ];  :lua vim.diagnostic.goto_next()   <cr>
+        nnoremap <buffer> -;  :lua vim.diagnostic.setloclist()   <cr>
+        nnoremap <buffer> gO  :lua vim.lsp.buf.document_symbol()<cr>
+        nnoremap <buffer> gd  :lua vim.lsp.buf.definition()     <cr>
+        nnoremap <buffer> [u  :lua vim.lsp.buf.references()     <cr>
+        nnoremap <buffer> ]u  :lua vim.lsp.buf.references()     <cr>
+        nnoremap <buffer> [j  :lua vim.lsp.buf.references()     <cr>
+        nnoremap <buffer> ]j  :lua vim.lsp.buf.references()     <cr>
+        nnoremap <buffer> [n  :lua vim.lsp.buf.implementation() <cr>
+        nnoremap <buffer> ]n  :lua vim.lsp.buf.implementation() <cr>
+        nnoremap <buffer> [k  :lua vim.lsp.buf.incoming_calls() <cr>
+        nnoremap <buffer> ]k  :lua vim.lsp.buf.outgoing_calls() <cr>
+        nnoremap <buffer> K   :lua vim.lsp.buf.hover()          <cr>
+        nnoremap <buffer> gra :lua vim.lsp.buf.code_action()    <cr>
+        nnoremap <buffer> gre :lua vim.lsp.buf.rename()         <cr>
+        nnoremap <buffer> grn :lua vim.lsp.buf.rename()         <cr>
+        nnoremap <buffer> grt :lua vim.lsp.buf.type_definition()<cr>
+    endfunction
+
+    autocmd LspAttach * call s:enableLspMapping()
+endif
+
 if exists('g:plugs') && has_key(g:plugs, 'vim-lsp')
     function s:enableLspMapping() abort
+        nmap <buffer> [; <plug>(lsp-previous-diagnostic)
+        nmap <buffer> ]; <plug>(lsp-next-diagnostic)
+        nmap <buffer> -; <plug>(lsp-document-diagnostics)
         nmap <buffer> gO <plug>(lsp-document-symbol)
         nmap <buffer> gd <plug>(lsp-definition)
         nmap <buffer> [u <plug>(lsp-references)
         nmap <buffer> ]u <plug>(lsp-references)
+        nmap <buffer> [j <plug>(lsp-references)
+        nmap <buffer> ]j <plug>(lsp-references)
         nmap <buffer> [n <plug>(lsp-implementation)
         nmap <buffer> ]n <plug>(lsp-implementation)
-        nmap <buffer> gy <plug>(lsp-type-definition)
-        nmap <buffer> [y <plug>(lsp-peek-type-definition)
-        nmap <buffer> ]y <plug>(lsp-peek-type-definition)
-        nmap <buffer> [g <plug>(lsp-previous-diagnostic)
-        nmap <buffer> ]g <plug>(lsp-next-diagnostic)
-        nmap <buffer> -g <plug>(lsp-document-diagnostics)
+        nmap <buffer> [k <plug>(lsp-call-hierarchy-incoming)
+        nmap <buffer> ]k <plug>(lsp-call-hierarchy-outgoing)
         nmap <buffer> K  <plug>(lsp-hover)
-        nmap <buffer> cra <plug>(lsp-code-action)
-        nmap <buffer> crr <plug>(lsp-rename)
+        nmap <buffer> gra <plug>(lsp-code-action)
+        nmap <buffer> gre <plug>(lsp-rename)
+        nmap <buffer> grn <plug>(lsp-rename)
+        nmap <buffer> grt <plug>(lsp-type-definition)
 
         if exists('+tagfunc')
             setlocal tagfunc=lsp#tagfunc
@@ -196,7 +226,18 @@ if exists('g:plugs') && has_key(g:plugs, 'neosnippet')
         \ neosnippet#expandable_or_jumpable()?
         \ "\<plug>(neosnippet_expand_or_jump)":
         \ &omnifunc ==# 'emmet#completeTag'?
-        \ "\<plug>(emmet-expand-abbr)": ';;'
+        \ "\<plug>(emmet-expand-abbr)":
+        \ !empty(&omnifunc)? "\<c-x><c-o>": ';;'
+
+    imap <expr> <tab>
+        \ pumvisible()? "\<c-n>":
+        \ (col('.') > 1 && getline('.')[col('.')-2] =~ '\s')?
+        \ "\<tab>":
+        \ neosnippet#expandable_or_jumpable()?
+        \ "\<plug>(neosnippet_expand_or_jump)":
+        \ &omnifunc ==# 'emmet#completeTag'?
+        \ "\<plug>(emmet-expand-abbr)":
+        \ !empty(&omnifunc)? "\<c-x><c-o>": "\<tab>"
 
     smap <expr> ;;
         \ neosnippet#expandable_or_jumpable()?

@@ -105,7 +105,14 @@ for cmd in ['ag', 'rg']
 endfor
 
 " language servers
-if has('lambda') && has('timers') && exists('*json_encode')
+if has('nvim-0.8')
+    Plug 'neovim/nvim-lspconfig', [
+    \ ['nvim-0.11'],
+    \ ['nvim-0.8', {'tag': 'v2.5.0'}]]
+    Plug 'mfussenegger/nvim-jdtls', [[executable('mvn')]]
+    Plug 'coder/claudecode.nvim',  [[executable('claude')]]
+    Plug 'folke/snacks.nvim',  [[executable('claude')]]
+elseif has('lambda') && has('timers') && exists('*json_encode')
     autocmd User asyncomplete_setup call asyncomplete#register_source(
         \ asyncomplete#sources#neosnippet#get_source_options({}))
     Plug 'mattn/vim-lsp-settings'
@@ -125,14 +132,14 @@ if has('nvim-0.5')
         \ ['nvim-0.9', {'tag': '0.10.0'}],
         \ ['nvim-0.7', {'tag': '0.7.0'}],
         \ ['nvim-0.5', {'tag': '0.3.0'}]]
-    Plug 'leoluz/nvim-dap-go', [[executable('go')]]
+    Plug 'leoluz/nvim-dap-go', [[executable('delve')]]
     Plug 'rcarriga/nvim-dap-ui', [
         \ ['nvim-0.7', {'tag': 'v3.9.3'}],
         \ ['nvim-0.6', {'tag': 'v3.6.4'}],
         \ ['nvim-0.5', {'tag': 'v0.27.1'}]]
     Plug 'nvim-treesitter/nvim-treesitter', [
-        \ ['nvim-0.10'],
-        \ ['nvim-0.9', {'tag': 'v0.9.1'}],
+        \ ['nvim-0.10', {'tag': 'v0.10.0'}],
+        \ ['nvim-0.9', {'tag': 'v0.9.3'}],
         \ ['nvim-0.8', {'tag': 'v0.8.1'}],
         \ ['nvim-0.7', {'tag': 'v0.7.2'}],
         \ ['nvim-0.6', {'commit': '6a437db'}],
@@ -143,7 +150,6 @@ if has('nvim-0.5')
         \ ['nvim-0.6', {'commit': '4938cda'}],
         \ ['nvim-0.5', {'commit': '7ad8f59'}]]
     Plug 'hiphish/rainbow-delimiters.nvim', [['nvim-0.9']]
-    Plug 'greggh/claude-code.nvim', [[has('nvim-0.7') && executable('claude')]]
 endif
 
 " file types
@@ -159,7 +165,6 @@ Plug 'dylon/vim-antlr', [[executable('antlr4')]]
 Plug 'leafoftree/vim-vue-plugin', [[executable('node')]]
 Plug 'ludovicchabant/vim-gutentags', [[executable('ctags')]]
 Plug 'mattn/emmet-vim'
-Plug 'mikelue/vim-maven-plugin', [[executable('mvn')]]
 Plug 'm-pilia/vim-mediawiki'
 Plug 'neovimhaskell/haskell-vim', [[executable('ghc')]]
 Plug 'plasticboy/vim-markdown'
