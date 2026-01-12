@@ -3,11 +3,6 @@ if not found then
     return
 end
 
-local found, go = pcall(require, 'dap-go')
-if found then
-    go.setup()
-end
-
 require 'dapui'.setup()
 
 require 'dap.repl'.commands = vim.tbl_extend('force', dap.repl.commands, {

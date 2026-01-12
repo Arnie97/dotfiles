@@ -1,6 +1,11 @@
 local found, claude = pcall(require, 'claudecode')
 if found then
-  claude.setup()
+  claude.setup {}
+end
+
+local found, auto = pcall(require, 'auto-lsp')
+if found then
+  auto.setup {}
 end
 
 local found, treesitter = pcall(require, 'nvim-treesitter.configs')

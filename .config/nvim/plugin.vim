@@ -107,11 +107,12 @@ endfor
 " language servers
 if has('nvim-0.8')
     Plug 'neovim/nvim-lspconfig', [
-    \ ['nvim-0.11'],
-    \ ['nvim-0.8', {'tag': 'v2.5.0'}]]
-    Plug 'mfussenegger/nvim-jdtls', [[executable('mvn')]]
+        \ ['nvim-0.11'],
+        \ ['nvim-0.10', {'tag': 'v2.5.0'}],
+        \ ['nvim-0.8', {'tag': 'v1.8.0'}]]
+    Plug 'mfussenegger/nvim-jdtls', [[executable('jdtls')]]
+    Plug 'wieerd/auto-lsp.nvim'
     Plug 'coder/claudecode.nvim',  [[executable('claude')]]
-    Plug 'folke/snacks.nvim',  [[executable('claude')]]
 elseif has('lambda') && has('timers') && exists('*json_encode')
     autocmd User asyncomplete_setup call asyncomplete#register_source(
         \ asyncomplete#sources#neosnippet#get_source_options({}))
@@ -124,9 +125,6 @@ endif
 
 " debug adapters and tree-sitter integrations
 if has('nvim-0.5')
-    autocmd VimEnter * lua
-        \ require 'dap-repl'
-        \ require 'tree-sitter'
     Plug 'mfussenegger/nvim-dap', [
         \ ['nvim-0.10'],
         \ ['nvim-0.9', {'tag': '0.10.0'}],

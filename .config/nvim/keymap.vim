@@ -227,7 +227,9 @@ if exists('g:plugs') && has_key(g:plugs, 'neosnippet')
         \ "\<plug>(neosnippet_expand_or_jump)":
         \ &omnifunc ==# 'emmet#completeTag'?
         \ "\<plug>(emmet-expand-abbr)":
-        \ !empty(&omnifunc)? "\<c-x><c-o>": ';;'
+        \ !empty(&omnifunc)? "\<c-x><c-o>":
+        \ !empty(&completefunc)? "\<c-x><c-u>":
+        \ "\<c-x><c-i>"
 
     imap <expr> <tab>
         \ pumvisible()? "\<c-n>":
@@ -237,7 +239,9 @@ if exists('g:plugs') && has_key(g:plugs, 'neosnippet')
         \ "\<plug>(neosnippet_expand_or_jump)":
         \ &omnifunc ==# 'emmet#completeTag'?
         \ "\<plug>(emmet-expand-abbr)":
-        \ !empty(&omnifunc)? "\<c-x><c-o>": "\<tab>"
+        \ !empty(&omnifunc)? "\<c-x><c-o>":
+        \ !empty(&completefunc)? "\<c-x><c-u>":
+        \ "\<tab>"
 
     smap <expr> ;;
         \ neosnippet#expandable_or_jumpable()?
