@@ -156,11 +156,16 @@ Plug 'ap/vim-css-color'
 Plug 'arnie97/exakt.vim'
 Plug 'arnie97/go-cmd.vim', [[executable('go')]]
 Plug 'arnie97/rainbow.vim'
-Plug 'cespare/vim-toml', [[!has('nvim-0.6') && !has('patch-8.2.3519')]]
-Plug 'chr4/nginx.vim', [[executable('/usr/sbin/nginx')]]
-Plug 'cmcaine/vim-uci'
+Plug 'cespare/vim-toml', [
+    \ [!has('nvim-0.6') && !has('patch-8.2.3519')]]
+Plug 'chr4/nginx.vim', [[
+    \ executable('/usr/sbin/nginx') &&
+    \ !has('nvim-0.6') && !has('patch-8.2.3474')]]
+Plug 'cmcaine/vim-uci', [[
+    \ !has('nvim-0.10') && !has('patch-9.1.0354')]]
 Plug 'dylon/vim-antlr', [[executable('antlr4')]]
-Plug 'leafoftree/vim-vue-plugin', [[executable('node')]]
+Plug 'leafoftree/vim-vue-plugin', [[
+    \ executable('npm') && !has('patch-8.1.1685')]]
 Plug 'ludovicchabant/vim-gutentags', [[executable('ctags')]]
 Plug 'mattn/emmet-vim'
 Plug 'm-pilia/vim-mediawiki'
