@@ -86,8 +86,6 @@ Plug 'yilin-yang/vim-markbar', [['nvim-0.1.6', 'patch-8.1.0039']]
 " command-line & insert mode
 Plug 'godlygeek/tabular'
 Plug 'ryvnf/readline.vim'
-Plug 'shougo/neosnippet'
-Plug 'shougo/neosnippet-snippets'
 Plug 'tmsvg/pear-tree', [['nvim', 'patch-7.4.849']]
 Plug 'vim-scripts/cmdalias.vim'
 
@@ -105,26 +103,20 @@ for cmd in ['ag', 'rg']
 endfor
 
 " language servers
-if has('nvim-0.8')
+if has('nvim-0.5')
     Plug 'neovim/nvim-lspconfig', [
         \ ['nvim-0.11'],
         \ ['nvim-0.10', {'tag': 'v2.5.0'}],
-        \ ['nvim-0.8', {'tag': 'v1.8.0'}]]
+        \ ['nvim-0.8', {'tag': 'v1.8.0'}],
+        \ ['nvim-0.7', {'tag': 'v0.1.6'}],
+        \ ['nvim-0.5', {'tag': 'v0.1.3'}]]
     Plug 'mfussenegger/nvim-jdtls', [[executable('jdtls')]]
     Plug 'wieerd/auto-lsp.nvim'
-    Plug 'coder/claudecode.nvim',  [[executable('claude')]]
-elseif has('lambda') && has('timers') && exists('*json_encode')
-    autocmd User asyncomplete_setup call asyncomplete#register_source(
-        \ asyncomplete#sources#neosnippet#get_source_options({}))
-    Plug 'mattn/vim-lsp-settings'
-    Plug 'prabirshrestha/vim-lsp'
-    Plug 'prabirshrestha/asyncomplete.vim'
-    Plug 'prabirshrestha/asyncomplete-lsp.vim'
-    Plug 'prabirshrestha/asyncomplete-neosnippet.vim'
-endif
-
-" debug adapters and tree-sitter integrations
-if has('nvim-0.5')
+    Plug 'coder/claudecode.nvim', [[
+        \ executable('claude') && has('nvim-0.8')]]
+    Plug 'saghen/blink.cmp', [
+        \ ['nvim-0.10', {'tag': 'v1.8.0'}]]
+    " Plug 'rafamadriz/friendly-snippets'
     Plug 'mfussenegger/nvim-dap', [
         \ ['nvim-0.10'],
         \ ['nvim-0.9', {'tag': '0.10.0'}],
@@ -136,6 +128,7 @@ if has('nvim-0.5')
         \ ['nvim-0.6', {'tag': 'v3.6.4'}],
         \ ['nvim-0.5', {'tag': 'v0.27.1'}]]
     Plug 'nvim-treesitter/nvim-treesitter', [
+        \ ['nvim-0.11'],
         \ ['nvim-0.10', {'tag': 'v0.10.0'}],
         \ ['nvim-0.9', {'tag': 'v0.9.3'}],
         \ ['nvim-0.8', {'tag': 'v0.8.1'}],
@@ -148,6 +141,11 @@ if has('nvim-0.5')
         \ ['nvim-0.6', {'commit': '4938cda'}],
         \ ['nvim-0.5', {'commit': '7ad8f59'}]]
     Plug 'hiphish/rainbow-delimiters.nvim', [['nvim-0.9']]
+elseif has('lambda') && has('timers') && exists('*json_encode')
+    Plug 'mattn/vim-lsp-settings'
+    Plug 'prabirshrestha/vim-lsp'
+    Plug 'prabirshrestha/asyncomplete.vim'
+    Plug 'prabirshrestha/asyncomplete-lsp.vim'
 endif
 
 " file types
@@ -173,7 +171,9 @@ Plug 'neovimhaskell/haskell-vim', [[executable('ghc')]]
 Plug 'plasticboy/vim-markdown'
 Plug 'robertklep/vim-berry', [[executable('berry')]]
 Plug 'rust-lang/rust.vim', [[executable('rustc')]]
-Plug 'solarnz/thrift.vim', [[executable('thrift')]]
+Plug 'solarnz/thrift.vim', [[
+    \ executable('thrift') &&
+    \ !has('nvim-0.11') && !has('patch-9.1.0641')]]
 Plug 'wfxr/protobuf.vim', [[executable('protoc')]]
 
 " color schemes
@@ -294,7 +294,6 @@ let g:markbar_cache_with_hidden_buffers = g:markbar_bool_false
 let g:markbar_num_lines_context = 1
 let g:markbar_persist_mark_names = g:markbar_bool_false
 let g:markbar_peekaboo_marks_to_display = '''"[]^.abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
-let g:neosnippet#enable_snipmate_compatibility = 1
 let g:netrw_liststyle = 3
 let g:netrw_nogx = 1
 

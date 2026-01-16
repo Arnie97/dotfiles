@@ -83,8 +83,7 @@ if [ -x "$(command -v udevil)" ]; then
             esac
         done
 
-        msg=$(udevil mount "$@")
-        echo "$msg"
+        msg=$(udevil mount "$@" | tee /dev/tty | tail -n 1)
         mountpoint="${msg##Mounted * at /}"
         if [ -n "$mountpoint" -a -d "/$mountpoint" ]; then
             pushd "/$mountpoint"

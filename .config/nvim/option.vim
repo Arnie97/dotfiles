@@ -51,7 +51,7 @@ set incsearch
 " ignore compiled files
 set wildmenu
 set wildmode=longest:full,full
-set wildignore=*~,*.class,*.[newj]ar,*.py[cod],*.o,*.obj,*.a,*.lib,*.so,*.dll,*.dylib,*.out,*.elf,*.exe,.DS_Store
+set wildignore=*~,*.class,*.py[cod],*.o,*.obj,*.a,*.lib,*.so,*.dll,*.dylib,*.out,*.elf,*.exe,.DS_Store
 set completeopt+=longest
 
 

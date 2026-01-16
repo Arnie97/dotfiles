@@ -122,6 +122,7 @@ else
 fi
 
 # GNU Readline behavior
+bindkey -e
 bindkey '^u' backward-kill-line
 
 # Prefix search

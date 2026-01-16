@@ -105,28 +105,24 @@ if exists('g:plugs') && has_key(g:plugs, 'vim-wordmotion')
 endif
 
 if exists('g:plugs') && has_key(g:plugs, 'nvim-lspconfig')
-    function s:enableLspMapping() abort
-        nnoremap <buffer> [;  :lua vim.diagnostic.goto_prev()   <cr>
-        nnoremap <buffer> ];  :lua vim.diagnostic.goto_next()   <cr>
-        nnoremap <buffer> -;  :lua vim.diagnostic.setloclist()   <cr>
-        nnoremap <buffer> gO  :lua vim.lsp.buf.document_symbol()<cr>
-        nnoremap <buffer> gd  :lua vim.lsp.buf.definition()     <cr>
-        nnoremap <buffer> [u  :lua vim.lsp.buf.references()     <cr>
-        nnoremap <buffer> ]u  :lua vim.lsp.buf.references()     <cr>
-        nnoremap <buffer> [j  :lua vim.lsp.buf.references()     <cr>
-        nnoremap <buffer> ]j  :lua vim.lsp.buf.references()     <cr>
-        nnoremap <buffer> [n  :lua vim.lsp.buf.implementation() <cr>
-        nnoremap <buffer> ]n  :lua vim.lsp.buf.implementation() <cr>
-        nnoremap <buffer> [k  :lua vim.lsp.buf.incoming_calls() <cr>
-        nnoremap <buffer> ]k  :lua vim.lsp.buf.outgoing_calls() <cr>
-        nnoremap <buffer> K   :lua vim.lsp.buf.hover()          <cr>
-        nnoremap <buffer> gra :lua vim.lsp.buf.code_action()    <cr>
-        nnoremap <buffer> gre :lua vim.lsp.buf.rename()         <cr>
-        nnoremap <buffer> grn :lua vim.lsp.buf.rename()         <cr>
-        nnoremap <buffer> grt :lua vim.lsp.buf.type_definition()<cr>
-    endfunction
-
-    autocmd LspAttach * call s:enableLspMapping()
+    nnoremap [;  :lua vim.diagnostic.goto_prev()    <cr>
+    nnoremap ];  :lua vim.diagnostic.goto_next()    <cr>
+    nnoremap -;  :lua vim.diagnostic.setloclist()   <cr>
+    nnoremap gO  :lua vim.lsp.buf.document_symbol() <cr>
+    nnoremap gd  :lua vim.lsp.buf.definition()      <cr>
+    nnoremap [u  :lua vim.lsp.buf.references()      <cr>
+    nnoremap ]u  :lua vim.lsp.buf.references()      <cr>
+    nnoremap [j  :lua vim.lsp.buf.references()      <cr>
+    nnoremap ]j  :lua vim.lsp.buf.references()      <cr>
+    nnoremap [n  :lua vim.lsp.buf.implementation()  <cr>
+    nnoremap ]n  :lua vim.lsp.buf.implementation()  <cr>
+    nnoremap [k  :lua vim.lsp.buf.incoming_calls()  <cr>
+    nnoremap ]k  :lua vim.lsp.buf.outgoing_calls()  <cr>
+    nnoremap K   :lua vim.lsp.buf.hover()           <cr>
+    nnoremap gra :lua vim.lsp.buf.code_action()     <cr>
+    nnoremap gre :lua vim.lsp.buf.rename()          <cr>
+    nnoremap grn :lua vim.lsp.buf.rename()          <cr>
+    nnoremap grt :lua vim.lsp.buf.type_definition() <cr>
 endif
 
 if exists('g:plugs') && has_key(g:plugs, 'vim-lsp')
@@ -221,32 +217,22 @@ endif
 inoremap <expr> <tab>   pumvisible()? "\<c-n>": "\<tab>"
 inoremap <expr> <s-tab> pumvisible()? "\<c-p>": "\<s-tab>"
 
-if exists('g:plugs') && has_key(g:plugs, 'neosnippet')
-    imap <expr> ;;
-        \ neosnippet#expandable_or_jumpable()?
-        \ "\<plug>(neosnippet_expand_or_jump)":
-        \ &omnifunc ==# 'emmet#completeTag'?
-        \ "\<plug>(emmet-expand-abbr)":
-        \ !empty(&omnifunc)? "\<c-x><c-o>":
-        \ !empty(&completefunc)? "\<c-x><c-u>":
-        \ "\<c-x><c-i>"
+imap <expr> ;;
+    \ &omnifunc ==# 'emmet#completeTag'?
+    \ "\<plug>(emmet-expand-abbr)":
+    \ !empty(&omnifunc)? "\<c-x><c-o>":
+    \ !empty(&completefunc)? "\<c-x><c-u>":
+    \ "\<c-x><c-i>"
 
-    imap <expr> <tab>
-        \ pumvisible()? "\<c-n>":
-        \ (col('.') > 1 && getline('.')[col('.')-2] =~ '\s')?
-        \ "\<tab>":
-        \ neosnippet#expandable_or_jumpable()?
-        \ "\<plug>(neosnippet_expand_or_jump)":
-        \ &omnifunc ==# 'emmet#completeTag'?
-        \ "\<plug>(emmet-expand-abbr)":
-        \ !empty(&omnifunc)? "\<c-x><c-o>":
-        \ !empty(&completefunc)? "\<c-x><c-u>":
-        \ "\<tab>"
+imap <expr> <tab>
+    \ pumvisible()? "\<c-n>":
+    \ (col('.') > 1 && getline('.')[col('.')-2] =~ '\s')?
+    \ "\<tab>":
+    \ !empty(&omnifunc)? "\<c-x><c-o>":
+    \ !empty(&completefunc)? "\<c-x><c-u>":
+    \ "\<tab>"
 
-    smap <expr> ;;
-        \ neosnippet#expandable_or_jumpable()?
-        \ "\<plug>(neosnippet_expand_or_jump)": ';;'
-
+if exists('g:plugs') && has_key(g:plugs, 'emmet-vim')
     let g:user_emmet_complete_tag = 1
     let g:user_emmet_install_global = 0
     let g:user_emmet_leader_key = ';'

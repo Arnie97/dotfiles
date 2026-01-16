@@ -14,7 +14,6 @@ if not found then
 end
 
 treesitter.setup {
-  ensure_installed = maintained,
   sync_install = false,
   auto_install = false,
   highlight = {
@@ -36,7 +35,7 @@ if not vim.api.nvim_create_autocmd then
 end
 
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = {'*'},
+  pattern = { '*' },
   callback = function()
     local lang = require 'nvim-treesitter.parsers'.get_buf_lang()
     local installed = require 'nvim-treesitter.info'.installed_parsers()
