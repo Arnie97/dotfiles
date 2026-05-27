@@ -1,4 +1,4 @@
-if not vim.fn.executable('jdtls') then
+if vim.fn.executable('jdtls') == 0 then
   return
 end
 
@@ -12,11 +12,19 @@ if #lombok == 0 then
   return
 end
 
+local function pad(s)
+  return s:gsub('%d+', function(n) return ('%04d'):format(n) end)
+end
+
+local latest = vim.iter(lombok):fold(lombok[1], function(acc, v)
+  return pad(v) > pad(acc) and v or acc
+end)
+
 auto.setup {
   ['jdtls'] = {
     cmd = {
       'jdtls',
-      '--jvm-arg=-javaagent:' .. lombok[#lombok],
+      '--jvm-arg=-javaagent:' .. latest,
     },
   },
 }

@@ -1,4 +1,4 @@
-if not vim.fn.executable('lua-language-server') then
+if vim.fn.executable('lua-language-server') == 0 then
   return
 end
 

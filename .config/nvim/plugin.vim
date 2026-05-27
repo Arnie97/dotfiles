@@ -89,7 +89,7 @@ Plug 'ryvnf/readline.vim'
 Plug 'tmsvg/pear-tree', [['nvim', 'patch-7.4.849']]
 Plug 'vim-scripts/cmdalias.vim'
 
-for cmd in ['ag', 'rg']
+for cmd in ['rg', 'ag']
     if !executable(cmd)
         continue
     endif
@@ -98,7 +98,7 @@ for cmd in ['ag', 'rg']
     set grepformat=%f:%l:%c:%m
     let &grepprg = cmd .. ' --vimgrep --smart-case'
     let g:ackprg = &grepprg
-    " let g:ctrlp_user_command = cmd .. ' %s -l --hidden'
+    let g:ctrlp_user_command = cmd .. ' --hidden -l "" %s'
     break
 endfor
 
@@ -106,7 +106,7 @@ endfor
 if has('nvim-0.5')
     Plug 'neovim/nvim-lspconfig', [
         \ ['nvim-0.11'],
-        \ ['nvim-0.10', {'tag': 'v2.5.0'}],
+        \ ['nvim-0.10', {'tag': 'v2.1.0'}],
         \ ['nvim-0.8', {'tag': 'v1.8.0'}],
         \ ['nvim-0.7', {'tag': 'v0.1.6'}],
         \ ['nvim-0.5', {'tag': 'v0.1.3'}]]
@@ -115,7 +115,7 @@ if has('nvim-0.5')
     Plug 'coder/claudecode.nvim', [[
         \ executable('claude') && has('nvim-0.8')]]
     Plug 'saghen/blink.cmp', [
-        \ ['nvim-0.10', {'tag': 'v1.8.0'}]]
+        \ ['nvim-0.10', {'tag': 'v1.10.2'}]]
     " Plug 'rafamadriz/friendly-snippets'
     Plug 'mfussenegger/nvim-dap', [
         \ ['nvim-0.10'],
