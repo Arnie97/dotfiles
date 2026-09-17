@@ -27,4 +27,4 @@ get_remote_file() {
 get_remote_repo ~ arnie97/dotfiles conf
 get_remote_file ~/.config/zsh zimfw/zimfw master zimfw.zsh
 get_remote_file ~/.local/share/nvim/site/autoload junegunn/vim-plug master plug.vim
-get_remote_file ~/.ssh/authorized_keys arnie97/dotfiles init authorized_keys
+get_remote_file ~/.ssh arnie97/dotfiles init authorized_keys
