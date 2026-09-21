@@ -16,9 +16,12 @@ local function pad(s)
   return s:gsub('%d+', function(n) return ('%04d'):format(n) end)
 end
 
-local latest = vim.iter(lombok):fold(lombok[1], function(acc, v)
-  return pad(v) > pad(acc) and v or acc
-end)
+local latest = ''
+for _, v in ipairs(lombok) do
+  if pad(v) > pad(latest) then
+    latest = v
+  end
+end
 
 auto.setup {
   ['jdtls'] = {

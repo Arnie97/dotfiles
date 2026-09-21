@@ -1,5 +1,6 @@
 export CLICOLOR=1
 export FX_THEME=6
+export HF_ENDPOINT=https://hf-mirror.com
 export HOMEBREW_NO_AUTO_UPDATE=1
 export LESS="-iFRSX"
 export NNN_OPTS="AdeHn"
@@ -10,7 +11,6 @@ export RUSTUP_DIST_SERVER="https://rsproxy.cn"
 export RUSTUP_UPDATE_ROOT="https://rsproxy.cn/rustup"
 export RUST_BACKTRACE=1
 
-alias -- -='cd -'
 alias c='cargo'
 alias d='docker'
 alias g='git'
@@ -24,18 +24,14 @@ alias la='ls -A'
 alias ll='ls -Alh'
 alias lt='ls -Alht'
 alias md='mkdir -p'
-alias rd='rmdir'
 alias pd='pushd'
+alias rg='rg --smart-case'
 
 # coreutils
 if [ -x "$(command -v gls)" ]; then
     alias ls='gls -F --color'
 elif ls --version > /dev/null 2>&1; then
     alias ls='ls -F --color --show-control-chars'
-fi
-
-if [ -x "$(command -v podman)" -a ! -x "$(command -v docker)" ]; then
-    alias docker='podman'
 fi
 
 if [ -x "$(command -v hub)" ]; then
